@@ -1,0 +1,28 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Warline</title>
+<link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
+</head>
+<body>
+<!--<img id="fondo" src=".\fotos\background.png"/>-->
+
+	<div id="header">
+		
+		<div id="userbar">	
+			<img id="cabe" src="resources/fragments/fotos/BannerVersion3.png"/>
+		</div>
+ 
+	</div>
+
+	<div id="sidebar">
+		<h2>Menu principal</h2>
+		<p><button class = "botonesPrincipales" id = "perfil"> Perfil </button>
+		<p><button class = "botonesPrincipales" id = "armeria"> Armeria </button>
+		<p><button class = "botonesPrincipales" id = "combates"> Arena </button>
+		<p><button class = "botonesPrincipales" id = "arcadeButton"> Arcade </button>
+		<p><button class = "botonesPrincipales" id = "salir"> Salir </button>
+	</div>
+		

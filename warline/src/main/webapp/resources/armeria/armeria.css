@@ -1,0 +1,103 @@
+
+#main {
+height:900px;
+}
+
+h3{
+	text-align: center;
+	vertical-align: top;
+}
+
+#acuerpo {
+    position: relative;
+    display: block;
+	color: black;
+	min-height: 100%;
+	height: 55em;
+    margin: 4%;
+}
+/*#apie {
+    position: absolute; bottom: 0; height: 40px;
+    background-color: #4b1a04; color: #fff; text-align: center; width: 100%; clear: both;
+}*/
+.apanel{
+    height: 320px;
+    width: 280px;
+    background-color: #0a2735; /*azul turquesa oscuro*/
+	border:3px solid #474747; /*gris oscuro*/
+}
+#ainventario{
+    float: left;
+	margin-left; 1em;
+}
+#avendedor{
+    margin-right: 0.3em;
+    float: right;
+}
+table{
+	margin-right: 10px;
+	margin-left: 10px;
+	height: 80%;
+	width: 93%;
+	background-color: grey;
+}
+td{
+	border: 5px grey inset;
+	background-color: #474747; /*gris oscuro*/
+}
+td:hover{
+	border-color: #fff08c; /*color marfil*/
+}
+caption{
+	text-align: center;
+    font-weight: bold;
+	font-size: 20px;
+	font-family: Barbarian NS;
+}
+
+#aobjeto{
+	position: relative;
+	
+	margin-top: 2em;
+	margin-right: 0.3em;
+	margin-left: 0.3em;
+	
+  	clear: both;
+	float: left;
+	float: right;
+	width: 98.5%;
+	height: 300px;
+	background-color: #grey;
+}
+.panelObjeto{
+	position: relative;
+	background-color: #474747; /*gris oscuro*/
+	border: 5px grey inset;
+	width: 47%;
+	height: 91%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#panelObjetoDcha{
+	float: right;
+	margin-right: 10px;
+}
+#panelObjetoIzda{
+	float: left;
+	margin-left: 10px;
+}
+p.apanel{
+	margin-left: 2em;
+	font-weight: bold;
+}
+#panelObjetoDcha p{
+	margin-left: 2em;
+	font-size: 20px;
+}
+#adinero{
+	margin-left: 2em;
+	font-size: 100%;
+}
+div#capaMadre{
+    height: 100%;
+}
