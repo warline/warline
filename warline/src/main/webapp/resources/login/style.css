@@ -46,7 +46,7 @@ li {
 	text-align: left;
 	background-color: black;
 	border: #860b09 2px solid;
-	width:900px; 
+	width:650px; 
 }
 
 #container {
@@ -129,7 +129,7 @@ li {
 	height: 500px;
 	width: 196px;
 	overflow: hidden;
-	background: #4c0000;
+	background: #4b1a04;
 }
 
 #userlogin form {
@@ -154,14 +154,14 @@ li {
 	width: 122px;
 	float: right;
 	clear: right;
+	color: #fff08c;
+	background-color: #4b0e07;
 }
 
 #userlogin input.button {
-	margin: 7px 0px;
 	width: 120px;
 	height: 27px;
-	float: none;
-	clear: both;
+	float: right;
 }
 
 #userlogin_links {
@@ -171,11 +171,6 @@ li {
 
 #userlogin_links h1,h3{
 	color:#fff08c;
-}
-
-
-#registro{
-	text-align:center;
 }
 
 /* Site Search */
@@ -203,19 +198,9 @@ li {
 	overflow: hidden;
 }
 
-#sitesearch input {
-	padding: 2px 0px;
-	width: 154px;
-	float: left;
-	font-size: 12px;
+#acercade{
+	color:white;
 }
-
-#sitesearch input.button {
-	width: 24px;
-	height: 20px;
-	float: right;
-}
-
 
 /* Content Body */
 

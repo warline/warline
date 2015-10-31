@@ -76,6 +76,16 @@ public class HomeController {
 		return "armeria";
 	}
 	
+
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/lobby", method = RequestMethod.GET)
+	public String lobby(Locale locale, Model model) {
+		return "lobby";
+	}
+	
+	
 	
 	
 }

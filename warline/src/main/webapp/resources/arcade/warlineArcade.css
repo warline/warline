@@ -11,11 +11,11 @@ body, h1, h2, h3 {
 	margin: 0;
 }
 
-a {
+#arcade a {
 color: #000;
 }
 
-a img {
+#arcade a img {
 border: 0;
 }
 

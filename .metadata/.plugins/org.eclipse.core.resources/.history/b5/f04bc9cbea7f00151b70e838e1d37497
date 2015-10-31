@@ -1,0 +1,218 @@
+body{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	font-family: Arial;
+	color: #530009;
+}
+
+body, h1, h2, h3 {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+color: #000;
+}
+
+a img {
+border: 0;
+}
+
+#arcade p {
+margin: 0;
+padding: 0;
+}
+
+
+
+
+/******************************************
+*******          MAIN             *********
+******************************************/
+
+#main {
+	float: right;
+	position: relative;
+	top:20px;
+	width: 900px;
+	height:100%;
+}
+
+/*#container{
+	position: relative;
+	margin: 0 auto;
+	text-align: center;
+	width: 1200px;
+	padding: 0 35px 0 38px;
+}*/
+#transparencia{
+	height: 100%;
+	position:absolute;
+	opacity:0.9;
+	background-color: #000000;
+	width: 100%;
+}
+/*
+div{
+	height: 1em;
+	width:100%;
+}*/
+
+#encabezado{
+	top: 5px;
+	background-color: #4b1a04;
+	color: yellow;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0 auto;
+	position: relative;
+	border: 5px solid black;
+    height: 55px;
+	width:890px;
+}
+#encabezado hr{
+	position: relative;
+	bottom: 20px;
+	width: 850px;
+}
+#warline{
+    text-align: center;
+    color: yellow;
+    vertical-align: middle;
+    font-size: 40px;
+    height: 80px;
+	width: 100%;
+	
+}
+
+
+#main{
+	text-align: center;
+	position: relative;
+	height: 100%;
+	margin: 0 auto;
+	top: 10px;
+	color: white;
+	width: 890px;
+	font-size: 200%;
+	border: 5px solid black;
+}
+
+h1{
+	color: yellow;
+	font-size: 50px;
+}
+
+#arcade{
+	background-color: #4b1a04;
+	color: white;
+	width: 870px;
+	position: relative;
+	margin: 0 auto;
+	top: 10px;
+	border: 5px solid black;
+	height: 80%;
+}
+
+.arcade{ /*Botones del nivel*/
+	display: none;
+	width: 50%;
+	position: relative;
+	top: 7px;
+}
+#tablaRivales{
+	position: relative;
+	width: 90%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	background-color: #2A0A12;
+}
+
+h2{
+	font-size: 20px;
+	text-align: center;
+	color: white;
+	height: 3px;
+	padding: 0;
+}
+
+h2 span {
+color: #3d3a33;
+}
+
+
+#imagenRival{
+	width: 65px;
+	height: 65px;
+	margin: 0 auto;
+	vertical-align: center;
+	border: 3px solid #686868;
+	position: relative;
+}
+
+.nombres{
+	position:relative;
+	text-align: center;
+	margin: 0 auto;
+	width: 50px;
+	height: 30px;
+	border: collapse;
+	border: 5px inset;
+	padding: 0;
+}
+
+.casilla{
+	width: 80px;
+	height: 80px;
+	text-align: center;
+	border: collapse;
+	border: 5px inset;
+	padding: 0;
+}
+.casilla:hover{
+	width: 90px;
+	height: 90px;
+}
+.casilla:hover #imagenRival{
+	width: 100px;
+	height: 100px;
+}
+.casillaNombre{
+	width: 15%;
+	height: 30px;
+	text-align: center;
+	line-height: 0.1;
+	border: 5px inset;
+	padding: 0;
+}
+
+#luchar{ /*Boton de combate*/
+	width: 150px;
+	height: 45px;
+	margin-bottom: 2em;
+	position: absolute;
+	right: 330px;
+	top: 350px;
+}
+
+/******************************************
+*******          FOOTER           *********
+******************************************/
+
+#footer {
+clear: both;
+}
+
+
+#ocultar{
+	display: none;
+	background-color: black;
+	opacity: 0.99;
+}
+
+#ocultar:hover{
+	opacity: 0;
+}
+
