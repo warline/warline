@@ -1,0 +1,170 @@
+body {
+	background-image:url("fotos/background.png");
+	background-size:100%;
+	background-attachment: fixed;
+	background-repeat: no-repeat; /*none*/
+}
+
+body, h1, h2, h3, #header ul, #sidebar ul, #userbar form {
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	color: #000;
+}
+
+a img {
+	border: 0;
+}
+
+#container {
+	width: 1200px;
+	/*padding: 0 35px 0 38px;*/
+	margin: 0 auto;
+}
+
+/******************************************
+*******          HEADER           *********
+******************************************/
+
+#header {
+	height: 175px;
+	width: 1200px;
+ }
+ 
+
+#cabe{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+/******************************************
+*******          MAIN             *********
+******************************************/
+
+#main {
+	float: right;
+	margin-top: 20px;
+	width: 900px;
+	height: 500px;
+}
+
+#capaMadre {
+	/*color:white;*/
+	/*width: 890px;*/
+    margin: 0 auto; 
+    height: 100%;
+	float: right;
+
+	border: 5px solid black;
+	opacity: 0.9;
+	background-color: #000000; /*negro*/
+   /* height: auto!important; min-height: 100%; height: 100%;*/
+}
+
+.cabecera {
+    background-color: #4c0000; /*marron*/
+	border-bottom: 5px solid black;
+    height: 90px;
+	width: 890px;
+	margin: 0 auto;
+}
+
+.cabecera hr {
+	bottom: 20px;
+	width: 850px;
+}
+
+#titulo{
+	font-family: Barbarian NS;
+	font-weight: bold;
+    text-align: center;
+    color: #fff08c; /*color marfil*/
+    line-height: 200%;
+    font-size: 40px;
+    height: 80px;
+}
+
+#titulo hr{
+	position: relative;
+	bottom: 25%;
+}	
+
+/*
+#main h2 {
+	height: 26px;
+	line-height: 26px;
+	padding: 0 22px;
+	font-size: 1.2em;
+	color: #540000;
+	font-weight: bold;
+}
+
+h2 span {
+	color: #3d3a33;
+}
+
+*/
+/******************************************
+*******          SIDEBAR          *********
+******************************************/
+
+#sidebar {
+	/*position:relative;*/
+	float: left;
+	width: 270px;
+	height: 380px;
+	background-color: #4b1a04; /*marron*/
+	margin-top: 20px;
+	border: 5px solid black;
+}
+
+.botonesPrincipales{
+	background-color: #7c381a; /*marron mas claro*/
+	color: #fff08c; /*color marfil*/
+	width: 90%;
+	height: 100%;
+	border: 6px #905520 outset; /*marron beige*/
+	font-size: 30px;
+	font-family: Barbarian NS;
+}
+button{
+	background-color: #7c381a; /*marron mas claro*/
+	color: #fff08c; /*color marfil*/
+	border: 6px #905520 outset; /*marron beige*/
+}
+button: active{
+	border: 6px #623711 inset;
+}
+.botonesPrincipales:active{
+	border: 6px #623711 inset;
+	font-size: 28px;
+}
+
+#sidebar p {
+	text-align: center;
+}
+
+#sidebar h2 {
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	padding: 0 22px;
+	font-size: 1.2em;
+	color: #ffffff; /*blanco*/
+	font-weight: bold;
+	clear: both;
+}
+
+/******************************************
+*******          FOOTER           *********
+******************************************/
+
+#footer {
+	clear: both;
+}
+

@@ -78,7 +78,7 @@ li {
 /* Page Menu */
 
 #page_menu {
-	width: 700px;
+	width: 1001px;
 	height: 30px;
 	background-color: #4c0000 ;
 	position: center;
@@ -109,69 +109,44 @@ li {
 	font-weight: bold;
 }
 
-#page_forms input.button {
-	padding: 0px;
-	border: none;
-	cursor: pointer;
-}
+
 
 
 /* User Login */
 
-#userlogin_header {
-	border-width: 2px 0px;
-	border-color: #860b09 #000 #860b09;
-	border-style: solid;
-}
-
-#userlogin_header h2 {
+#userlogin_header h1 {
 	width: 196px;
 	height: 29px;
-	background: url('images/userlogin_header.gif') no-repeat 50% 0%;
+	color:white;
+	text-align:center;
+	color: #fff08c;
 }
 
 #userlogin {
-	height: 235px;
+	border-width: 2px 0px;
+	border-color: #860b09 #000 #860b09;
+	border-style: solid;
+	height: 500px;
 	width: 196px;
 	overflow: hidden;
+	background: #4c0000;
 }
 
 #userlogin form {
-	margin: 12px 0px 10px;
 	width: 196px;
-	text-align: center;
+	/*text-align: center;*/
 }
 
-#userlogin form strong {
-	display: block;
-	width: 70px;
-	height: 24px;
-	margin-bottom: 3px;
-	float: left;
-	clear: left;
+#userlogin form h3 {
+	padding: 10px 12px 0px;
 }
+
 
 #field_username, #field_password {
 	display: block;
 	clear: both;
 }
 
-#button_enter {
-	margin: 0px auto;
-	width: 40px;
-	float: none;
-	clear: both;
-	display: block;
-}
-
-#field_username strong {
-	width:100%;
-	background: url('images/userlogin_login.gif') no-repeat;
-}
-
-#field_password strong {
-	background: url('images/userlogin_password.gif') no-repeat 50% 6px;
-}
 
 #userlogin input {
 	margin-right: 2px;
@@ -194,23 +169,14 @@ li {
 	border-top: #860b09 2px solid;
 }
 
-#userlogin_links a#register {
-	background: url('images/userlogin_register.gif') no-repeat 0px 0px;
-	display: block;
+#userlogin_links h1,h3{
+	color:#fff08c;
 }
 
-#userlogin_links a#notregister {
-	background: url('images/userlogin_notregister.gif') no-repeat 0px 0px;
-	display: block;
-}
 
-#userlogin_links a strong {
-	width: 170px;
-	height: 20px;
-	display: block;
-	cursor: pointer;
+#registro{
+	text-align:center;
 }
-
 
 /* Site Search */
 
@@ -301,30 +267,4 @@ li {
 	font-weight: normal;
 }
 
-/* acerca de */
 
-#acercade {
-	padding: 15px 10px;
-	float: left;
-}
-
-
-
-/* Page Footer */
-
-#page_footer {
-	padding: 15px 10px;
-	color: #e5e0e0;
-	font-size: 12px;
-	text-align: center;
-	letter-spacing: 0px;
-}
-
-#page_footer a {
-	color: #e5e0e0;
-	text-decoration: underline;
-}
-
-#page_footer a:hover {
-	color: #bb1414;
-}
