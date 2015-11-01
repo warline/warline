@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Sun Nov 01 11:30:37 CET 2015
-org.eclipse.jst.jee.server\:warline=C\:\\Users\\josemanuel\\Documents\\uni\\sts-bundle\\pivotal-tc-server-developer-3.1.2.RELEASE\\base-instance\\wtpwebapps\\warline
