@@ -1,8 +1,14 @@
 package es.ucm.iw1;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class HomeController {
+	
+	private login log;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -86,7 +94,15 @@ public class HomeController {
 		return "lobby";
 	}
 	
-	
-	
+	/** login
+	 * 
+	 */
+	 protected void login(HttpServletRequest request, HttpServletResponse response)
+	            throws ServletException, IOException {
+		 log = new login();
+		 log.processRequestPOST(request, response);
+	 }
+	 
+	 
 	
 }
