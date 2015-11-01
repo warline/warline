@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -41,4 +42,3 @@
 					<button class="botonesPrincipales" id="salir">Salir</button>
 				</a>
 		</div>
-	</div>

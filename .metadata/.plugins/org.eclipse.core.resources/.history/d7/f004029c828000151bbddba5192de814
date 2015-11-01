@@ -40,7 +40,7 @@
 					<h3>correo:</h3>
 					<br>
 					<div id="field_username">
-						<strong><span>correo:</span></strong> <input id= "correoR"  type="text" />
+						<strong><span>correo:</span></strong> <input id= "correo"  type="text" />
 					</div>
 					<h3>nombre:</h3>
 					<br>
@@ -50,7 +50,7 @@
 					<h3>contraseña:</h3>
 					<br>
 					<div id="field_password">
-						<strong><span>contraseÃ±a:</span></strong> <input id= "passwordR" input
+						<strong><span>contraseÃ±a:</span></strong> <input id= "password" input
 							type=password â password-input field # T />
 					</div>
 					<div id="log_button">  <p> <a href="#"> <button class = "botonesPrincipales" id = "login"> Registrarse </button> </a> </p> </div>
