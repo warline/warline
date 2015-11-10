@@ -1,14 +1,15 @@
-//fuerza. vida .velocidad
-var malo=[0,0,0];
-var heroe=[0,0,0];
-var heroe0=[0,0,0];
-const heroe1=[30,205,15];
-const heroe2=[15,165,65];
-const heroe3=[15,500,8];
+//nivel, vida, defensa fuerza, velocidad precision
+var malo=[0,0,0,0,0,0];
+var heroe=[0,0,0,0,0,0];
+var heroe0=[0,0,0,0,0,0];
+const heroe1=[2,205,5,30,15,20];
+const heroe2=[2,165,2,15,65,15];
+const heroe3=[2,500,8,15,8,20];
 var pe=0;
 var pem=0;
 var vidaM;
 var vidaH;
+var combate=false;
 const VMAX=100;
 
 /*var Datos={
@@ -36,14 +37,14 @@ const VMAX=100;
 function fuerza(o){
 if(o.id=="experm1"){
 	if(pem>0){
-			malo[0]+=5;
+			malo[3]+=5;
 			pem--;
 	}
 	infomalo();
 }
 else{
 	if(pe>0){
-			heroe[0]+=5;
+			heroe[3]+=5;
 			pe--;
 	}
 	info();
@@ -54,14 +55,14 @@ else{
 function velocidad(o){
 if(o.id=="experm3"){
 	if(pem>0){
-			malo[2]+=10;
+			malo[4]+=10;
 			pem--;
 	}
 	infomalo();
 }
 else{
 	if(pe>0){
-			heroe[2]+=10;
+			heroe[4]+=10;
 			pe--;
 	}
 	info();
@@ -87,15 +88,15 @@ else{
 //grafo();
 }
 
-function sleep(n){
-	var start=new Date().getTime();
-	for(var i=0;i<1e7;i++){
-		if ((new Date().getTime()-start) > n){break;}
-	}
-}
-
 function reinicia(){
+combate=false;
+$("#versus").css("display","none");
 $(".sangre").css("display","none");
+if(pe>0)
+	$(".bpe").css("display","inline");
+if(pem>0)
+	$(".bpem").css("display","inline");
+
 malo[1]=vidaM;
 heroe[1]=vidaH;
 vidaMalo();
@@ -110,7 +111,6 @@ function vidaMalo(){
 	caja2.css("backgroundColor","red");
 	
 	var caja1=$("#vidamalo");
-	//caja1.progressbar({value: heroe[1]*100/vidaH});
 	caja1.css("backgroundColor","green");
 	caja1.css("position","relative");
 	caja1.css("bottom","28px");
@@ -119,19 +119,16 @@ function vidaMalo(){
 	var vidam= malo[1]/(vidaM/70);
 	vidam+="%";
 	caja1.animate({width:vidam},"normal");
-	//caja1.css("width",vidam);
-	//caja1.progressbar({value:41});
-	
-
 
 
 }
 
+
 function vidaHeroe(){
 if(heroe[1]<0)heroe[1]=0;
 	$(".vidah").css( "border","3px solid black");
-	var caja1=$("#vidah");
-	// caja1.progressbar({value: heroe[1]*100/vidaH});
+	var caja1=$("#vidaheroe");
+	
 	caja1.css("backgroundColor","green");
 	caja1.css("position","relative");
 	caja1.css("bottom","28px");
@@ -139,34 +136,45 @@ if(heroe[1]<0)heroe[1]=0;
 	var vidam= heroe[1]/(vidaH/70);
 	vidam+="%";
 	caja1.animate({width:vidam},"normal");
-	// caja1.css("width",vidam);
 
 	
 
-var caja2=$("#vidahmax");
+var caja2=$("#vidaheroemax");
 caja2.css("backgroundColor","red");
 }
 
+function iniciaCombate(){
+	if(combate==false){
+		$(".bpe").css("display","none");
+		$(".bpem").css("display","none");
+		$("#versus").css("display","block");
+		combate=true;
+		lucha(1);
+		
+	}
+}
+
 function lucha(contador){
-	//$("#versus").css("display","block");
-	//$(".sangre").draggable();
-	if(malo[1]>0&&heroe[1]>0){
-		while(contador%(VMAX-malo[2])!=0&&contador%(VMAX-heroe[2])!=0){
-			contador++;
+
+	if(combate==true){
+		if(malo[1]>0&&heroe[1]>0){
+			while(contador%(VMAX-malo[4])!=0&&contador%(VMAX-heroe[4])!=0){
+				contador++;
+			}
+			if(contador%(VMAX-malo[4])==0||contador%(VMAX-heroe[4])==0){
+				if(contador%(VMAX-heroe[4])==0)malo[1]-=random(heroe[3],malo[4]);
+				if(contador%(VMAX-malo[4])==0)heroe[1]-=random(malo[3], heroe[4]);
+				vidaMalo();
+				vidaHeroe();	
+			}
+			setTimeout(function(){lucha(contador+1);},500);
 		}
-		if(contador%(VMAX-malo[2])==0||contador%(VMAX-heroe[2])==0){
-			if(contador%(VMAX-heroe[2])==0)malo[1]-=random(heroe[0],malo[2]);
-			if(contador%(VMAX-malo[2])==0)heroe[1]-=random(malo[0], heroe[2]);
-			vidaMalo();
-			vidaHeroe();	
+		else{
+			combate=false;
+			if(malo[1]==0)$("#dsangrem").toggle("fast");	
+			if(heroe[1]==0)$("#dsangreh").toggle("fast");
 		}
-		setTimeout(function(){lucha(contador+1);},500);
 	}
-	else{
-	 if(malo[1]==0)$("#dsangrem").toggle("fast");	
-	 if(heroe[1]==0)$("#dsangreh").toggle("fast");
-	}
-	
 		
 }
 
@@ -176,18 +184,14 @@ var f=Math.floor(Math.random()*(fuerza/2));
 return f+fuerza/2;
 }
 
-function fondo(){
-	var ran=Math.floor(Math.random()*16777215).toString(16);
-	document.bgColor= '+'+ran;
-}
 
 function escogemalo(h){
 $(".imgm").slideUp("slow");
 if(h.id=="mpersonalizado"){
 	malo=heroe0.slice(0);
-	pem=15;
+	pem=12;
 	var botones=$(".bpem");
-	botones.css("display",'block');
+	botones.css("display",'inline');
 	var imgs=$("#dpersom");
 	
 }
@@ -223,7 +227,7 @@ function escoge(h){
 $(".imgh").slideUp("slow");
 if(h.id=="personalizado"){
 	heroe=heroe0.slice(0);
-	pe=15;
+	pe=12;
 	var botones=$(".bpe");
 	botones.css("display",'inline');
 	var imgs=$("#dperso");
@@ -253,27 +257,115 @@ else if(h.id=="tanque"){
 
 //grafo();
 imgs.toggle("slow");
-info();
+infoheroe();
 
 }
+
+
+function info(){
+	infoheroe();
+	infomalo();
+}
+
 
 function infomalo(){
 vidaM= malo[1];
 vidaMalo();
-$("#infomalo").css("display","block");
-$("#infomalo").text("Fuerza, vida y velocidad: "+(malo[0]+","+malo[1]+","+malo[2]));
+$("#infom").css("display","block");
+$("#nivelm").text("Nivel "+malo[0]);
+$("#vidam").text("Vida "+malo[1]);
+$("#defensam").text("Defensa "+malo[2]);
+$("#fuerzam").text("Fuerza "+malo[3]);
+$("#velocidadm").text("Velocidad "+malo[4]);
+$("#precisionm").text("Precision "+malo[5]);
+coloresInfo();
 }
 
-function info(){
+function infoheroe(){
 vidaH= heroe[1];
 vidaHeroe();
-$("#info").css("display","block");
-$("#info").text("Fuerza, vida y velocidad: "+(heroe[0]+","+heroe[1]+","+heroe[2]));
+$("#infoh").css("display","block");
+$("#nivelh").text("Nivel "+heroe[0]);
+$("#vidah").text("Vida "+heroe[1]);
+$("#defensah").text("Defensa "+heroe[2]);
+$("#fuerzah").text("Fuerza "+heroe[3]);
+$("#velocidadh").text("Velocidad "+heroe[4]);
+$("#precisionh").text("Precision "+heroe[5]);
+coloresInfo();
 }
 
+function coloresInfo(){
+	
+	$("td").css("color","white");
+	if(heroe[0]>malo[0]){
+		$("#nivelh").css("color","green");
+		$("#nivelm").css("color","red");
+	}
+	else if(heroe[0]<malo[0]){
+		$("#nivelh").css("color","red");
+		$("#nivelm").css("color","green");
+	}
+	
+	
+	if(heroe[1]>malo[1]){
+		$("#vidah").css("color","green");
+		$("#vidam").css("color","red");
+	}
+	else if(heroe[1]<malo[1]){
+		$("#vidah").css("color","red");
+		$("#vidam").css("color","green");
+	}
+	
+	
+	if(heroe[2]>malo[2]){
+		$("#defensah").css("color","green");
+		$("#defensam").css("color","red");
+	}
+	else if(heroe[2]<malo[2]){
+		$("#defensah").css("color","red");
+		$("#defensam").css("color","green");
+	}
+	
+	
+	if(heroe[3]>malo[3]){
+		$("#fuerzah").css("color","green");
+		$("#fuerzam").css("color","red");
+	}
+	else if(heroe[3]<malo[3]){
+		$("#fuerzah").css("color","red");
+		$("#fuerzam").css("color","green");
+	}
+	
+	
+	if(heroe[4]>malo[4]){
+		$("#velocidadh").css("color","green");
+		$("#velocidadm").css("color","red");
+	}
+	else if(heroe[4]<malo[4]){
+		$("#velocidadh").css("color","red");
+		$("#velocidadm").css("color","green");
+	}
+	
+	
+	if(heroe[5]>malo[5]){
+		$("#precisionh").css("color","green");
+		$("#precisionm").css("color","red");
+	}
+	else if(heroe[5]<malo[5]){
+		$("#precisionh").css("color","red");
+		$("#precisionm").css("color","green");
+	}
+	
+		
+}
+
+
+
+
+
 /*function grafo(){
-Datos.datasets[0].data=[heroe[0],heroe[1]/10,heroe[2],0,0];
-Datos.datasets[1].data=[malo[0],malo[1]/10,malo[2],0,0];
+Datos.datasets[0].data=[heroe[3],heroe[1]/10,heroe[4],0,0];
+Datos.datasets[1].data=[malo[3],malo[1]/10,malo[4],0,0];
 var contexto=document.getElementById("canvas").getContext("2d");
 window.Radar= new Chart(contexto).Radar(Datos);
 

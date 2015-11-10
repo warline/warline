@@ -16,8 +16,8 @@
 <!--<img id="fondo" src=".\fotos\background.png"/>-->
 <div id="container">
 	<div id="main">
-		<div id="capaMadre">
-			<div id="capaHija"></div>	
+		<div id="capaMadreCombate">
+			<div id="capaHijaCombate"></div>	
 			<div class="cabecera">
 				<div id ="warline">
 					COMBATE
@@ -28,7 +28,7 @@
 				<div class = "heroe" id=jugador>
 					<div class="marco">
 				
-						<h2>Escoge tu héroe:</h2>
+						<h2>Héroe:</h2>
 						<button class="hero" id=personalizado onClick="escoge(this)"> Personalizado </button>
 						<button class="hero" id=fuerte onClick="escoge(this)"> Fuerte </button>
 						<button class="hero" id=rapido onClick="escoge(this)"> Rápido </button>
@@ -39,15 +39,19 @@
 						<div class="imgh" id="drapido" ><img class= "foto" id="irapido" src ="resources\combates\fotos\rapido.png"></img></div>
 						<div class="imgh" id="dtanque"><img class= "foto" id="itanque" src ="resources\combates\fotos\tanque.png"></img></div>
 						<div class="sangre" id="dsangreh"><img class= "foto" id="isangreh" src ="resources\combates\fotos\sangre2.png"></img></div>
-						<div class=vidah id="vidahmax"></div>
-						<div class=vidah id="vidah" ></div>
+						<div class=vidah id="vidaheroemax"></div>
+						<div class=vidah id="vidaheroe" ></div>
 		
 						<input class="bpe" type="button" id=exper1 value="Fuerza (+5)" onClick="fuerza(this)"/>
 						<input class="bpe" type="button" id=exper2 value="Salud (+50)" onClick="defensa(this)"/>
 						<input class="bpe" type="button" id=exper3 value="Velocidad (+10)" onClick="velocidad(this)"/>
 					</div>
 					
-					<p><a> <div class=info id="info"> </div></a> </p>
+					<table  class= dinfo id="infoh">
+						<tr> <td id ="nivelh"> </td> <td id ="vidah"> </td></tr>
+						<tr> <td id ="defensah"> </td> <td id ="fuerzah"> </td></tr>
+						<tr> <td id ="velocidadh"> </td> <td id ="precisionh"> </td></tr>
+					</table>
 						
 				</div>
 			
@@ -55,7 +59,7 @@
 			
 				<div class = "heroe" id=enemigo>
 					<div class="marco" id=marcoenemigo>
-						<h2>Escoge al enemigo:</h2>
+						<h2>Enemigo:</h2>
 						<button class="hero" id=mpersonalizado onClick="escogemalo(this)"> Personalizado </button>
 						<button class="hero" id=mfuerte onClick="escogemalo(this)"> Fuerte </button>
 						<button class="hero" id=mrapido onClick="escogemalo(this)"> Rápido </button>
@@ -67,19 +71,27 @@
 						<div class="imgm" id="dtanquem"><img class= "foto" id="itanque" src ="resources\combates\fotos\tanque.png"></img></div>
 						<div class="sangre" id="dsangrem"><img class= "foto" id="isangrem" src ="resources\combates\fotos\sangre.png"></img></div>
 						
-						<div class=vidam id="vidamalomax"></div>					
-						<div class=vidam id="vidamalo" ></div>
-						<p><a><div class=info id="infomalo"> </div></a> </p>
+						<div class=vidam id="vidamalomax" ></div>					
+						<div class=vidam id="vidamalo"></div>
+						
 						<input class="bpem" type="button" id=experm1 value="Fuerza (+5)" onClick="fuerza(this)"/>
 						<input class="bpem" type="button" id=experm2 value="Salud (+50)" onClick="defensa(this)"/>
 						<input class="bpem" type="button" id=experm3 value="Velocidad (+10)" onClick="velocidad(this)"/>	
 					</div>	
+					
+				
+					<table  class= dinfo id="infom">
+					<tr> <td id ="nivelm"> </td> <td id ="vidam"> </td></tr>
+					<tr> <td id ="defensam"> </td> <td id ="fuerzam"> </td></tr>
+					<tr> <td id ="velocidadm"> </td> <td id ="precisionm"> </td></tr>
+					</table>
+					
 				</div>
 			
-				<div  id="versus" ><img id="vs" src =".\fotos\versus.png"></img></div>
+				<div  id="versus" ><img id="vs" src ="resources\combates\fotos\versus.png"></img></div>
 				<!--<div id="can" ><canvas id="canvas"></canvas></div>-->
 			</div>
-			<input type="button" id=lucha value="Luchar " onClick="lucha(1)"/> 
+			<input type="button" id=lucha value="Luchar " onClick="iniciaCombate()"/> 
 			<br/>
 			<input type="button" id=reinicia value="Reiniciar" onClick="reinicia()"/>
 		</div>
