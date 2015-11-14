@@ -37,7 +37,7 @@
 						<jsp:forward page="arena.jsp" />
 					</c:if>
 				</c:if>
-				<form action="login" method="login">
+				<form action="login" method="POST">
 					<div id="field_username">
 						<h3>correo:</h3>
 						<br> <input id="correo" name="user" type="text" />
@@ -70,8 +70,8 @@
 					<h3>contraseña:</h3>
 					<br>
 					<div id="field_password">
-						<strong><span>contraseÃ±a:</span></strong> <input id="passwordR"
-							input type=password â password-input field # T />
+						<strong><span>contraseÃ±a:</span></strong> <input
+							type="password" id="passwordR"/>
 					</div>
 					<div id="log_button">
 						<p>

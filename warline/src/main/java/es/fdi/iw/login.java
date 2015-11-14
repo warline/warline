@@ -1,4 +1,4 @@
-package es.ucm.iw1;
+package es.fdi.iw;
 
 import java.io.IOException;
 
@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class login extends HttpServlet  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//metodo encargado de la gestión del método POST
     protected void processRequestPOST(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package es.ucm.model;
+package es.fdi.model;
 
 import com.google.gson.Gson;
 
