@@ -152,7 +152,43 @@ public class HomeController {
 		// redirects to view from which login was requested
 		return "redirect:" + formSource;
 	}
-	 
-	 
+	
+	
+	/*
+	 * GESTION
+	 */
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.GET)
+	public String nuevoObjeto(Locale locale, Model model) {
+		return "nuevoObjeto";
+	}
+
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/nuevaBestia", method = RequestMethod.GET)
+	public String nuevaBestia(Locale locale, Model model) {
+		return "nuevaBestia";
+	}
+
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/gestionObjetos", method = RequestMethod.GET)
+	public String gestionObjetos(Locale locale, Model model) {
+		return "gestionObjetos";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.GET)
+	public String gestionUsuarios(Locale locale, Model model) {
+		return "gestionUsuarios";
+	}
+	
 	
 }

@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Vendor: Pivotal Software, Inc.
-Implementation-Title: WarLine
-Implementation-Version: 1.0.0-BUILD-SNAPSHOT
-Implementation-Vendor-Id: es.fdi
-Build-Jdk: 1.7.0_85
-Built-By: chema
-Created-By: Maven Integration for Eclipse
-

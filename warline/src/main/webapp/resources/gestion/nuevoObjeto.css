@@ -1,0 +1,136 @@
+#main {
+	height: 750px;
+}
+
+#capaMadre img {
+	width: 100%;
+	height: 100%;
+}
+
+#divIzquierdo {
+	float: left;
+	width: 300px;
+	height: 655px;
+	background: transparent;
+}
+
+#fotoObjeto, #panelBotonSubirImagen{
+	width: 255px;
+    height: 255px;
+	background-color: #0a2735;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
+	border: #474747 solid 3px;
+}
+
+#panelBotonSubirImagen {
+	height: 50px;
+	width: 200px;
+}
+
+#panelBotonSubirImagen button {
+	height: 100%;
+	width: 100%;
+}
+
+#panelDisponibilidad {
+	height: 50px;
+	width: 200px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
+	background-color: transparent;
+}
+
+#panelDisponibilidad p {
+	font-size: 18px;
+	color: white;
+	text-align: center;
+}
+
+#panelDisponibilidad input[type= "checkbox"]{
+ height: 20px;
+ width: 20px;
+}
+
+#divDerecho {
+	float: right;
+    width: 580px;
+    height: 650px;
+    background-color: transparent;
+}
+
+#divDerecho p {
+	margin-top: 25px;
+	font-size: 20px;
+	color: white;
+	text-align: left;
+}
+
+#divDerecho input[type= "text"] {
+	float: right;
+	margin-right: 100px;
+	height: 20px;
+	width: 400px;
+}
+
+#divDerecho select {
+	margin-left: 20px;
+	height: 30px;
+	width: 330px;
+	font-size: 20px;
+}
+
+#panelStatsObj {
+	width: 300px;
+	height: 250px;
+	background-color: transparent;
+	margin-right: 100px;
+}
+
+#tablaEstadObj {
+    width: 100%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+}
+
+#tablaEstadObj table {
+	font-size: 20px;
+	color: white;
+	width: 100%;
+}
+
+#tablaEstadObj td input[type= "text"] {
+	float: right;
+	font-size: 20px;
+	text-align: right;
+	width: 100px;
+	margin-right: 20px;
+}
+
+#panelBotonNuevo {
+	width: 250px;
+	height: 50px;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#panelBotonNuevo button {
+	height: 100%;
+	width: 100%;
+}
+
+#capaMadre h1 {
+    text-align: center;
+}
+
+#capaMadre h2 {
+	font-size: 20px;
+	text-align: center;
+	margin-top: 8px;
+}
+

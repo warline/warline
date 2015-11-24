@@ -1,0 +1,134 @@
+#main {
+	height: 750px;
+}
+
+#capaMadre img {
+	width: 100%;
+	height: 100%;
+}
+
+#divIzquierdo {
+	float: left;
+	width: 300px;
+	height: 655px;
+	background: transparent;
+}
+
+#fotoObjeto, #panelBotonSubirImagen{
+	width: 255px;
+    height: 255px;
+	background-color: #0a2735;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 30px;
+	border: #474747 solid 3px;
+}
+
+#panelBotonSubirImagen {
+	height: 50px;
+	width: 200px;
+}
+
+#panelBotonSubirImagen button {
+	height: 50px;
+	width: 200px;
+}
+
+#divDerecho {
+	float: right;
+    width: 580px;
+    height: 650px;
+    background-color: transparent;
+}
+
+#divDerecho p {
+	margin-top: 25px;
+	font-size: 20px;
+	color: white;
+	text-align: left;
+}
+
+#divDerecho input[type= "text"] {
+	float: right;
+	margin-right: 100px;
+	height: 20px;
+	width: 400px;
+	font-size: 20px;
+	text-align: center;
+}
+
+#panelStatsMonst {
+	width: 300px;
+	height: 250px;
+	background-color: transparent;
+	margin-right: 100px;
+}
+
+#panelStatsMonst table {
+	font-size: 20px;
+	color: white;
+	width: 300px;
+}
+
+#panelStatsMonst td input[type= "text"] {
+	float: right;
+	font-size: 20px;
+	text-align: right;
+	width: 100px;
+	margin-right: 20px;
+}
+
+#panelRecompensas {
+	width: 580px;
+	height: 200px;
+	margin-top: 20px;
+	background-color: transparent;
+}
+
+#panelExpYOro {
+	width: 290px;
+	height: 80px;
+	background-color: transparent;
+}
+
+#panelExpYOro table {
+	font-size: 20px;
+	color: white;
+}
+
+#panelExpYOro td input[type= "text"] {
+	font-size: 20px;
+	text-align: right;
+	width: 120px;
+	margin: auto;
+}
+
+#panelObj {
+	width: 580px;
+	height: 120px;
+	background-color: yellow;
+}
+	
+#panelBotonNuevo {
+	width: 250px;
+	height: 50px;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#panelBotonNuevo button {
+	height: 100%;
+	width: 100%;
+}
+
+#capaMadre h1 {
+    text-align: center;
+}
+
+#capaMadre h2 {
+	font-size: 20px;
+	text-align: center;
+	margin-top: 8px;
+}
+

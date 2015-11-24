@@ -1,0 +1,90 @@
+
+#main {
+height:600px;
+}
+
+h3{
+	text-align: center;
+	vertical-align: top;
+}
+
+#acuerpo {
+    display: block;
+	color: black;
+	min-height: 100%;
+	margin-left: 35px;
+}
+/*#apie {
+    position: absolute; bottom: 0; height: 40px;
+    background-color: #4b1a04; color: #fff; text-align: center; width: 100%; clear: both;
+}*/
+.apanel{
+	margin-top: 20px;
+    height: 320px;
+    width: 800px;
+    background-color: #0a2735; /*azul turquesa oscuro*/
+	border:3px solid #474747; /*gris oscuro*/
+}
+#find input[type= "text"]{
+	margin-right: 15px;
+	height: 25px;
+	width: 300px;
+}
+
+.listaUsu{
+	color: black;
+}
+
+.botonesGUsu{
+	margin-top: 20px;
+	width: 50px;
+	height: 50px;
+	background-size: 40px;
+}
+
+table{
+	margin-right: 10px;
+	margin-left: 10px;
+	height: 93%;
+	width: 93%;
+}
+td{
+	color: white;
+}
+
+caption{
+	text-align: center;
+    font-weight: bold;
+	font-size: 20px;
+	font-family: Barbarian NS;
+}
+p.apanel{
+	margin-left: 2em;
+	font-weight: bold;
+}
+div#capaMadre{
+    height: 100%;
+}
+
+/* iconos */
+
+#modificar{
+	background-image:url("fotos/modificar.gif");
+}
+#añadir{
+	background-image:url("fotos/añadir.png");
+}
+
+#filtrar{
+	/*background-image:url("fotos/busqueda.png");*/
+	width: 70px;
+	height: 30px;
+}
+
+#banear{
+	background-image:url("fotos/bannear.png");
+}
+
+#eliminar{
+	background-image:url("fotos/eliminar.png");
+}

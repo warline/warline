@@ -30,7 +30,7 @@
 					<hr>
 				</div>
 				<c:if test="${empty param.user or empty param.password}">
-					<c:out value="Debe rellenar los campos" />
+					<!--<c:out value="Debe rellenar los campos" />-->
 				</c:if>
 				<c:if test="${not empty param.user and not empty param.password}">
 					<c:if test="${param.user == 'admin' and param.pass == 'god'}">
