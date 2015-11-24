@@ -1,4 +1,4 @@
-<%@ include file="fragments/header.jspf" %>
+<%@ include file="fragments/headerGestion.jspf"%>
 <!DOCTYPE html>
 <html>
 <head> <title> Nuevo_Objeto </title>
