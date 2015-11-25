@@ -60,8 +60,10 @@
 				</div>
 				
 				<div id = "panelBotonNuevo">
-				<button type="submit" id="guardarObj">
-								Guardar objeto </button>
+				<a href = gestionObjetos>
+					<button type="submit" id="guardarObj">
+									Guardar objeto </button>
+				</a>
 				</div>
 
 

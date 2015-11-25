@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.fdi.model.User;
+import es.fdi.iw.model.User;
 
 
 /**
@@ -137,7 +137,7 @@ public class HomeController {
 				if (formPass.length() == 4) {
 					// UGLY: register new users if they do not exist and pass is 4 chars long
 					logger.info("no-such-user; creating user {}", formLogin);				
-					User user = User.createUser(formLogin, formPass, "user");
+					User user = User.createUser(formLogin, formPass, "user", "Hola");
 					entityManager.persist(user);				
 					session.setAttribute("user", user);
 					// sets the anti-csrf token
@@ -189,6 +189,13 @@ public class HomeController {
 	public String gestionUsuarios(Locale locale, Model model) {
 		return "gestionUsuarios";
 	}
-	
+
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/gestionBestias", method = RequestMethod.GET)
+	public String gestionBestias(Locale locale, Model model) {
+		return "gestionBestias";
+	}
 	
 }

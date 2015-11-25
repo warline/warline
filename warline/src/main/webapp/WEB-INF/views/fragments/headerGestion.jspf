@@ -18,16 +18,24 @@
 	</div>
 	<div id="container">
 		<div id="sidebar">
-			<h2>Menu principal</h2>
+			<h2>Menu de Gestión</h2>
 			<p>
-				<button class="botonesPrincipales" id="usuarios">Usuarios</button>
+				<a href= "gestionUsuarios">
+					<button class="botonesPrincipales" id="usuarios">Usuarios</button>
+				</a>
 			<p>
-				<button class="botonesPrincipales" id="objetos">Objetos</button>
+				<a href= "gestionObjetos">
+					<button class="botonesPrincipales" id="objetos">Objetos</button>
+				</a>
 			<p>
 				<button class="botonesPrincipales" id="arenas">Arenas</button>
 			<p>
-				<button class="botonesPrincipales" id="arcade">Arcade</button>
+				<a href= "gestionBestias">
+					<button class="botonesPrincipales" id="arcade">Bestias</button>
+				</a>
 			<p>
-				<button class="botonesPrincipales" id="salir">Salir</button>
+				<a href= "login">
+					<button class="botonesPrincipales" id="salir">Salir</button>
+				</a>
 		</div>
 	</div>

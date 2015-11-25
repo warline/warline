@@ -1,4 +1,4 @@
-package es.fdi.model;
+package es.fdi.iw.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -19,8 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
     @NamedQuery(name="delUser",
     	query="delete from User u where u.id= :idParam")
 })
-
-
 public class User {	
 	
     private static BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
@@ -30,16 +29,18 @@ public class User {
 	private String login;
 	private String role;
 	private String hashedAndSalted;
-	//private Perfil userPerfil;
-	public User() {
-		
-	}
+	private Heroe heroe;
+	private boolean banned;
+	
+	public User() {}
 
-	public static User createUser(String login, String pass, String role) {
+	public static User createUser(String login, String pass, String role, String name) {
 		User u = new User();
 		u.login = login;
 		u.hashedAndSalted = generateHashedAndSalted(pass);
 		u.role = role;
+		u.heroe = new Heroe(name);
+		u.banned = false;
 		return u;
 	}
 	
@@ -130,6 +131,23 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@OneToOne(targetEntity = Heroe.class)
+	public Heroe getHeroe() {
+		return heroe;
+	}
+
+	public void setHeroe(Heroe heroe) {
+		this.heroe = heroe;
+	}
+
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
 	}
 
 	public String toString() {

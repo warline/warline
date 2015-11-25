@@ -186,13 +186,13 @@ return f+fuerza/2;
 
 
 function escogemalo(h){
-$(".imgm").slideUp("slow");
+var imagen = $("#imalo");
 if(h.id=="mpersonalizado"){
 	malo=heroe0.slice(0);
 	pem=12;
 	var botones=$(".bpem");
 	botones.css("display",'inline');
-	var imgs=$("#dpersom");
+	imagen.attr("src","resources/combates/fotos/perso.png");
 	
 }
 else if(h.id=="mfuerte"){
@@ -200,37 +200,35 @@ else if(h.id=="mfuerte"){
 	pem=0;
 	var botones=$(".bpem");
 	botones.css("display",'none');
-	var imgs=$("#dfuertem");
+	imagen.attr("src","resources/combates/fotos/fuerte.png");
 }
 else if(h.id=="mrapido"){
 	malo=heroe2.slice(0);
 	pem=0;
 	var botones=$(".bpem");
 	botones.css("display",'none');
-	var imgs=$("#drapidom");
+	imagen.attr("src","resources/combates/fotos/rapido.png");
 }
 else if(h.id=="mtanque"){
 	malo=heroe3.slice(0);
 	pem=0;
 	var botones=$(".bpem");
 	botones.css("display",'none');
-	var imgs=$("#dtanquem");
+	imagen.attr("src","resources/combates/fotos/tanque.png");
 }
 //grafo();
-imgs.toggle("slow");
 infomalo();
 }
 
 function escoge(h){
 
-
-$(".imgh").slideUp("slow");
+var imagen = $("#iheroe");
 if(h.id=="personalizado"){
 	heroe=heroe0.slice(0);
 	pe=12;
 	var botones=$(".bpe");
 	botones.css("display",'inline');
-	var imgs=$("#dperso");
+	imagen.attr("src","resources/combates/fotos/perso.png");
 	
 }
 else if(h.id=="fuerte"){
@@ -238,25 +236,25 @@ else if(h.id=="fuerte"){
 	pe=0;
 	var botones=$(".bpe");
 	botones.css("display",'none');
-	var imgs=$("#dfuerte");
+	imagen.attr("src","resources/combates/fotos/fuerte.png");
 }
 else if(h.id=="rapido"){
 	heroe=heroe2.slice(0);
 	pe=0;
 	var botones=$(".bpe");
 	botones.css("display",'none');
-	var imgs=$("#drapido");
+	imagen.attr("src","resources/combates/fotos/rapido.png");
 }
 else if(h.id=="tanque"){
 	heroe=heroe3.slice(0);
 	pe=0;
 	var botones=$(".bpe");
 	botones.css("display",'none');
-	var imgs=$("#dtanque");
+	imagen.attr("src","resources/combates/fotos/tanque.png");
 }
 
 //grafo();
-imgs.toggle("slow");
+
 infoheroe();
 
 }

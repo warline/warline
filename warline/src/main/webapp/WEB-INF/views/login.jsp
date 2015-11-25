@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
 <title>warline</title>
-<link rel="stylesheet" href="resources/login/style.css" type="text/css"
+<link rel="stylesheet" href="resources/login/login.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />

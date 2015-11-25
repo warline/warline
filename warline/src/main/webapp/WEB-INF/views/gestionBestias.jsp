@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href=".\ui\jquery-ui.css" />
 <link rel="stylesheet" type="text/css"
-	href="resources/fragments/plantilla.css" />
+	href="resources/fragments/plantilla.css" />  
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/gestion.css">
 </head>
@@ -23,7 +23,7 @@
 			<div id="capaMadre">
 				<div class="cabecera">
 					<div id="titulo">
-						GESTION DE OBJETOS
+						GESTION DE BESTIAS
 						<hr>
 					</div>
 				</div>
@@ -38,12 +38,12 @@
 
 					</form>
 					
-					<a href = "nuevoObjeto">
+					<!--<a href = "nuevoObjeto">-->
 						<button class="botonesGUsu" id="añadir"></button>
-					</a>
-					<a href = "nuevoObjeto">
+					<!-- </a> -->
+					<!--<a href = "nuevoObjeto">-->
 						<button class="botonesGUsu" id="modificar"></button>
-					</a>
+					<!-- </a> -->
 					<button class="botonesGUsu" id="eliminar"></button>
 					
 					<div class="apanel">
@@ -52,31 +52,31 @@
 								<td id="imagen"></td>
 								<td>IMAGEN</td>
 								<td>NOMBRE</td>
-								<td>TIPO</td>
+								<td>NIVEL</td>
 							</tr>
 							<tr>
 								<td id="imagen"><input type="checkbox"></td>
 								<td></td>
-								<td>Espada del Olimpo</td>
-								<td>Espada</td>
+								<td>Boqueron</td>
+								<td>3</td>
 							</tr>
 							<tr>
 								<td id="imagen"><input type="checkbox"></td>
 								<td></td>
-								<td>Casco de Gladiador</td>
-								<td>Casco</td>
+								<td>Lobo</td>
+								<td>7</td>
 							</tr>
 							<tr>
 								<td id="imagen"><input type="checkbox"></td>
 								<td></td>
-								<td>Botas de Tela</td>
-								<td>Botas</td>
+								<td>Hydra</td>
+								<td>45</td>
 							</tr>
 							<tr>
 								<td id="imagen"><input type="checkbox"></td>
 								<td></td>
-								<td>Malla de Hierro</td>
-								<td>Armadura</td>
+								<td>OSO</td>
+								<td>30</td>
 							</tr>
 						</table>
 					</div>
