@@ -32,10 +32,10 @@ public class Item {
 	private int velocidad;
 	private int precision;
 	private TipoItem tipo;
-
+	private int precio;
 	public Item() {}
 	
-	public Item(String nombre, String img, double vida, int fu, int def, int vel, int pre, TipoItem t){
+	public Item(String nombre, String img, double vida, int fu, int def, int vel, int pre, TipoItem t , int _precio){
 		this.nombre = nombre;
 		this.imagen = img;
 		this.vida = vida;
@@ -44,6 +44,15 @@ public class Item {
 		this.velocidad = vel;
 		this.precision = pre;
 		this.tipo = t;
+		precio = _precio;
+	}
+	
+	public int getPrecio(){
+		return precio;
+	}
+	
+	public void setPrecio(int _precio){
+		precio = _precio;
 	}
 	
 	@Id
