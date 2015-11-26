@@ -17,14 +17,16 @@
 <div id="container">
 	<div id="main">
 		<div id="capaMadreCombate">
-			<div id="capaHijaCombate"></div>	
+				
 			<div class="cabecera">
 				<div id ="warline">
 					COMBATE
 				<hr>
 				</div>
 			</div>
+			<div id="capaHijaCombate"></div>
 			<div id="cuerpo">
+			
 				<div class = "heroe" id=jugador>
 					<div class="marco">
 				
@@ -83,13 +85,12 @@
 					</table>
 					
 				</div>
-			
 				<div  id="versus" ><img id="vs" src ="resources\combates\fotos\versus.png"></img></div>
 				<!--<div id="can" ><canvas id="canvas"></canvas></div>-->
 			</div>
-			<input type="button" id=lucha value="Luchar " onClick="iniciaCombate()"/> 
+			<button id=lucha onClick="iniciaCombate()"> Luchar </button>
 			<br/>
-			<input type="button" id=reinicia value="Reiniciar" onClick="reinicia()"/>
+			<button id=reinicia onClick="reinicia()"> Reiniciar </button>
 		</div>
 	</div>
 	<div id="footer">

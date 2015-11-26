@@ -4,23 +4,22 @@ body {
 	color: #530009;
 }
 
-
 body, h1, h2, h3, #header ul {
-padding: 0;
-margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 a {
-color: #000;
+	color: #000;
 }
 
 a img {
-border: 0;
+	border: 0;
 }
 
 p {
-margin: 0;
-padding: 11px;
+	margin: 0;
+	padding: 11px;
 }
 
 /*#container {
@@ -30,256 +29,224 @@ margin: 0 auto;
 
 }*/
 
-
-
 /******************************************
 *******          HEADER           *********
 ******************************************/
-
-
-#cabe{
-position:relative;
-width:100%;
-height: 100%;
-
+#cabe {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 #userbar {
-height: 175px;
-line-height: 31px;
-position: absolute;
-width: 1200px;
-
+	height: 175px;
+	line-height: 31px;
+	position: absolute;
+	width: 1200px;
 }
-
 
 #header h1, #header h1 a {
-height: 213px;
-display: block;
+	height: 213px;
+	display: block;
 }
 
-#header h1 span { display: none; }
+#header h1 span {
+	display: none;
+}
 
 #header ul {
-list-style: none;
-height: 31px;
-width:100%;
-overflow: hidden;
-padding-left: 7px;
-position: relative;
-bottom: 80px;
-margin:0 auto;
+	list-style: none;
+	height: 31px;
+	width: 100%;
+	overflow: hidden;
+	padding-left: 7px;
+	position: relative;
+	bottom: 80px;
+	margin: 0 auto;
 }
 
 #header ul li, #header ul li a {
-float: left;
+	float: left;
 }
 
 #header ul li {
-padding-right: 8px;
-height: 31px;
+	padding-right: 8px;
+	height: 31px;
 }
 
 #header ul li a {
-display: inline;
-width: 206px;
-text-align: center;
-height: 27px;
-line-height: 27px;
-padding: 4px 0 0 0;
-background-color:white;
-color: #000;
-text-transform: uppercase;
-font-size: 0.8em;
-text-decoration: none;
-overflow: hidden;
-border :2px solid black;
+	display: inline;
+	width: 206px;
+	text-align: center;
+	height: 27px;
+	line-height: 27px;
+	padding: 4px 0 0 0;
+	background-color: white;
+	color: #000;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	text-decoration: none;
+	overflow: hidden;
+	border: 2px solid black;
 }
 
 #header ul li a:hover, #header ul li.active a {
-background-position: bottom;
+	background-position: bottom;
 }
 
 /******************************************
 *******          MAIN             *********
 ******************************************/
-
 #main {
-float: right;
-position: relative;
-top:20px;
-
-width: 900px;
-height:500px;
+	float: right;
+	position: relative;
+	width: 900px;
+	height: 500px;
 }
 
 #main h2 {
-height: 26px;
-line-height: 26px;
-padding: 0 22px;
-text-align: center;
-color: white;
-font-weight: bold;
+	height: 26px;
+	line-height: 26px;
+	padding: 0 22px;
+	text-align: center;
+	color: white;
+	font-weight: bold;
 }
 
 h2 span {
-color: #3d3a33;
+	color: #3d3a33;
 }
-
 
 /******************************************
 *******          FOOTER           *********
 ******************************************/
-
 #footer {
-clear: both;
+	clear: both;
 }
-
 
 /******************************************
 *******       HTML PROPIO         *********
 ******************************************/
-
-
-.cabecera {
-    background-color: #4b1a04;
-    position: relative;
+/*.cabecera {
+	background-color: #4b1a04;
+	position: relative;
 	border-bottom: 5px solid black;
-    height: 55px;
-	width:890px;
+	height: 55px;
+	width: 890px;
 	margin: 0 auto;
 }
 
-.cabecera hr{
-position: relative;
-bottom: 20px;
-width: 850px;
+.cabecera hr {
+	position: relative;
+	bottom: 20px;
+	width: 850px;
+}*/
+
+h2 {
+	line-height: 0.5%;
 }
 
-
-h2{
-line-height:0.5%;
+div {
+	height: 1em;
+	width: 100%;
 }
-
-
-div{
-
-height: 1em;
-width:100%;
-}
-
-
 
 #capaMadreCombate {
-	color:white;
+	color: white;
 	width: 890px;
-    margin: 0 auto; 
-    height: 100%;
-	background-color:transparent;
+	margin: 0 auto;
+	height: 100%;
+	background-color: transparent;
 	position: relative;
 	font-size: 200%;
 	border: 5px solid black;
-   /* height: auto!important; min-height: 100%; height: 100%;*/
-   
+	/* height: auto!important; min-height: 100%; height: 100%;*/
 }
 
 #capaHijaCombate {
-	opacity:0.9;
+	opacity: 0.9;
 	background-color: #000000;
-    height: 100%;
+	height:410px ;
 	width: 100%;
 	position: absolute;
 }
 
-#warline{
-    text-align: center;
-    color: yellow;
-    vertical-align: middle;
-    font-size: 40px;
-    height: 80px;
+#warline {
+	text-align: center;
+	color: yellow;
+	vertical-align: middle;
+	font-size: 40px;
+	height: 80px;
 	width: 100%;
-
 }
-#cuerpo {
 
-    position: relative;
+#cuerpo {
+	position: relative;
 	height: 70%;
 }
 
 /******************************************
 *******          COMBATE          *********
 ******************************************/
-
-.marco{
-
- line-height: 10%;
-
- height: 300px;
- width: 100%;
- 
- background-color: #4b1a04;
- border: 5px solid black;
+.marco {
+	line-height: 10%;
+	height: 300px;
+	width: 100%;
+	background-color: #4b1a04;
+	border: 5px solid black;
 }
 
- .hero{
- width: 90px;
- position: relative;
- left: 10px;
- }
- 
- .vidah,.vidam{
+.hero {
+	width: 90px;
+	position: relative;
+	left: 10px;
+}
 
- position:relative;
- left:30px;
- height: 22px;
- font-size:0.5em;
- color:white;
- line-height: 100%;
- width:70%;
- }
- 
- .heroe{
- height: 400px;
- width: 400px;
- position: absolute;
+.vidah, .vidam {
+	position: relative;
+	left: 30px;
+	height: 22px;
+	font-size: 0.5em;
+	color: white;
+	line-height: 100%;
+	width: 70%;
+}
 
+.heroe {
+	height: 400px;
+	width: 400px;
+	position: absolute;
+}
 
- 
- }
- 
- .foto{
+.foto {
 	width: 100%;
 	height: 100%;
- }
-
- .imgh,.imgm{
- position:relative;
- left : 100px;
- width: 200px;
- height:200px;
-
- 
- }
-
-.bpe,.bpem{
-width:8em;
-display: none;
-position: relative;
-bottom: 6em;
-left: 3em;
 }
 
-.dinfo{
-	color: white;
-	line-height:100%;
-	font-size:20px;
+.imgh, .imgm {
+	position: relative;
+	left: 100px;
+	width: 200px;
+	height: 200px;
+}
+
+.bpe, .bpem {
+	width: 8em;
 	display: none;
-	text-align : center;
-	width:300px;
+	position: relative;
+	bottom: 6em;
+	left: 3em;
+}
+
+.dinfo {
+	color: white;
+	line-height: 100%;
+	font-size: 20px;
+	display: none;
+	text-align: center;
+	width: 300px;
 	height: 75px;
 	background-color: #4b1a04;
-
-	
 	border: 4px solid black;
 	position: relative;
 	float: top;
@@ -288,104 +255,103 @@ left: 3em;
 	border-spacing: 0;
 }
 
-td{
-	border:2px inset;
+td {
+	border: 2px inset;
 	width: 150px;
 }
 
-.stat{
-
+.stat {
 	width: 35%;
 	height: 26%;
 	position: relative;
-	float:top;
+	float: top;
 	background-color: white;
 	border: 1px solid black;
 }
 
-#infom{
-left: 20px;
+#infom {
+	left: 20px;
 }
 
-#canvas{
-width: 3em;
-height: 3em;
-display: none;
-}
-
-#can{
-width: 2em;
-height: 2em;
-position: relative;
-left:3.35em;
-top: 1em;
-
-}
-
-.sangre{
-position: absolute;
-width:350px;
-height: 350px;
-opacity: 0.65;
-display:none;
-bottom: 40px;
-} 
-
-#dsangreh{
-}
-
-
-#dsangrem{
-left: 70px;
-}
-
-
-
-#pie {
-    position: absolute; bottom: 0; height: 40px;
-    background-color: #300; color: #fff; text-align: center; width: 100%; clear: both;
-}
-
- #jugador{
- left:10px;
- top: 15px;
- }
- 
-#exper{
-
+#canvas {
+	width: 3em;
+	height: 3em;
 	display: none;
 }
 
-#fondo{
-position:absolute;
-width:100%;
-height: 100%;
+#can {
+	width: 2em;
+	height: 2em;
+	position: relative;
+	left: 3.35em;
+	top: 1em;
 }
 
- #enemigo{
- right:20px;
- top: 15px;
- }
-
-#versus{
-position: relative;
-left:350px;
-top: 85px;
-display:none;
+.sangre {
+	position: absolute;
+	width: 350px;
+	height: 350px;
+	opacity: 0.65;
+	display: none;
+	bottom: 40px;
 }
- 
- 
-#lucha{
+
+#dsangreh {
+	
+}
+
+#dsangrem {
+	left: 70px;
+}
+
+#pie {
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	background-color: #300;
+	color: #fff;
+	text-align: center;
+	width: 100%;
+	clear: both;
+}
+
+#jugador {
+	left: 10px;
+	top: 15px;
+}
+
+#exper {
+	display: none;
+}
+
+#fondo {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#enemigo {
+	right: 20px;
+	top: 15px;
+}
+
+#versus {
+	position: relative;
+	left: 350px;
+	top: 85px;
+	display: none;
+}
+
+#lucha {
 	height: 30px;
 	position: relative;
-	left:390px;
+	left: 390px;
 	width: 120px;
 }
 
-#reinicia{
+#reinicia {
 	height: 30px;
 	position: relative;
-
-	left:390px;
+	left: 390px;
 	width: 120px;
 }

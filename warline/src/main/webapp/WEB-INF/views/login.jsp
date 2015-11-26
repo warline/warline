@@ -23,6 +23,13 @@
 			DESCRIPCIÓN
 			<hr>
 		</div>
+		<div id="descr">
+			Warline es un juego de combates uno contra uno, en los que las habilidades del guerrero de cada usuario ayudan a obtener la victoria aunque no la aseguran.
+			Esto es, cualquiera puede ganar, hasta un débil principiante puede ganar a un veterano, a pesar de las pocas probabilidades que tenga. 
+			La estrategia principal reside en ser astuto repartiendo los Puntos de Habilidad para formar un guerrero equilibrado que pueda ganar a cualquier rival. 
+			Para los novatos, ofrecemos un modo arcade individual en el que ir probándose según se mejora el guerrero.
+			Deja de leer esta ayuda y registrate ya para disfrutar de un juego que seguro marcará una época en la historia de los juegos online.
+		</div>
 		<div id="page_forms">
 			<div id="userlogin">
 				<div id="userlogin_header">
@@ -39,35 +46,35 @@
 				</c:if>
 				<form action="login" method="POST">
 					<div id="field_username">
-						<h3>correo:</h3>
+						<h3>Correo:</h3>
 						<br> <input id="correo" name="user" type="text" />
 					</div>
 					<div id="field_password">
-						<h3>contraseña:</h3>
+						<h3>Contraseña:</h3>
 						<br> <input id="password" name="password" type="password" />
 					</div>
 					
 					<div id="log_button">
 						<p>
 							<button type="submit" class="botonesPrincipales" id="login">
-								login</button>
+								Log in</button>
 						</p>
 					</div>
 				</form>
 				<div id="userlogin_links">
-					<h3>correo:</h3>
+					<h3>Correo:</h3>
 					<br>
 					<div id="field_username">
 						<strong><span>correo:</span></strong> <input id="correoR"
 							type="text" />
 					</div>
-					<h3>nombre:</h3>
+					<h3>Nombre:</h3>
 					<br>
 					<div id="field_username">
 						<strong><span>nombre:</span></strong> <input id="nombre"
 							type="text" />
 					</div>
-					<h3>contraseña:</h3>
+					<h3>Contraseña:</h3>
 					<br>
 					<div id="field_password">
 						<strong><span>contraseÃ±a:</span></strong> <input

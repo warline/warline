@@ -1,3 +1,4 @@
+
 body{
 	height: 100%;
 	width: 100%;
@@ -5,26 +6,24 @@ body{
 	font-family: Arial;
 	color: #530009;
 }
-
-body, h1, h2, h3 {
-	padding: 0;
-	margin: 0;
-}
-
+/*
 #arcade a {
 color: #000;
-}
+}*/
 
+#arcade h3{
+	top: 10px;
+	text-align: center;
+}
+/*
 #arcade a img {
 border: 0;
-}
-
+}*/
+/*
 #arcade p {
 margin: 0;
 padding: 0;
-}
-
-
+}*/
 
 
 /******************************************
@@ -32,10 +31,10 @@ padding: 0;
 ******************************************/
 
 #main {
-	float: right;
+/*	float: right;
 	position: relative;
-	top:20px;
-	width: 900px;
+	
+	width: 900px;*/
 	height:100%;
 }
 
@@ -58,7 +57,7 @@ div{
 	height: 1em;
 	width:100%;
 }*/
-
+/*
 #encabezado{
 	top: 5px;
 	background-color: #4b1a04;
@@ -85,19 +84,20 @@ div{
 	width: 100%;
 	
 }
+*/
 
-
+/*
 #main{
 	text-align: center;
 	position: relative;
 	height: 100%;
 	margin: 0 auto;
-	top: 10px;
-	color: white;
+	top: 10px; /* PUEDE DAR PROBLEMAS DE ALINEAMIENTO ARRIBA 
 	width: 890px;
 	font-size: 200%;
 	border: 5px solid black;
 }
+*/
 
 h1{
 	color: yellow;
@@ -112,15 +112,9 @@ h1{
 	margin: 0 auto;
 	top: 10px;
 	border: 5px solid black;
-	height: 80%;
+	height: 75%;
 }
 
-.arcade{ /*Botones del nivel*/
-	display: none;
-	width: 50%;
-	position: relative;
-	top: 7px;
-}
 #tablaRivales{
 	position: relative;
 	width: 90%;
@@ -139,9 +133,8 @@ h2{
 }
 
 h2 span {
-color: #3d3a33;
+	color: #3d3a33;
 }
-
 
 #imagenRival{
 	width: 65px;
@@ -171,6 +164,7 @@ color: #3d3a33;
 	border: 5px inset;
 	padding: 0;
 }
+/*
 .casilla:hover{
 	width: 90px;
 	height: 90px;
@@ -179,6 +173,7 @@ color: #3d3a33;
 	width: 100px;
 	height: 100px;
 }
+*/
 .casillaNombre{
 	width: 15%;
 	height: 30px;
@@ -191,20 +186,11 @@ color: #3d3a33;
 #luchar{ /*Boton de combate*/
 	width: 150px;
 	height: 45px;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 	position: absolute;
-	right: 330px;
-	top: 350px;
+	left: 40%;
+	bottom: 0px;
 }
-
-/******************************************
-*******          FOOTER           *********
-******************************************/
-
-#footer {
-clear: both;
-}
-
 
 #ocultar{
 	display: none;
@@ -216,3 +202,11 @@ clear: both;
 	opacity: 0;
 }
 
+/******************************************
+*******          FOOTER           *********
+******************************************/
+/*
+#footer {
+clear: both;
+}
+*/
