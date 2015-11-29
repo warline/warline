@@ -19,7 +19,7 @@
 		<div id="capaMadreCombate">
 				
 			<div class="cabecera">
-				<div id ="warline">
+				<div id ="titulo">
 					COMBATE
 				<hr>
 				</div>
@@ -42,10 +42,10 @@
 						<div class=vidah id="vidaheroemax"></div>
 						<div class=vidah id="vidaheroe" ></div>
 		
-						<input class="bpe" type="button" id=exper1 value="Fuerza (+5)" onClick="fuerza(this)"/>
-						<input class="bpe" type="button" id=exper2 value="Salud (+50)" onClick="defensa(this)"/>
-						<input class="bpe" type="button" id=exper3 value="Velocidad (+10)" onClick="velocidad(this)"/>
-					</div>
+						<button class="bpe" id=exper1  onClick="fuerza(this)">Fuerza (+5)</button>
+						<button class="bpe" id=exper2  onClick="defensa(this)">Salud (+50)</button>
+						<button class="bpe" id=exper3  onClick="velocidad(this)">Velocidad (+10)</button>	
+</div>
 					
 					<table  class= dinfo id="infoh">
 						<tr> <td id ="nivelh"> </td> <td id ="vidah"> </td></tr>
@@ -72,10 +72,10 @@
 						<div class=vidam id="vidamalomax" ></div>					
 						<div class=vidam id="vidamalo"></div>
 						
-						<input class="bpem" type="button" id=experm1 value="Fuerza (+5)" onClick="fuerza(this)"/>
-						<input class="bpem" type="button" id=experm2 value="Salud (+50)" onClick="defensa(this)"/>
-						<input class="bpem" type="button" id=experm3 value="Velocidad (+10)" onClick="velocidad(this)"/>	
-					</div>	
+						<button class="bpem" id=experm1  onClick="fuerza(this)">Fuerza (+5)</button>
+						<button class="bpem" id=experm2  onClick="defensa(this)">Salud (+50)</button>
+						<button class="bpem" id=experm3  onClick="velocidad(this)">Velocidad (+10)</button>	
+						</div>	
 					
 				
 					<table  class= dinfo id="infom">
