@@ -3,7 +3,6 @@ body{
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	font-family: Arial;
 	color: #530009;
 }
 /*
@@ -124,18 +123,6 @@ h1{
 	background-color: #2A0A12;
 }
 
-h2{
-	font-size: 20px;
-	text-align: center;
-	color: white;
-	height: 3px;
-	padding: 0;
-}
-
-h2 span {
-	color: #3d3a33;
-}
-
 #imagenRival{
 	width: 65px;
 	height: 65px;
@@ -164,7 +151,7 @@ h2 span {
 	border: 5px inset;
 	padding: 0;
 }
-/*
+
 .casilla:hover{
 	width: 90px;
 	height: 90px;
@@ -173,7 +160,7 @@ h2 span {
 	width: 100px;
 	height: 100px;
 }
-*/
+
 .casillaNombre{
 	width: 15%;
 	height: 30px;

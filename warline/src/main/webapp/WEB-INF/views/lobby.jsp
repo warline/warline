@@ -6,30 +6,30 @@
 <head>
 	<title> Arena - WarLine </title>
 	<link rel="stylesheet" type="text/css" href="resources/combates/lobby.css"/>
+	<link rel="stylesheet" type="text/css"
+	href="resources/fragments/plantilla.css" />
 </head>
 <body>
 	<div id="container">
 		<div id="main">
-			<div id="transparencia"></div>
-			<div id="encabezado"> 
-				<div id ="warline">
-					ARENA
-				<hr>
-				</div>
+		 <div id="capaMadre">
+			<div class="cabecera"> 
+				<div id ="titulo"> ARENA <hr> </div>
 			</div>
+			
 			<div id="arcade">
 				<div id="arriba">
 					<div id="combateRandom">
 						<br>
 						Combate aleatorio:
-						<p><button id="aleatorio" onClick="">¡Lucha ahora!</button>
+						<p><a href="arena"><button id="aleatorio">¡Lucha ahora!</button></a>
 					</div>
 					
 					<div id="combateAmigo">
 						<br>
 						Reta a algún amigo:
-						<p><input type=text id="usuario"></text>
-						<p><button id="amigo" onClick="">¡Lucha!</button>
+						<p><input type=text id="usuario"></input>
+						<p><a href="arena"><button id="amigo">¡Lucha!</button></a>
 					</div>
 				</div>
 				<br>
@@ -48,6 +48,8 @@
 				</div>
 				<br><br>
 			</div>
+			</div>
+	
 	</div>
 
 

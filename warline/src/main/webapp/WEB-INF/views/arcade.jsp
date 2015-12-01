@@ -5,7 +5,7 @@
 <head>
 <%--<title> Arcade - WarLine </title>--%>
 <link rel="stylesheet" type="text/css"
-	href="resources/arcade/warlineArcade.css" />
+	href="resources/arcade/arcade.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />
 </head>
@@ -66,9 +66,9 @@
 						<td class="casillaNombre"><h2>HYDRA</h2></td>
 					</tr>
 				</table>
-
-				<button id="luchar" type="button" onClick="<!--ruta al combate-->">¡A
-					LUCHAR!</button>
+				<a href="arena">
+					<button id="luchar">¡A LUCHAR!</button>
+				</a>
 				<br> <br>
 			</div>
 		</div>

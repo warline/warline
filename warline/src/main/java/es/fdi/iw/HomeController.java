@@ -63,7 +63,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/arcade", method = RequestMethod.GET)
 	public String arcade(Locale locale, Model model) {
-		return "warlineArcade";
+		return "arcade";
 	}
 	
 	/**
