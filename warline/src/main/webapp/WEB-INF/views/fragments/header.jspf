@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -28,13 +28,12 @@
 					<button class="botonesPrincipales" id="armeria">Armeria</button>
 				</a>
 			<p>
-				<a href="arena">
+				<a href="lobby">
 					<button class="botonesPrincipales" id="combates">Arena</button>
 				</a>
 			<p>
 				<a href="arcade">
-					<button class="botonesPrincipales" id="arcadeButton">
-						Arcade</button>
+					<button class="botonesPrincipales" id="arcadeButton">Arcade</button>
 				</a>
 			<p>
 				<a href="login">
