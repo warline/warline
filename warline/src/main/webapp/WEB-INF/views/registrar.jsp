@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
 <title>warline</title>
-<link rel="stylesheet" href="resources/login/login.css" type="text/css"
+<link rel="stylesheet" href="resources/registrar/registrar.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />
@@ -18,46 +18,52 @@
 		</div>
 
 	</div>
-	<div id="container">
-		<div id="combate">
-			<img id ="leon" src="resources/login/images/leon.JPG"></img>
-			<img id ="orco" src="resources/login/images/orco.JPG"></img>
-		</div>
-		<div id="page_forms">
+		
+		
+		<div id="container">
+			
+			
+			<div id="page_forms">
 			<div id="userlogin">
-			<div id="page_menu">
-				Conectate
+				<div id="page_menu">
+				Registrarse
 				<hr>
-		</div>
-				<form action="login" method="POST">
+			</div>
+				
+				<div id="userlogin_links">
+				
+				<form action="registro" method="POST">
 					<div id="field_username">
 						<h3>Correo:
-						<input id="correo" name="login" type="text" /></h3>
+						<input id="correo" name="correo" type="text" /></h3>
+					</div>
+					<div id="field_nombre">
+						<h3>Nombre:
+						<input id="nombre" name="nombre" type="text" /></h3>
 					</div>
 					<div id="field_password">
 						<h3>Contraseña:
 						<input id="password" name="password" type="password" /></h3>
 					</div>
+					<div id="field_repassword">
+						<h3>Repita la contraseña:
+						<input id="repassword" name="repassword" type="password" /></h3>
+					</div>
 					<br>
-					<br>
-					<div id="log_button">
+					<div id="reg_button">
 						<p>
 							<button type="submit" class="botonesPrincipales" id="login">
-								Log in</button>
+								Registrarse</button>
 						</p>
 					</div>
 				</form>
 				
-				<div id="userlogin_links">
-				
-				
-					<h2>
-						<a id="registrar" href="registrar">Registrate ahora</a>
-					</h2>
 				</div>
 			</div>
+			</div>
 		</div>
-	
-	</div>
+		<div id="clearthis_contentbody"></div>
 </body>
 </html>
+
+ 

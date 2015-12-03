@@ -39,38 +39,45 @@
 					<button class="botonesGUsu" id="banear"></button>
 					<button class="botonesGUsu" id="eliminar"></button>
 					<button class="botonesGUsu" id ="admin"></button>
+					<button class="botonesGUsu" id ="usuario"></button>
 					<div class="apanel">
 						<table>
 							<tr>
 								<td></td>
 								<td>USUARIO</td>
 								<td>CORREO</td>
+								<td>ROL</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>JAVI</td>
-								<td>adfgadfF</td>
+								<td>javi@ucm.es</td>
+								<td>Usuario</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>HENRY</td>
-								<td>GdgGFH</td>
+								<td>henry@ucm.es</td>
+								<td>Administrador</td>
 
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>CHEMA</td>
-								<td>afgafgag</td>
+								<td>elreyenelnorte@ucm.es</td>
+								<td>Rey en el Norte</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>JAVO</td>
-								<td>asfgasfg</td>
+								<td>javo@ucm.es</td>
+								<td>Usuario</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>DAVID</td>
-								<td>gfgsafgsag</td>
+								<td>david@ucm.es</td>
+								<td>Usuario</td>
 							</tr>
 						</table>
 					</div>

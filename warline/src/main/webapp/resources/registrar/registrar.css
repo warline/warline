@@ -95,8 +95,7 @@ li {
 	width: 400px;
 	height: 338px;
 	left: 400px;
-	bottom: 300px;
-	
+	opacity: 0.9;
 }
 
 #page_forms input {
@@ -195,9 +194,7 @@ li {
 	overflow: hidden;
 }
 
-#registrar{
-	color:white;
-}
+
 
 /* Content Body */
 
@@ -207,27 +204,6 @@ li {
 	width: 774px;
 }
 
-
-#combate {
-	width: 1200px;
-	margin : 0px;
-	height : 338px;
-	float : none;
-	position: relative;
-	top: 38px;
-}
-
-#leon{
-	width: 455px;
-	height: 338px;
-	float:left;
-}
-
-#orco{
-	width: 455px;
-	height: 338px;
-	float:right;
-}
 
 
 

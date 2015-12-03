@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
@@ -134,7 +136,7 @@ public class Heroe {
 		this.equipo = equipo;
 	}
 
-	@OneToMany(targetEntity = Item.class)
+	@OneToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
 	public List<Item> getInventario() {
 		return inventario;
 	}

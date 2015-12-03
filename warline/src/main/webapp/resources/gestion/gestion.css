@@ -74,6 +74,12 @@ div#capaMadre{
 #añadir{
 	background-image:url("fotos/añadir.png");
 }
+#admin{
+	background-image:url("fotos/admin.png");
+}
+#usuario{
+	background-image:url("fotos/usuario.png");
+}
 
 #filtrar{
 	/*background-image:url("fotos/busqueda.png");*/

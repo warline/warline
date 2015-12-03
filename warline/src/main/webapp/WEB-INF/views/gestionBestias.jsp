@@ -38,12 +38,12 @@
 
 					</form>
 					
-					<!--<a href = "nuevoObjeto">-->
+					<a href = "nuevaBestia">
 						<button class="botonesGUsu" id="añadir"></button>
-					<!-- </a> -->
-					<!--<a href = "nuevoObjeto">-->
+					</a>
+					<a href = "nuevaBestia">
 						<button class="botonesGUsu" id="modificar"></button>
-					<!-- </a> -->
+					</a>
 					<button class="botonesGUsu" id="eliminar"></button>
 					
 					<div class="apanel">

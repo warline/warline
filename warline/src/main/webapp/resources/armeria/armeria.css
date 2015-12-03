@@ -49,6 +49,7 @@ td:hover{
 	border-color: #fff08c; /*color marfil*/
 }
 caption{
+	color: white;
 	text-align: center;
     font-weight: bold;
 	font-size: 20px;
@@ -57,11 +58,9 @@ caption{
 
 #aobjeto{
 	position: relative;
-	
 	margin-top: 2em;
 	margin-right: 0.3em;
 	margin-left: 0.3em;
-	
   	clear: both;
 	float: left;
 	float: right;
@@ -79,6 +78,7 @@ caption{
 	margin-bottom: 10px;
 }
 #panelObjetoDcha{
+	color: white;
 	float: right;
 	margin-right: 10px;
 }
@@ -95,6 +95,7 @@ p.apanel{
 	font-size: 20px;
 }
 #adinero{
+	color:white;
 	margin-left: 2em;
 	font-size: 100%;
 }

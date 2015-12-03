@@ -46,8 +46,8 @@
 				<div id = "panelRecompensas">
 					<div id = "panelExpYOro">
 						<table>
-							<tr> <td> Experiencia: </td> <td> <input type = "text" id = "expMonst"/> </td> <td> xp </td> </tr> 
-							<tr> <td> Oro: </td> <td> <input type = "text" id = "oroMonst"/> </td> <td> gold </td> </tr>
+							<tr> <td> Experiencia: </td> <td> <input type = "text" id = "expMonst"/> </td> <td> puntos </td> </tr> 
+							<tr> <td> Oro: </td> <td> <input type = "text" id = "oroMonst"/> </td> <td> monedas </td> </tr>
 						</table>
 					</div>
 					<div id = "panelObj">

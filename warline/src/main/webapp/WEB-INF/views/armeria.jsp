@@ -35,7 +35,7 @@
 					<p id = "adinero"> Monedas: </p></div>
 				<div class = "apanel" id = "avendedor">
 					<table>
-						<caption> MERCADER </caption>
+						<caption> ARMERIA </caption>
 						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
 						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
 						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
