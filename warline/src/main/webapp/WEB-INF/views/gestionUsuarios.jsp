@@ -38,43 +38,39 @@
 
 					<button class="botonesGUsu" id="banear"></button>
 					<button class="botonesGUsu" id="eliminar"></button>
+					<button class="botonesGUsu" id ="admin"></button>
 					<div class="apanel">
 						<table>
 							<tr>
 								<td></td>
 								<td>USUARIO</td>
 								<td>CORREO</td>
-								<td>CONTRASEÑA</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>JAVI</td>
 								<td>adfgadfF</td>
-								<td>1234</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>HENRY</td>
 								<td>GdgGFH</td>
-								<td>4321</td>
+
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>CHEMA</td>
 								<td>afgafgag</td>
-								<td>536536</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>JAVO</td>
 								<td>asfgasfg</td>
-								<td>63463</td>
 							</tr>
 							<tr>
 								<td><input type="checkbox"></td>
 								<td>DAVID</td>
 								<td>gfgsafgsag</td>
-								<td>653362</td>
 							</tr>
 						</table>
 					</div>
