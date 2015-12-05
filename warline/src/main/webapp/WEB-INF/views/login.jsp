@@ -49,8 +49,6 @@
 				</form>
 				
 				<div id="userlogin_links">
-				
-				
 					<h2>
 						<a id="registrar" href="registrar">Registrate ahora</a>
 					</h2>

@@ -54,7 +54,7 @@
 }
 
 #arcade{
-	background-color: #4b1a04;
+	background-color: black;
 	color: white;
 	width: 870px;
 	position: relative;
@@ -73,10 +73,10 @@
 
 #combateRandom{
 	text-align: center;
-	border: 4px solid black;
+	border: 3px solid #474747;
 	width: 40%;
 	height: 100%;
-	background-color: #2A0A12;
+	background-color: #0a2735;
 	position: relative;
 	float: left;
 	left: 10px;
@@ -90,10 +90,10 @@
 
 #combateAmigo{
 	text-align: center;
-	border: 4px solid black;
+	border: 3px solid #474747;
 	width: 55%;
 	height: 100%;
-	background-color: #2A0A12;
+	background-color: #0a2735;
 	position: relative;
 	float: right;
 	right: 10px;
@@ -119,7 +119,7 @@
 }
 
 #perfil2{
-	border: 4px solid black;
+	border: 3px solid #474747;
 	top: 2px;
 	text-align: left;
 	position: relative;
@@ -127,11 +127,11 @@
 	width: 95%;
 	height: 55%;
 	margin: 0 auto;
-	background-color: #2A0A12;
+	background-color: #0a2735;
 }
 
 #topDiez{
-	border: 4px solid black;
+	border: 3px solid #474747;
 	text-align: center;
 	position: relative;
 	float: top;
@@ -140,7 +140,7 @@
 	margin: 0 auto;
 	border-collapse: collapse;
 	border-spacing: 0;
-	background-color: #2A0A12;
+	background-color: #0a2735;
 }
 #top{
 	font-weight: bold;
