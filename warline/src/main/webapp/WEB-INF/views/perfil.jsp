@@ -21,19 +21,19 @@
 			
 			<div id = "divIzquierdo">
 				<div id = "panelNombreYFoto">
-					<h2> Nombre del jugador </h2>
+					<h2> <c:out value="${user.getHeroe().nombre}"/> </h2>
 					<div id = "imagenPerfil"><img src = "resources/perfil/fotos/imagenPerfil.jpg"></div>
 				</div>
 				<div id = "estadisticas">
 					<div id = "tablaEstad">
 						<table>
 						<thead>
-							<tr>  <td> Nivel </td><td> <c:out value="${nv}"/> </td>  </tr>
-							<tr>  <td> Vida </td><td> <c:out value="${vida}"/> </td>  </tr>
-							<tr>  <td> Fuerza </td><td> <c:out value="${fue}"/></td>  </tr>
-							<tr>  <td> Precisión </td><td> <c:out value="${pre}"/> </td> </tr>
-							<tr>  <td> Defensa </td><td> <c:out value="${def}"/> </td>  </tr>
-							<tr>  <td> Velocidad </td><td> <c:out value="${vel}"/> </td>  </tr>
+							<tr>  <td> Nivel </td><td> <c:out value="${user.getHeroe().nivel}"/> </td>  </tr>
+							<tr>  <td> Vida </td><td> <c:out value="${user.getHeroe().vida}"/> </td>  </tr>
+							<tr>  <td> Fuerza </td><td> <c:out value="${user.getHeroe().fuerza}"/></td>  </tr>
+							<tr>  <td> Precisión </td><td> <c:out value="${user.getHeroe().precision}"/> </td> </tr>
+							<tr>  <td> Defensa </td><td> <c:out value="${user.getHeroe().defensa}"/> </td>  </tr>
+							<tr>  <td> Velocidad </td><td> <c:out value="${user.getHeroe().velocidad}"/> </td>  </tr>
 						</table>
 					</div>
 					<div id = "diagramaEstad"><img src = "resources/perfil/fotos/stats.png"></div>

@@ -60,26 +60,6 @@ public class HomeController {
 		String formSource = "perfil";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
-		else{
-			Heroe h = u.getHeroe();
-			model.addAttribute("vida","hola");
-			model.addAttribute("def", h.getDefensa());
-			model.addAttribute("fue", h.getFuerza());
-			model.addAttribute("vel", h.getVelocidad());
-			model.addAttribute("pre", h.getPrecision());
-			model.addAttribute("nv", h.getNivel());
-			model.addAttribute("oro", h.getOro());
-			model.addAttribute("xp", h.getXp());
-			/* 	private double vida;
-				private int defensa;
-				private int fuerza;
-				private int velocidad;
-				private int precision;
-				private int nivel;
-				private int oro;
-				private int xp;
-			 */
-		}
 		return formSource;
 	}
 
@@ -174,7 +154,8 @@ public class HomeController {
 					logger.info("no-such-user; creating user {}", formLogin);				
 					User user = User.createUser(formLogin, formPass, "user", "Hola");
 					entityManager.persist(user.getHeroe());
-					entityManager.persist(user);				
+					entityManager.persist(user);	
+					//session.setAttribute("heroe", user.getHeroe());
 					session.setAttribute("user", user);
 					// sets the anti-csrf token
 					getTokenForSession(session);					
