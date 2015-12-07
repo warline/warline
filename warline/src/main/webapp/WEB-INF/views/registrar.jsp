@@ -19,10 +19,8 @@
 
 	</div>
 		
-		
 		<div id="container">
-			
-			
+		
 			<div id="page_forms">
 			<div id="userlogin">
 				<div id="page_menu">
@@ -56,6 +54,10 @@
 								Registrarse</button>
 						</p>
 					</div>
+					<c:if test="${not empty registrerError}">
+						error
+						<br><span class='registrerError'>Login o contraseña incorrectos</span>
+					</c:if>
 				</form>
 				
 				</div>

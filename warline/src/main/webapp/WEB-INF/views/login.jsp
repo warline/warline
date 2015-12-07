@@ -20,26 +20,27 @@
 	</div>
 	<div id="container">
 		<div id="combate">
-			<img id ="leon" src="resources/login/images/leon.JPG"></img>
-			<img id ="orco" src="resources/login/images/orco.JPG"></img>
+			<img id="leon" src="resources/login/images/leon.JPG"></img> <img
+				id="orco" src="resources/login/images/orco.JPG"></img>
 		</div>
 		<div id="page_forms">
 			<div id="userlogin">
-			<div id="page_menu">
-				Conectate
-				<hr>
-		</div>
+				<div id="page_menu">
+					Conectate
+					<hr>
+				</div>
 				<form action="login" method="POST">
 					<div id="field_username">
-						<h3>Correo:
-						<input id="correo" name="login" type="text" /></h3>
+						<h3>
+							Correo: <input id="correo" name="login" type="text" />
+						</h3>
 					</div>
 					<div id="field_password">
-						<h3>Contraseña:
-						<input id="password" name="password" type="password" /></h3>
+						<h3>
+							Contraseña: <input id="password" name="password" type="password" />
+						</h3>
 					</div>
-					<br>
-					<br>
+					<br> <br>
 					<div id="log_button">
 						<p>
 							<button type="submit" class="botonesPrincipales" id="login">
@@ -47,7 +48,11 @@
 						</p>
 					</div>
 				</form>
-				
+				<c:if test="${not empty loginError}">
+					error
+					<br>
+					<span class='errorLogin'>Login o contraseña incorrectos</span>
+				</c:if>
 				<div id="userlogin_links">
 					<h2>
 						<a id="registrar" href="registrar">Registrate ahora</a>
@@ -55,7 +60,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
 </body>
 </html>
