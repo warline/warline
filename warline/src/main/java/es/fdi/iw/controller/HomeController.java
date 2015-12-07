@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.fdi.iw.model.Heroe;
 import es.fdi.iw.model.User;
 
 
@@ -55,8 +56,31 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
-	public String perfil(Locale locale, Model model) {
-		return "perfil";
+	public String perfil(Locale locale, Model model , HttpSession session) {
+		String formSource = "perfil";
+		User u = (User)session.getAttribute("user");
+		if(u == null) formSource = "login";
+		else{
+			Heroe h = u.getHeroe();
+			model.addAttribute("vida","hola");
+			model.addAttribute("def", h.getDefensa());
+			model.addAttribute("fue", h.getFuerza());
+			model.addAttribute("vel", h.getVelocidad());
+			model.addAttribute("pre", h.getPrecision());
+			model.addAttribute("nv", h.getNivel());
+			model.addAttribute("oro", h.getOro());
+			model.addAttribute("xp", h.getXp());
+			/* 	private double vida;
+				private int defensa;
+				private int fuerza;
+				private int velocidad;
+				private int precision;
+				private int nivel;
+				private int oro;
+				private int xp;
+			 */
+		}
+		return formSource;
 	}
 
 	/**
@@ -280,4 +304,16 @@ public class HomeController {
 		session.setAttribute("csrf_token", token);
 		return token;
 	}
+	
+    /**
+     * Logout (also returns to home view).
+     */
+    @RequestMapping(value = "/logout", 
+            method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        logger.info("User '{}' logged out", 
+                    session.getAttribute("user"));
+        session.invalidate();
+        return "redirect:/";
+    }
 }

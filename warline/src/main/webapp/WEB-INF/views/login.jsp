@@ -49,9 +49,7 @@
 					</div>
 				</form>
 				<c:if test="${not empty loginError}">
-					error
-					<br>
-					<span class='errorLogin'>Login o contraseña incorrectos</span>
+					<c:out value="${loginError}"/>
 				</c:if>
 				<div id="userlogin_links">
 					<h2>

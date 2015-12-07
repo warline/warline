@@ -55,8 +55,7 @@
 						</p>
 					</div>
 					<c:if test="${not empty registrerError}">
-						error
-						<br><span class='registrerError'>Login o contraseña incorrectos</span>
+						<c:out value="${registrerError}"/>
 					</c:if>
 				</form>
 				
