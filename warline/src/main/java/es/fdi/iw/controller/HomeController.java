@@ -1,5 +1,6 @@
 package es.fdi.iw.controller;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.fdi.iw.model.Bestia;
 import es.fdi.iw.model.Heroe;
 import es.fdi.iw.model.User;
 
@@ -226,30 +228,59 @@ public class HomeController {
 	}
 
 
+	/**
+	 * Returns an anti-csrf token for a session, and stores it in the session
+	 * @param session
+	 * @return
+	 */
+	static String getTokenForSession (HttpSession session) {
+		String token=UUID.randomUUID().toString();
+		session.setAttribute("csrf_token", token);
+		return token;
+	}
 
-
+	/**
+	 * Logout (also returns to home view).
+	 */
+	@RequestMapping(value = "/logout", 
+			method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		logger.info("User '{}' logged out", 
+				session.getAttribute("user"));
+		session.invalidate();
+		return "redirect:/";
+	}
 
 
 	/*
-	 * GESTION
+	 ********************* FUNCIONES DE LA GESTION *****************************
 	 */
+
+	/************************ GESTION DE USUARIOS *********************************/
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.GET)
-	public String nuevoObjeto(Locale locale, Model model) {
-		return "nuevoObjeto";
+	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.GET)
+	public String gestionUsuarios(Locale locale, Model model) {
+		List<User> u = null;
+		try{
+			u = (List<User>)entityManager.createNamedQuery("allUsers").getResultList();
+			model.addAttribute("users", u);
+		} catch(NoResultException nre){}
+		return "gestionUsuarios";
 	}
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/nuevaBestia", method = RequestMethod.GET)
-	public String nuevaBestia(Locale locale, Model model) {
-		return "nuevaBestia";
+	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
+	@Transactional
+	public String modificarEstadoUsers(Locale locale, Model model) {
+
+		return "gestionUsuarios";
 	}
 
+	/*******************************************************************************/
+
+	/**************************** GESTION OBJETOS *********************************/
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -261,11 +292,15 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.GET)
-	public String gestionUsuarios(Locale locale, Model model) {
-		return "gestionUsuarios";
+	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.POST)
+	@Transactional
+	public String nuevoObjeto(Locale locale, Model model) {
+		return "nuevoObjeto";
 	}
 
+	/*******************************************************************************/
+
+	/**************************** GESTION DE BESTIAS ******************************/
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -273,28 +308,52 @@ public class HomeController {
 	public String gestionBestias(Locale locale, Model model) {
 		return "gestionBestias";
 	}
-
+	
+	@RequestMapping(value = "/nuevaBestia", method = RequestMethod.GET)
+	public String nuevaBestia(Locale locale, Model model) {
+		return "nuevaBestia";
+	}
 
 	/**
-	 * Returns an anti-csrf token for a session, and stores it in the session
-	 * @param session
-	 * @return
+	 * Simply selects the home view to render by returning its name.
 	 */
-	static String getTokenForSession (HttpSession session) {
-		String token=UUID.randomUUID().toString();
-		session.setAttribute("csrf_token", token);
-		return token;
-	}
-	
-    /**
-     * Logout (also returns to home view).
-     */
-    @RequestMapping(value = "/logout", 
-            method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        logger.info("User '{}' logged out", 
-                    session.getAttribute("user"));
-        session.invalidate();
-        return "redirect:/";
-    }
+	@RequestMapping(value = "/registrarBestia", method = RequestMethod.POST)
+	public String registrarBestia(
+			@RequestParam("nombreBestia") String formNombre,
+			@RequestParam("nivel") int formNivel,
+			@RequestParam("vida") int formVida,
+			@RequestParam("fuerza") int formFuerza,
+			@RequestParam("precision") int formPrecision,
+			@RequestParam("defensa") int formDefensa,
+			@RequestParam("velocidad") int formVelocidad,
+			@RequestParam("exp") int formExp,
+			@RequestParam("oro") int formOro,
+			Model model) {
+		
+			String formSource = "nuevaBestia";
+			// validate request
+			if (formNombre == null) {
+				model.addAttribute("bestiaError", "Debe asignar un nombre");
+			} else {
+				Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
+						,formVelocidad, formNivel, formNombre, formExp, formOro);
+				Bestia b = null;
+				try{
+					b = (Bestia)entityManager.createNamedQuery("bestia")
+							.setParameter("nombreParam", formNombre).getSingleResult();
+					if (b != null) {
+						model.addAttribute("registrerError", "el nombre ya esta en uso");
+					} else {
+						entityManager.persist(bestia);
+						formSource = "gestionBestias";
+					}
+				}catch(NoResultException nre){
+						entityManager.persist(bestia);				
+						formSource = "gestionBestias";
+				}
+			}
+			return formSource;
+		}
+
+/******************************************************************************/
 }

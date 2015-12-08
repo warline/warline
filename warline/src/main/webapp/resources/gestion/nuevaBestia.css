@@ -14,14 +14,13 @@
 	background: transparent;
 }
 
-#fotoObjeto, #panelBotonSubirImagen{
+#fotoBestia, #panelBotonSubirImagen{
 	width: 255px;
     height: 255px;
 	background-color: #0a2735;
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 30px;
-	border: #474747 solid 3px;
 }
 
 #panelBotonSubirImagen {
@@ -103,7 +102,7 @@
 	margin: auto;
 }
 
-#panelObj {
+#panelObjetos {
 	width: 580px;
 	height: 120px;
 	background-color: transparent;

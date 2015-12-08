@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 <!DOCTYPE html>
 <html>
@@ -46,42 +48,20 @@
 								<td></td>
 								<td>USUARIO</td>
 								<td>CORREO</td>
+								<td>BANEADO</td>
 								<td>ROL</td>
 							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>JAVI</td>
-								<td>javi@ucm.es</td>
-								<td>Usuario</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>HENRY</td>
-								<td>henry@ucm.es</td>
-								<td>Administrador</td>
-
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>CHEMA</td>
-								<td>elreyenelnorte@ucm.es</td>
-								<td>Rey en el Norte</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>JAVO</td>
-								<td>javo@ucm.es</td>
-								<td>Usuario</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox"></td>
-								<td>DAVID</td>
-								<td>david@ucm.es</td>
-								<td>Usuario</td>
-							</tr>
+							    <c:forEach var="i" items="${users}">
+    								<tr>
+										<td><input type="checkbox"></td>
+										<td><c:out value="${i.getHeroe().nombre}"/></td>
+										<td><c:out value="${i.login}"/></td>
+										<td><c:out value="${i.banned}"/></td>
+										<td><c:out value="${i.role}"/></td>
+									</tr>
+    							</c:forEach>
 						</table>
 					</div>
-
 				</div>
 			</div>
 		</div>

@@ -10,9 +10,9 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
     @NamedQuery(name="bestia",
-            query="select b from Bestia b where b.id= :idParam"),
+            query="select b from Bestia b where b.nombre= :nombreParam"),
     @NamedQuery(name="delBestia",
-    		query="delete from Bestia b where b.id= :idParam")
+    		query="delete from Bestia b where b.nombre= :nombreParam")
 })
 public class Bestia {
 	private long id;
