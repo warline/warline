@@ -1,19 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="fragments/header.jspf" %>
-<!DOCTYPE html>
-<html>
-<head>
 
-<title>Warline</title>
+<%@ include file="fragments/header.jspf" %>
+
 <script src="resources/combates/combates.js"></script>
 <script src= "resources/ui/external/jquery/jquery.js"></script>
 <script src="resources/ui/jquery-ui.js"></script>
 
 <link rel="stylesheet" type="text/css" href="resources\ui\jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/combates/combates.css"/>
-</head>
-<body>
-<!--<img id="fondo" src=".\fotos\background.png"/>-->
+
 <div id="container">
 	<div id="main">
 		<div id="capaMadreCombate">
@@ -30,15 +24,15 @@
 				<div class = "heroe" id=jugador>
 					<div class="marco">
 				
-						<h2>HÃ©roe:</h2>
+						<h2>Héroe:</h2>
 						<button class="hero" id=personalizado onClick="escoge(this)"> Personalizado </button>
 						<button class="hero" id=fuerte onClick="escoge(this)"> Fuerte </button>
-						<button class="hero" id=rapido onClick="escoge(this)"> RÃ¡pido </button>
+						<button class="hero" id=rapido onClick="escoge(this)"> Rápido </button>
 						<button class="hero" id=tanque onClick="escoge(this)"> Tanque </button>
 						
 						<div class="imgh"><img class= "foto" id="iheroe" ></img></div>
 						
-						<div class="sangre" id="dsangreh"><img class= "foto" id="isangreh" src ="resources\combates\fotos\sangre2.png"></img></div>
+						<div class="sangre" id="dsangreh"><img class= "foto" id="isangreh" src ="resources/combates/fotos/sangre2.png"></img></div>
 						<div class=vidah id="vidaheroemax"></div>
 						<div class=vidah id="vidaheroe" ></div>
 		
@@ -62,12 +56,12 @@
 						<h2>Enemigo:</h2>
 						<button class="hero" id=mpersonalizado onClick="escogemalo(this)"> Personalizado </button>
 						<button class="hero" id=mfuerte onClick="escogemalo(this)"> Fuerte </button>
-						<button class="hero" id=mrapido onClick="escogemalo(this)"> RÃ¡pido </button>
+						<button class="hero" id=mrapido onClick="escogemalo(this)"> Rápido </button>
 						<button class="hero" id=mtanque onClick="escogemalo(this)"> Tanque </button>
 						
 						<div class="imgm" id="dmalo" ><img class= "foto" id="imalo" ></img></div>
 						
-						<div class="sangre" id="dsangrem"><img class= "foto" id="isangrem" src ="resources\combates\fotos\sangre.png"></img></div>
+						<div class="sangre" id="dsangrem"><img class= "foto" id="isangrem" src ="resources/combates/fotos/sangre.png"></img></div>
 						
 						<div class=vidam id="vidamalomax" ></div>					
 						<div class=vidam id="vidamalo"></div>
@@ -85,7 +79,7 @@
 					</table>
 					
 				</div>
-				<div  id="versus" ><img id="vs" src ="resources\combates\fotos\versus.png"></img></div>
+				<div  id="versus" ><img id="vs" src ="resources/combates/fotos/versus.png"></img></div>
 				<!--<div id="can" ><canvas id="canvas"></canvas></div>-->
 			</div>
 			<button id=lucha onClick="iniciaCombate()"> Luchar </button>

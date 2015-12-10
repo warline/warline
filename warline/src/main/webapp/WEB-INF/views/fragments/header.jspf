@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,6 @@
 	href="resources/fragments/plantilla.css" />
 </head>
 <body>
-	<!--<img id="fondo" src=".\fotos\background.png"/>-->
 
 	<div id="header">
 

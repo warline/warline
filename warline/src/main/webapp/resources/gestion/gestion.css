@@ -25,6 +25,11 @@ h3{
     background-color: #0a2735; /*azul turquesa oscuro*/
 	border:3px solid #474747; /*gris oscuro*/
 }
+div#panelScroll{
+	height: 320px;
+    width: 800px;
+    overflow: scroll;
+}
 #find input[type= "text"]{
 	margin-right: 15px;
 	height: 25px;

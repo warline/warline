@@ -1,15 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="fragments/header.jspf"%>
-<!DOCTYPE html>
-<html>
-<head>
 <%--<title> Arcade - WarLine </title>--%>
 <link rel="stylesheet" type="text/css"
 	href="resources/arcade/arcade.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />
-</head>
-<body>
+
 	<div id="container">
 		<div id="main">
 		 <div id="capaMadre">
@@ -36,9 +31,9 @@
 							<img id="imagenRival" src="resources/arcade/images/pantera.jpg" /></td>
 					</tr>
 					<tr class="nombres">
-						<td class="casillaNombre"><h2>BOQUERÃ“N</h2></td>
+						<td class="casillaNombre"><h2>BOQUERÓN</h2></td>
 						<td class="casillaNombre"><h2>RATAS</h2></td>
-						<td class="casillaNombre"><h2>TEJÃ“N</h2></td>
+						<td class="casillaNombre"><h2>TEJÓN</h2></td>
 						<td class="casillaNombre"><h2>KOMODO</h2></td>
 						<td class="casillaNombre"><h2>LOBO</h2></td>
 						<td class="casillaNombre"><h2>PANTERA</h2></td>
@@ -62,12 +57,12 @@
 						<td class="casillaNombre"><h2>TIGRE</h2></td>
 						<td class="casillaNombre"><h2>RHINO</h2></td>
 						<td class="casillaNombre"><h2>ELEFANTE</h2></td>
-						<td class="casillaNombre"><h2>DRAGÃ“N</h2></td>
+						<td class="casillaNombre"><h2>DRAGÓN</h2></td>
 						<td class="casillaNombre"><h2>HYDRA</h2></td>
 					</tr>
 				</table>
 				<a href="arena">
-					<button id="luchar">Â¡A LUCHAR!</button>
+					<button id="luchar">¡A LUCHAR!</button>
 				</a>
 				<br> <br>
 			</div>

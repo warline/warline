@@ -11,7 +11,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="allItems",
             query="select i from Item i"),
-    @NamedQuery(name="itemByNombre",
+    @NamedQuery(name="itemByName",
         query="select i from Item i where i.nombre = :nombreParam"),
     @NamedQuery(name="delItem",
     	query="delete from Item i where i.id= :idParam"),
@@ -33,6 +33,7 @@ public class Item {
 	private int precision;
 	private TipoItem tipo;
 	private int precio;
+	//private boolean disponibilidad
 	public Item() {}
 	
 	public Item(String nombre, String img, double vida, int fu, int def, int vel, int pre, TipoItem t , int _precio){

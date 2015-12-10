@@ -1,13 +1,9 @@
 <%@ include file="fragments/headerGestion.jspf"%>
-<!DOCTYPE html>
-<html>
-<head> <title> Nueva Bestia </title>
 <link rel="stylesheet" type="text/css" 
 		href="resources/fragments/plantilla.css"/>
 <link rel = "stylesheet" type = "text/css" 
 		href = "resources/gestion/nuevaBestia.css">
-</head> 
-<body> 
+		
 <div id="container">
 	<div id="main">
 		<div id="capaMadre">
@@ -59,6 +55,10 @@
 						<button type="submit">Guardar Bestia </button>
 					</div>
 				</form>
+				
+				<c:if test="${not empty bestiaError}">
+					<c:out value="${bestiaError}"/>
+				</c:if>
 				
 
 

@@ -1,21 +1,18 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
-<!DOCTYPE html>
-<html>
-<head>
 
-<title>Warline</title>
 <script src="prueba.js"></script>
-<script src=".\ui\external\jquery\jquery.js"></script>
-<script src=".\ui\jquery-ui.js"></script>
+<script src="./ui/external/jquery/jquery.js"></script>
+<script src="./ui/jquery-ui.js"></script>
 
-<link rel="stylesheet" type="text/css" href=".\ui\jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />  
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/gestion.css">
-</head>
-<body>
-	<!--<img id="fondo" src=".\fotos\background.png"/>-->
+
+	<!--<img id="fondo" src="./fotos/background.png"/>-->
 	<div id="container">
 
 
@@ -46,7 +43,7 @@
 					</a>
 					<button class="botonesGUsu" id="eliminar"></button>
 					
-					<div class="apanel">
+					<div class="apanel" id = "panelScroll">
 						<table>
 							<tr>
 								<td id="imagen"></td>
@@ -54,30 +51,15 @@
 								<td>NOMBRE</td>
 								<td>NIVEL</td>
 							</tr>
-							<tr>
-								<td id="imagen"><input type="checkbox"></td>
-								<td></td>
-								<td>Boqueron</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td id="imagen"><input type="checkbox"></td>
-								<td></td>
-								<td>Lobo</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td id="imagen"><input type="checkbox"></td>
-								<td></td>
-								<td>Hydra</td>
-								<td>45</td>
-							</tr>
-							<tr>
-								<td id="imagen"><input type="checkbox"></td>
-								<td></td>
-								<td>OSO</td>
-								<td>30</td>
-							</tr>
+							<c:forEach var="b" items="${bestias}">
+								<tr>
+									<td><input type="checkbox"></td>
+									<td></td>
+									<td><c:out value="${b.nombre}" /></td>
+									<td><c:out value="${b.nivel}" /></td>
+								</tr>
+							</c:forEach>
+
 						</table>
 					</div>
 

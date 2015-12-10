@@ -1,15 +1,9 @@
-
-<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="fragments/header.jspf" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<title> Arena - WarLine </title>
+
 	<link rel="stylesheet" type="text/css" href="resources/combates/lobby.css"/>
 	<link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />
-</head>
-<body>
+
 	<div id="container">
 		<div id="main">
 		 <div id="capaMadre">
@@ -22,14 +16,14 @@
 					<div id="combateRandom">
 						<br>
 						Combate aleatorio:
-						<p><a href="arena"><button id="aleatorio">Â¡Lucha ahora!</button></a>
+						<p><a href="arena"><button id="aleatorio">¡Lucha ahora!</button></a>
 					</div>
 					
 					<div id="combateAmigo">
 						<br>
-						Reta a algÃºn amigo:
+						Reta a algún amigo:
 						<p><input type=text id="usuario"></input>
-						<p><a href="arena"><button id="amigo">Â¡Lucha!</button></a>
+						<p><a href="arena"><button id="amigo">¡Lucha!</button></a>
 					</div>
 				</div>
 				<br>

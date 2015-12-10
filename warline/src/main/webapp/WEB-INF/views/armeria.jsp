@@ -1,20 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="fragments/header.jspf" %>
-<!DOCTYPE html>
-<html>
-<head>
-
-<title>Warline</title>
 <script src="prueba.js"></script>
-<script src= ".\ui\external\jquery\jquery.js"></script>
-<script src=".\ui\jquery-ui.js"></script>
+<script src= "./ui/external/jquery/jquery.js"></script>
+<script src="./ ui/jquery-ui.js"></script>
 
-<link rel="stylesheet" type="text/css" href=".\ui\jquery-ui.css"/>
+<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
 <link rel="stylesheet" type="text/css" href="resources/armeria/armeria.css"/>
-</head>
-<body>
-<!--<img id="fondo" src=".\fotos\background.png"/>-->
+
 <div id="container">
 	<div id="main">
 		<div id="capaMadre">

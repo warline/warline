@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.fdi.iw.model.Bestia;
 import es.fdi.iw.model.Heroe;
+import es.fdi.iw.model.Item;
+import es.fdi.iw.model.TipoItem;
 import es.fdi.iw.model.User;
 
 
@@ -273,8 +275,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
 	@Transactional
-	public String modificarEstadoUsers(Locale locale, Model model) {
-
+	public String modificarEstadoUsers(Model model) {
 		return "gestionUsuarios";
 	}
 
@@ -285,18 +286,61 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/gestionObjetos", method = RequestMethod.GET)
-	public String gestionObjetos(Locale locale, Model model) {
+	public String gestionObjetos(Model model) {
+		List<Item> o = null;
+		try{
+			o = (List<Item>)entityManager.createNamedQuery("allItems").getResultList();
+			model.addAttribute("objetos", o);
+		} catch(NoResultException nre){}
 		return "gestionObjetos";
 	}
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.POST)
-	@Transactional
-	public String nuevoObjeto(Locale locale, Model model) {
+	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.GET)
+	public String nuevoObjeto(Model model) {
 		return "nuevoObjeto";
 	}
+	
+	@Transactional
+	@RequestMapping(value = "/registrarItem", method = RequestMethod.POST)
+	public String registrarItem(
+			@RequestParam("nombreObj") String formNombre,
+			@RequestParam("tipoObj") TipoItem formTipo,
+			@RequestParam("nivelObj") int formNivel,
+			@RequestParam("vidaObj") int formVida,
+			@RequestParam("fuerzaObj") int formFuerza,
+			@RequestParam("precisionObj") int formPrecision,
+			@RequestParam("defObj") int formDefensa,
+			@RequestParam("velObj") int formVelocidad,
+			@RequestParam("precioObj") int formPrecio,
+			Model model) {
+			//TipoItem tipo = TipoItem.parseo(formTipo);
+			String formSource = "nuevoObjeto";
+			// validate request
+			if (formNombre == null) {
+				model.addAttribute("objetoError", "Debe asignar un nombre");
+			} else {
+				Item item = new Item(formNombre, " ", formVida,formFuerza, formDefensa,
+						formVelocidad, formPrecision, formTipo , formPrecio);
+				Item i = null;
+				try{
+					i = (Item)entityManager.createNamedQuery("itemByName")
+							.setParameter("nombreParam", formNombre).getSingleResult();
+					if (i != null) {
+						model.addAttribute("objetoError", "el nombre ya esta en uso");
+					} else {
+						entityManager.persist(item);
+						formSource = gestionObjetos(model);
+					}
+				} catch(NoResultException nre){
+						entityManager.persist(item);				
+						formSource = gestionObjetos(model);
+				}
+			}
+			return formSource;
+		}
 
 	/*******************************************************************************/
 
@@ -305,18 +349,24 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/gestionBestias", method = RequestMethod.GET)
-	public String gestionBestias(Locale locale, Model model) {
+	public String gestionBestias(Model model) {
+		List<Bestia> b = null;
+		try{
+			b = (List<Bestia>)entityManager.createNamedQuery("allBestias").getResultList();
+			model.addAttribute("bestias", b);
+		} catch(NoResultException nre){}
 		return "gestionBestias";
 	}
 	
 	@RequestMapping(value = "/nuevaBestia", method = RequestMethod.GET)
-	public String nuevaBestia(Locale locale, Model model) {
+	public String nuevaBestia(Model model) {
 		return "nuevaBestia";
 	}
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	@Transactional
 	@RequestMapping(value = "/registrarBestia", method = RequestMethod.POST)
 	public String registrarBestia(
 			@RequestParam("nombreBestia") String formNombre,
@@ -339,21 +389,22 @@ public class HomeController {
 						,formVelocidad, formNivel, formNombre, formExp, formOro);
 				Bestia b = null;
 				try{
-					b = (Bestia)entityManager.createNamedQuery("bestia")
+					b = (Bestia)entityManager.createNamedQuery("bestiaByName")
 							.setParameter("nombreParam", formNombre).getSingleResult();
 					if (b != null) {
-						model.addAttribute("registrerError", "el nombre ya esta en uso");
+						model.addAttribute("bestiaError", "el nombre ya esta en uso");
 					} else {
 						entityManager.persist(bestia);
-						formSource = "gestionBestias";
+						formSource = gestionBestias(model);
 					}
-				}catch(NoResultException nre){
+				} catch(NoResultException nre){
 						entityManager.persist(bestia);				
-						formSource = "gestionBestias";
+						formSource = gestionBestias(model);
 				}
 			}
 			return formSource;
 		}
-
+	
+	
 /******************************************************************************/
 }

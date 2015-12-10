@@ -9,7 +9,9 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="bestia",
+	@NamedQuery(name="allBestias",
+			query="select b from Bestia b"),
+    @NamedQuery(name="bestiaByName",
             query="select b from Bestia b where b.nombre= :nombreParam"),
     @NamedQuery(name="delBestia",
     		query="delete from Bestia b where b.nombre= :nombreParam")

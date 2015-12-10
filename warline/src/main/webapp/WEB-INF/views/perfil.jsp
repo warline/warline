@@ -1,17 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
-<!DOCTYPE html>
-<html>
-<head> <title> Perfil </title>
-<script src="prueba.js"></script>
-<script src= ".\ui\external\jquery\jquery.js"></script>
-<script src=".\ui\jquery-ui.js"></script>
 
-<link rel="stylesheet" type="text/css" href=".\ui\jquery-ui.css"/>
+<script src="prueba.js"></script>
+<script src= "./ui/external/jquery/jquery.js"></script>
+<script src="./ui/jquery-ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
-</head> <link rel = "stylesheet" type = "text/css" href = "resources/perfil/perfil.css">
-<body> 
+<link rel = "stylesheet" type = "text/css" href = "resources/perfil/perfil.css">
 <div id="container">
 	<div id="main">
 		<div id="capaMadre">
@@ -31,7 +27,7 @@
 							<tr>  <td> Nivel </td><td> <c:out value="${user.getHeroe().nivel}"/> </td>  </tr>
 							<tr>  <td> Vida </td><td> <c:out value="${user.getHeroe().vida}"/> </td>  </tr>
 							<tr>  <td> Fuerza </td><td> <c:out value="${user.getHeroe().fuerza}"/></td>  </tr>
-							<tr>  <td> PrecisiÃ³n </td><td> <c:out value="${user.getHeroe().precision}"/> </td> </tr>
+							<tr>  <td> Precisión </td><td> <c:out value="${user.getHeroe().precision}"/> </td> </tr>
 							<tr>  <td> Defensa </td><td> <c:out value="${user.getHeroe().defensa}"/> </td>  </tr>
 							<tr>  <td> Velocidad </td><td> <c:out value="${user.getHeroe().velocidad}"/> </td>  </tr>
 						</table>

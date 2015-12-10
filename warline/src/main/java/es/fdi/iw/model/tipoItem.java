@@ -1,5 +1,5 @@
 package es.fdi.iw.model;
 
-enum TipoItem{
+public enum TipoItem {
 	CASCO, ARMADURA, BOTAS, ESPADA, ESCUDO;
 }
