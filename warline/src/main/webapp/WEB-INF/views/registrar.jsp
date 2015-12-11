@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
-
+<script src="resources/registrar/registrar.js"></script>
+<script src= "resources/ui/external/jquery/jquery.js"></script>
 <link rel="stylesheet" href="resources/registrar/registrar.css" type="text/css"
 	media="screen" />
 <link rel="stylesheet" type="text/css"
@@ -43,10 +44,13 @@
 						<h3>Repita la contraseña:
 						<input id="repassword" name="repassword" type="password" /></h3>
 					</div>
+					<div class="imgheroe" id="imgizd" onClick="rotarizd()"><img class= "foto" id="fizd" ></img> </div>
+					<div class="imgheroe" id="imgcen"> <img class= "foto" id="fcen" ></img></div>
+					<div class="imgheroe" id="imgder"onClick="rotarder()"><img class= "foto" id="fder" ></img> </div>
 					<br>
 					<div id="reg_button">
 						<p>
-							<button type="submit" class="botonesPrincipales" id="login">
+							<button type="submit" class="botonesPrincipales" id="registrar">
 								Registrarse</button>
 						</p>
 					</div>

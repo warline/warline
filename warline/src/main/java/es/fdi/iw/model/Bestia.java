@@ -1,5 +1,7 @@
 package es.fdi.iw.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,8 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="allBestias",
-			query="select b from Bestia b"),
+	@NamedQuery(name="bestiasPorNivel",
+			query="select b from Bestia b Order By(b.nivel)"),
     @NamedQuery(name="bestiaByName",
             query="select b from Bestia b where b.nombre= :nombreParam"),
     @NamedQuery(name="delBestia",

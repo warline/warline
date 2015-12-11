@@ -38,10 +38,33 @@ li {
 	list-style-type: none;
 }
 
+#registrar{
+	height: 50px;
+}
 
+.imgheroe{
+	border: 1px solid white;
+	float: left;
+	margin: 10px;
+}
 
+#imgizd, #imgder{
+	height: 80px;
+	top: 35px;
+	position:relative;
+	width: 80px;
+}
 
-
+#imgcen{
+	height: 150px;
+	width: 150px;
+	
+}
+.foto{
+	height: 100%;
+	width: 100%;
+	}
+	
 /* Page Header */
 
 #page_header {
@@ -126,7 +149,7 @@ li {
 	border-width: 2px 0px;
 	border-color: #860b09 #000 #860b09;
 	border-style: solid;
-	height: 334px;
+	height: 500px;
 	width: 400px;
 	
 	overflow: hidden;

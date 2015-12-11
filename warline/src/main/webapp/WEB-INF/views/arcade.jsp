@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf"%>
 <%--<title> Arcade - WarLine </title>--%>
 <link rel="stylesheet" type="text/css"
@@ -16,7 +18,15 @@
 			<div id="arcade">
 				<h3>Escoge un rival:</h3>
 				<table id="tablaRivales">
-					<tr id="arribaRivales">
+				<tr>
+				<c:forEach var="b" items="${bestias}">
+								
+									<td><c:out value="${b.nombre}" />
+									<p><c:out value="${b.nivel}" /></td>
+								
+				</c:forEach>
+				</tr>
+					<!-- <tr id="arribaRivales">
 						<td class="casilla"><div id="ocultar"></div>
 							<img id="imagenRival" src="resources/arcade/images/boqueron.jpg" /></td>
 						<td class="casilla"><div id="ocultar"></div>
@@ -59,7 +69,7 @@
 						<td class="casillaNombre"><h2>ELEFANTE</h2></td>
 						<td class="casillaNombre"><h2>DRAGÓN</h2></td>
 						<td class="casillaNombre"><h2>HYDRA</h2></td>
-					</tr>
+					</tr>-->
 				</table>
 				<a href="arena">
 					<button id="luchar">¡A LUCHAR!</button>

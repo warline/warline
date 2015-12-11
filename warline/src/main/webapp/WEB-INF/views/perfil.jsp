@@ -30,9 +30,11 @@
 							<tr>  <td> Precisión </td><td> <c:out value="${user.getHeroe().precision}"/> </td> </tr>
 							<tr>  <td> Defensa </td><td> <c:out value="${user.getHeroe().defensa}"/> </td>  </tr>
 							<tr>  <td> Velocidad </td><td> <c:out value="${user.getHeroe().velocidad}"/> </td>  </tr>
+							<tr>  <td> Oro </td><td> <c:out value="${user.getHeroe().oro}"/> </td>  </tr>
+							<tr>  <td> Experiencia </td><td> <c:out value="${user.getHeroe().xp}"/> </td>  </tr>
 						</table>
 					</div>
-					<div id = "diagramaEstad"><img src = "resources/perfil/fotos/stats.png"></div>
+					<!--<div id = "diagramaEstad"><img src = "resources/perfil/fotos/stats.png"></div>  -->
 				</div>
 			</div> <!-- divIzquierdo -->
 

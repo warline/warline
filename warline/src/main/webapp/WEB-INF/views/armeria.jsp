@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 <script src="prueba.js"></script>
 <script src= "./ui/external/jquery/jquery.js"></script>
@@ -24,7 +26,7 @@
 						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
 						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>		
 					</table>
-					<p id = "adinero"> Monedas: </p></div>
+					<p id = "adinero"> Monedas: <c:out value="${user.getHeroe().oro}" /></p></div>
 				<div class = "apanel" id = "avendedor">
 					<table>
 						<caption> ARMERIA </caption>

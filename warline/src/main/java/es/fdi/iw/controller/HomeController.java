@@ -71,16 +71,27 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/arcade", method = RequestMethod.GET)
-	public String arcade(Locale locale, Model model) {
-		return "arcade";
+	public String arcade(Locale locale, Model model , HttpSession session) {
+		String formSource = "arcade";
+		User u = (User)session.getAttribute("user");
+		if(u == null) formSource = "login";
+		List<Bestia> b = null;
+		try{
+			b = (List<Bestia>)entityManager.createNamedQuery("bestiasPorNivel").getResultList();
+			model.addAttribute("bestias", b);
+		} catch(NoResultException nre){}
+		return formSource;
 	}
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/arena", method = RequestMethod.GET)
-	public String arena(Locale locale, Model model) {
-		return "combates";
+	public String arena(Locale locale, Model model , HttpSession session) {
+		String formSource = "arena";
+		User u = (User)session.getAttribute("user");
+		if(u == null) formSource = "login";
+		return formSource;
 	}
 
 	/**
@@ -96,8 +107,11 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/armeria", method = RequestMethod.GET)
-	public String armeria(Locale locale, Model model) {
-		return "armeria";
+	public String armeria(Locale locale, Model model , HttpSession session) {
+		String formSource = "armeria";
+		User u = (User)session.getAttribute("user");
+		if(u == null) formSource = "login";
+		return formSource;
 	}
 
 
@@ -105,8 +119,11 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/lobby", method = RequestMethod.GET)
-	public String lobby(Locale locale, Model model) {
-		return "lobby";
+	public String lobby(Locale locale, Model model , HttpSession session) {
+		String formSource = "lobby";
+		User u = (User)session.getAttribute("user");
+		if(u == null) formSource = "login";
+		return formSource;
 	}
 
 	/**
@@ -272,10 +289,27 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return "gestionUsuarios";
 	}
-
-	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
+	
+	/*@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
 	@Transactional
-	public String modificarEstadoUsers(Model model) {
+	public String banearUsuarios(Model model) {
+		return "gestionUsuarios";
+	}
+	
+	//@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
+	//@Transactional
+	//public String convertirEnAdmins(Model model) {
+	//	return "gestionUsuarios";
+	//}
+	
+	//@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
+	//@Transactional
+	//public String convertirEnUsers(Model model) {
+	//	return "gestionUsuarios";
+	//}
+	
+	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
+	public String buscarUsuario(Model model) {
 		return "gestionUsuarios";
 	}
 
@@ -341,6 +375,11 @@ public class HomeController {
 			}
 			return formSource;
 		}
+	
+	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.POST)
+	public String editarObjeto(Model model) {
+		return "nuevoObjeto";
+	}
 
 	/*******************************************************************************/
 
@@ -352,7 +391,7 @@ public class HomeController {
 	public String gestionBestias(Model model) {
 		List<Bestia> b = null;
 		try{
-			b = (List<Bestia>)entityManager.createNamedQuery("allBestias").getResultList();
+			b = (List<Bestia>)entityManager.createNamedQuery("bestiasPorNivel").getResultList();
 			model.addAttribute("bestias", b);
 		} catch(NoResultException nre){}
 		return "gestionBestias";
@@ -382,7 +421,7 @@ public class HomeController {
 		
 			String formSource = "nuevaBestia";
 			// validate request
-			if (formNombre == null) {
+			if (formNombre == "") {
 				model.addAttribute("bestiaError", "Debe asignar un nombre");
 			} else {
 				Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
@@ -404,6 +443,10 @@ public class HomeController {
 			}
 			return formSource;
 		}
+	
+	public String editarBestias() {
+		return null;
+	}
 	
 	
 /******************************************************************************/

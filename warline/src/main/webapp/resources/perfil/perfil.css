@@ -61,6 +61,11 @@
 	color: white;
 }
 
+#tablaEstad table td {
+	
+	width: 140px;
+}
+
 #diagramaEstad {
     height: 45%;
     margin-top: 3px;
