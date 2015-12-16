@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 
-<script src="prueba.js"></script>
+
+
 <script src="./ui/external/jquery/jquery.js"></script>
 <script src="./ui/jquery-ui.js"></script>
 
@@ -22,41 +23,51 @@
 					</div>
 				</div>
 
-				<div id="acuerpo">
-					<form>
-						<!--Filtro:<br> -->
-						<div id="find">
-							<input type="text" name="filtro">
-							<button class="botonesGUsu" id="filtrar">Buscar</button>
-						</div>
-					</form>
-
-					<button class="botonesGUsu" id="banear"></button>
-					<button class="botonesGUsu" id="eliminar"></button>
-					<button class="botonesGUsu" id ="admin"></button>
-					<button class="botonesGUsu" id ="usuario"></button>
-					<div class="apanel" id = "panelScroll">
-						<table>
-							<tr>
-								<td></td>
-								<td>USUARIO</td>
-								<td>CORREO</td>
-								<td>BANEADO</td>
-								<td>ROL</td>
-							</tr>
-							    <c:forEach var="i" items="${users}">
-    								<tr>
-										<td><input type="checkbox"></td>
-										<td><c:out value="${i.getHeroe().nombre}"/></td>
-										<td><c:out value="${i.login}"/></td>
-										<td><c:out value="${i.banned}"/></td>
-										<td><c:out value="${i.role}"/></td>
-									</tr>
-    							</c:forEach>
-						</table>
+			<div id="acuerpo">
+				<form>
+					<!--Filtro:<br> -->
+					<div id="find">
+						<input type="text" name="filtro">
+						<button class="botonesGUsu" id="filtrar">Buscar</button>
 					</div>
+				</form>
+
+				<button class="botonesGUsu" id="banear"></button>
+				<button class="botonesGUsu" id="eliminar"></button>
+				<button class="botonesGUsu" id="admin"></button>
+				<button class="botonesGUsu" id="usuario"></button>
+
+				<div class="apanel" id="panelScroll">
+				    <form id="selected" method="POST">
+					<table>
+						<thead>
+							<tr>
+								<th id = "checkbox"></th>
+								<th>USUARIO</th>
+								<th>CORREO</th>
+								<th>BANEADO</th>
+								<th>ROL</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+							<c:forEach var="i" items="${users}">
+							<tr>
+									<td id = "checkbox"><input type="checkbox" name="selected"></td>
+									<td><c:out value="${i.getHeroe().nombre}" /></td>
+									<td><c:out value="${i.login}" /></td>
+									<td><c:out value="${i.banned}" /></td>
+									<td><c:out value="${i.role}" /></td>
+									</tr>
+							</c:forEach>
+						
+						</tbody>
+					</table>
+					<input type="hidden" id="op" name="op"/>
+					</form>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
-<script src="prueba.js"></script>
+
 <script src= "./ui/external/jquery/jquery.js"></script>
 <script src="./ ui/jquery-ui.js"></script>
 
@@ -30,11 +30,14 @@
 				<div class = "apanel" id = "avendedor">
 					<table>
 						<caption> ARMERIA </caption>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>	
+						<c:forEach var="i" items="${items}">
+								<tr>
+									<!-- <td><img class="bicho" src = "${b.imagen}"/></td> -->
+									<td><c:out value="${i.nombre}" /></td>
+									<td><c:out value="${i.precio} monedas" /></td>
+									<td><c:out value="${i.tipo}" /></td>
+								</tr>
+							</c:forEach>	
 					</table>
 				</div>
 				<div class = "apanel" id = "aobjeto">

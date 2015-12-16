@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.fdi.iw.model.Bestia;
 import es.fdi.iw.model.Heroe;
@@ -88,12 +89,26 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/arena", method = RequestMethod.GET)
 	public String arena(Locale locale, Model model , HttpSession session) {
-		String formSource = "arena";
+		String formSource = "combates";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
+		Bestia rival=(Bestia)entityManager.createNamedQuery("bestiaByName").setParameter("nombreParam", "boqueron").getSingleResult();;
+		model.addAttribute("rival", rival);
 		return formSource;
 	}
 
+	@RequestMapping(value = "/escoge", method = RequestMethod.POST)
+	public void escoge(String nombre,Locale locale, Model model) {
+
+		Bestia rival=(Bestia)entityManager.createNamedQuery("bestiaByName").setParameter("nombreParam", nombre).getSingleResult();;
+		model.addAttribute("rival", rival);
+		System.err.println(nombre+"s");
+	
+	}
+
+	
+	
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -111,6 +126,11 @@ public class HomeController {
 		String formSource = "armeria";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
+		List<Item> i = null;
+		try{
+			i = (List<Item>)entityManager.createNamedQuery("itemsPorPrecio").getResultList();
+			model.addAttribute("items", i);
+		} catch(NoResultException nre){}
 		return formSource;
 	}
 
@@ -161,7 +181,10 @@ public class HomeController {
 				if (u.isPassValid(formPass)) {
 					logger.info("pass was valid");				
 					session.setAttribute("user", u);
-					formSource = "perfil";
+					if(u.getRole().equals("User"))
+						formSource = "perfil";
+					else if(u.getRole().equals("Admin"))
+						formSource = "gestionUsuarios";
 					// sets the anti-csrf token
 					getTokenForSession(session);
 				} else {
@@ -201,6 +224,7 @@ public class HomeController {
 			@RequestParam("nombre") String formNombre,
 			@RequestParam("password") String formPass,
 			@RequestParam("repassword") String formRePass,
+			@RequestParam("imagen") String formImagen,
 
 			HttpServletRequest request, HttpServletResponse response, 
 			Model model, HttpSession session) {
@@ -212,7 +236,7 @@ public class HomeController {
 			model.addAttribute("registrerError", "usuarios y contraseñas: 4 caracteres mínimo");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
-			User user = User.createUser(formLogin, formPass, "user", formNombre);
+			User user = User.createUser(formLogin, formPass, "admin", formNombre);
 			User u = null;
 			try{
 				u = (User)entityManager.createNamedQuery("userByLogin")
@@ -221,8 +245,9 @@ public class HomeController {
 					model.addAttribute("registrerError", "ya estas registrado");
 				} else {
 					if(formPass.equals(formRePass)){
+						user.getHeroe().setImagen(formImagen);
 						entityManager.persist(user.getHeroe());
-						entityManager.persist(user);				
+						entityManager.persist(user);	
 						session.setAttribute("user", user);
 						formSource = "perfil";
 					} else {
@@ -232,6 +257,7 @@ public class HomeController {
 				}
 			}catch(NoResultException nre){
 				if(formPass.equals(formRePass)){
+					user.getHeroe().setImagen(formImagen);
 					entityManager.persist(user.getHeroe());
 					entityManager.persist(user);				
 					session.setAttribute("user", user);
@@ -281,13 +307,18 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.GET)
-	public String gestionUsuarios(Locale locale, Model model) {
+	public String gestionUsuarios(Locale locale, Model model,HttpSession session) {
+		String formSource = "gestionUsuarios";
 		List<User> u = null;
 		try{
 			u = (List<User>)entityManager.createNamedQuery("allUsers").getResultList();
 			model.addAttribute("users", u);
+			User user = (User)session.getAttribute("user");
+			if(user == null) formSource = "login";
+			else if(! user.getRole().equals("admin")) formSource = "perfil";
+			
 		} catch(NoResultException nre){}
-		return "gestionUsuarios";
+		return formSource;
 	}
 	
 	/*@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
@@ -320,11 +351,15 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/gestionObjetos", method = RequestMethod.GET)
-	public String gestionObjetos(Model model) {
+	public String gestionObjetos(Model model,HttpSession session) {
+		String formSource = "gestionObjetos";
 		List<Item> o = null;
 		try{
 			o = (List<Item>)entityManager.createNamedQuery("allItems").getResultList();
 			model.addAttribute("objetos", o);
+			User user = (User)session.getAttribute("user");
+			if(user == null) formSource = "login";
+			else if(! user.getRole().equals("admin")) formSource = "perfil";
 		} catch(NoResultException nre){}
 		return "gestionObjetos";
 	}
@@ -349,7 +384,7 @@ public class HomeController {
 			@RequestParam("defObj") int formDefensa,
 			@RequestParam("velObj") int formVelocidad,
 			@RequestParam("precioObj") int formPrecio,
-			Model model) {
+			Model model,HttpSession session) {
 			//TipoItem tipo = TipoItem.parseo(formTipo);
 			String formSource = "nuevoObjeto";
 			// validate request
@@ -357,7 +392,7 @@ public class HomeController {
 				model.addAttribute("objetoError", "Debe asignar un nombre");
 			} else {
 				Item item = new Item(formNombre, " ", formVida,formFuerza, formDefensa,
-						formVelocidad, formPrecision, formTipo , formPrecio);
+						formVelocidad, formPrecision, formTipo , formPrecio,formNivel);
 				Item i = null;
 				try{
 					i = (Item)entityManager.createNamedQuery("itemByName")
@@ -366,11 +401,11 @@ public class HomeController {
 						model.addAttribute("objetoError", "el nombre ya esta en uso");
 					} else {
 						entityManager.persist(item);
-						formSource = gestionObjetos(model);
+						formSource = gestionObjetos(model,session);
 					}
 				} catch(NoResultException nre){
 						entityManager.persist(item);				
-						formSource = gestionObjetos(model);
+						formSource = gestionObjetos(model,session);
 				}
 			}
 			return formSource;
@@ -388,13 +423,17 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/gestionBestias", method = RequestMethod.GET)
-	public String gestionBestias(Model model) {
+	public String gestionBestias(Model model , HttpSession session) {
+		String formSource = "gestionBestias";
 		List<Bestia> b = null;
 		try{
 			b = (List<Bestia>)entityManager.createNamedQuery("bestiasPorNivel").getResultList();
 			model.addAttribute("bestias", b);
+			User user = (User)session.getAttribute("user");
+			if(user == null) formSource = "login";
+			else if(! user.getRole().equals("admin")) formSource = "perfil";
 		} catch(NoResultException nre){}
-		return "gestionBestias";
+		return formSource;
 	}
 	
 	@RequestMapping(value = "/nuevaBestia", method = RequestMethod.GET)
@@ -417,7 +456,8 @@ public class HomeController {
 			@RequestParam("velocidad") int formVelocidad,
 			@RequestParam("exp") int formExp,
 			@RequestParam("oro") int formOro,
-			Model model) {
+			@RequestParam("foto") MultipartFile foto,
+			Model model,HttpSession session) {
 		
 			String formSource = "nuevaBestia";
 			// validate request
@@ -425,7 +465,7 @@ public class HomeController {
 				model.addAttribute("bestiaError", "Debe asignar un nombre");
 			} else {
 				Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
-						,formVelocidad, formNivel, formNombre, formExp, formOro);
+						,formVelocidad, formNivel, formNombre, formExp, formOro, "resources/arcade/images/"+formNombre+".jpg");
 				Bestia b = null;
 				try{
 					b = (Bestia)entityManager.createNamedQuery("bestiaByName")
@@ -434,11 +474,11 @@ public class HomeController {
 						model.addAttribute("bestiaError", "el nombre ya esta en uso");
 					} else {
 						entityManager.persist(bestia);
-						formSource = gestionBestias(model);
+						formSource = gestionBestias(model,session);
 					}
 				} catch(NoResultException nre){
 						entityManager.persist(bestia);				
-						formSource = gestionBestias(model);
+						formSource = gestionBestias(model,session);
 				}
 			}
 			return formSource;

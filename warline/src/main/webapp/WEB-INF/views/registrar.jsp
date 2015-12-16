@@ -44,6 +44,7 @@
 						<h3>Repita la contraseña:
 						<input id="repassword" name="repassword" type="password" /></h3>
 					</div>
+					<input id="imagen" name ="imagen" type="hidden" />
 					<div class="imgheroe" id="imgizd" onClick="rotarizd()"><img class= "foto" id="fizd" ></img> </div>
 					<div class="imgheroe" id="imgcen"> <img class= "foto" id="fcen" ></img></div>
 					<div class="imgheroe" id="imgder"onClick="rotarder()"><img class= "foto" id="fder" ></img> </div>

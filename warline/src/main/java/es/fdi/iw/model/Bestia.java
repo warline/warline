@@ -1,6 +1,5 @@
 package es.fdi.iw.model;
 
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +20,6 @@ import javax.persistence.NamedQuery;
 public class Bestia {
 	private long id;
 	private String nombre;
-	private String imagen;
 	private int nivel;
 	
 	//Estadisticas 
@@ -36,7 +34,7 @@ public class Bestia {
 	
 	public Bestia() {}
 	
-	public Bestia(int f, int d, int hp, int p, int vel, int n, String name, int x, int o){
+	public Bestia(int f, int d, int hp, int p, int vel, int n, String name, int x, int o, String imagen){
 		this.fuerza = f;
 		this.defensa = d;
 		this.vida = hp;
@@ -66,14 +64,7 @@ public class Bestia {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public String getImagen() {
-		return imagen;
-	}
 
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
 	
 	public int getNivel() {
 		return nivel;

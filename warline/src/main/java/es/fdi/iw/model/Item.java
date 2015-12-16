@@ -11,6 +11,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="allItems",
             query="select i from Item i"),
+    @NamedQuery(name="itemsPorPrecio",
+    		query="select i from Item i Order By(i.precio)"),
     @NamedQuery(name="itemByName",
         query="select i from Item i where i.nombre = :nombreParam"),
     @NamedQuery(name="delItem",
@@ -25,6 +27,7 @@ public class Item {
 	private long id;
 	private String nombre;
 	private String imagen;
+	private int nivel;
 	//Estadisticas
 	private double vida;
 	private int fuerza;
@@ -36,7 +39,7 @@ public class Item {
 	//private boolean disponibilidad
 	public Item() {}
 	
-	public Item(String nombre, String img, double vida, int fu, int def, int vel, int pre, TipoItem t , int _precio){
+	public Item(String nombre, String img, double vida, int fu, int def, int vel, int pre, TipoItem t , int precio, int nivel){
 		this.nombre = nombre;
 		this.imagen = img;
 		this.vida = vida;
@@ -45,9 +48,18 @@ public class Item {
 		this.velocidad = vel;
 		this.precision = pre;
 		this.tipo = t;
-		precio = _precio;
+		this.precio = precio;
+		this.nivel=nivel;
 	}
 	
+	public int getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
 	public int getPrecio(){
 		return precio;
 	}

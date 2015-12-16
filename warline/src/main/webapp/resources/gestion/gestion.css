@@ -18,18 +18,15 @@ h3{
     position: absolute; bottom: 0; height: 40px;
     background-color: #4b1a04; color: #fff; text-align: center; width: 100%; clear: both;
 }*/
+
 .apanel{
-	margin-top: 20px;
-    height: 320px;
+	margin-top: 30px;
+    height: 300px;
     width: 800px;
-    background-color: #0a2735; /*azul turquesa oscuro*/
+	background-color: #0a2735; /* azul turquesa oscuro*/
 	border:3px solid #474747; /*gris oscuro*/
 }
-div#panelScroll{
-	height: 320px;
-    width: 800px;
-    overflow: scroll;
-}
+
 #find input[type= "text"]{
 	margin-right: 15px;
 	height: 25px;
@@ -47,14 +44,50 @@ div#panelScroll{
 	background-size: 40px;
 }
 
-table{
-	margin-right: 10px;
-	margin-left: 10px;
-	height: 93%;
+table {
+	margin: auto;
 	width: 93%;
+	height: 93%;
+	position: relative;
 }
-td{
+
+table thead {
 	color: white;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	right: 5px;
+	width: 734px;
+}
+
+table thead tr th {
+	border-bottom: 3px solid white;
+	text-align: center;
+	width: 734px;
+}
+
+table tbody {
+	color: white;
+	position: absolute;
+	top: 40px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 250px;
+	width: 734px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
+}
+
+table tbody tr td, #checkbox {
+	padding: 7px 9px 8px 9px;
+	width: 168px;
+	text-align: center;
+	font-size: 20px;
+}
+
+#checkbox {
+	width: 10px;
 }
 
 caption{
@@ -63,25 +96,29 @@ caption{
 	font-size: 20px;
 	font-family: Barbarian NS;
 }
-p.apanel{
+
+p .apanel{
 	margin-left: 2em;
 	font-weight: bold;
 }
-div#capaMadre{
+
+div #capaMadre{
     height: 100%;
 }
 
 /* iconos */
-
 #modificar{
 	background-image:url("fotos/modificar.gif");
 }
-#añadir{
-	background-image:url("fotos/añadir.png");
+
+#anadir{
+	background-image:url("fotos/a�adir.png");
 }
+
 #admin{
 	background-image:url("fotos/admin.png");
 }
+
 #usuario{
 	background-image:url("fotos/usuario.png");
 }
@@ -99,3 +136,7 @@ div#capaMadre{
 #eliminar{
 	background-image:url("fotos/eliminar.png");
 }
+.bicho{
+	width: 120px;
+	height: 120px;
+	}

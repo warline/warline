@@ -1,4 +1,5 @@
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
 <script src="resources/combates/combates.js"></script>
@@ -23,68 +24,56 @@
 			
 				<div class = "heroe" id=jugador>
 					<div class="marco">
-				
-						<h2>Héroe:</h2>
-						<button class="hero" id=personalizado onClick="escoge(this)"> Personalizado </button>
-						<button class="hero" id=fuerte onClick="escoge(this)"> Fuerte </button>
-						<button class="hero" id=rapido onClick="escoge(this)"> Rápido </button>
-						<button class="hero" id=tanque onClick="escoge(this)"> Tanque </button>
-						
-						<div class="imgh"><img class= "foto" id="iheroe" ></img></div>
+						<br>
+						<h2><c:out value="${user.getHeroe().nombre}"/></h2>
+						<hr>
+						<div class="imgh"><img class= "foto" id="iheroe" src= "${user.getHeroe().imagen}"></img></div>
 						
 						<div class="sangre" id="dsangreh"><img class= "foto" id="isangreh" src ="resources/combates/fotos/sangre2.png"></img></div>
 						<div class=vidah id="vidaheroemax"></div>
 						<div class=vidah id="vidaheroe" ></div>
-		
-						<button class="bpe" id=exper1  onClick="fuerza(this)">Fuerza (+5)</button>
-						<button class="bpe" id=exper2  onClick="defensa(this)">Salud (+50)</button>
-						<button class="bpe" id=exper3  onClick="velocidad(this)">Velocidad (+10)</button>	
-</div>
+					
+					</div>
 					
 					<table  class= dinfo id="infoh">
-						<tr> <td id ="nivelh"> </td> <td id ="vidah"> </td></tr>
-						<tr> <td id ="defensah"> </td> <td id ="fuerzah"> </td></tr>
-						<tr> <td id ="velocidadh"> </td> <td id ="precisionh"> </td></tr>
+						<tr> <td id ="nivelh">Nivel <c:out value="${user.getHeroe().nivel}" /> </td> <td id ="vidah">Vida <c:out value="${user.getHeroe().vida}" /></td></tr>
+						<tr> <td id ="defensah">Defensa <c:out value="${user.getHeroe().defensa}" /> </td> <td id ="fuerzah">Fuerza <c:out value="${user.getHeroe().fuerza}" /> </td></tr>
+						<tr> <td id ="velocidadh">Velocidad <c:out value="${user.getHeroe().velocidad}" /> </td> <td id ="precisionh">Precision <c:out value="${user.getHeroe().precision}" /> </td></tr>
 					</table>
 						
 				</div>
 			
-				
-			
 				<div class = "heroe" id=enemigo>
 					<div class="marco" id=marcoenemigo>
-						<h2>Enemigo:</h2>
-						<button class="hero" id=mpersonalizado onClick="escogemalo(this)"> Personalizado </button>
-						<button class="hero" id=mfuerte onClick="escogemalo(this)"> Fuerte </button>
-						<button class="hero" id=mrapido onClick="escogemalo(this)"> Rápido </button>
-						<button class="hero" id=mtanque onClick="escogemalo(this)"> Tanque </button>
+						<br>
+						<h2><c:out value="${rival.nombre}" /></h2>
+						<hr>
 						
-						<div class="imgm" id="dmalo" ><img class= "foto" id="imalo" ></img></div>
+						<div class="imgm" id="dmalo" ><img class= "foto" id="imalo" src="resources/arcade/images/${rival.nombre}.jpg"></img></div>
 						
 						<div class="sangre" id="dsangrem"><img class= "foto" id="isangrem" src ="resources/combates/fotos/sangre.png"></img></div>
 						
 						<div class=vidam id="vidamalomax" ></div>					
 						<div class=vidam id="vidamalo"></div>
 						
-						<button class="bpem" id=experm1  onClick="fuerza(this)">Fuerza (+5)</button>
-						<button class="bpem" id=experm2  onClick="defensa(this)">Salud (+50)</button>
-						<button class="bpem" id=experm3  onClick="velocidad(this)">Velocidad (+10)</button>	
+						
 						</div>	
 					
 				
 					<table  class= dinfo id="infom">
-					<tr> <td id ="nivelm"> </td> <td id ="vidam"> </td></tr>
-					<tr> <td id ="defensam"> </td> <td id ="fuerzam"> </td></tr>
-					<tr> <td id ="velocidadm"> </td> <td id ="precisionm"> </td></tr>
+					<tr> <td id ="nivelh">Nivel <c:out value="${rival.nivel}" /> </td> <td id ="vidah">Vida <c:out value="${rival.vida}" /></td></tr>
+						<tr> <td id ="defensah">Defensa <c:out value="${rival.defensa}" /> </td> <td id ="fuerzah">Fuerza <c:out value="${rival.fuerza}" /> </td></tr>
+						<tr> <td id ="velocidadh">Velocidad <c:out value="${rival.velocidad}" /> </td> <td id ="precisionh">Precision <c:out value="${rival.precision}" /> </td></tr>
+					
 					</table>
 					
 				</div>
 				<div  id="versus" ><img id="vs" src ="resources/combates/fotos/versus.png"></img></div>
 				<!--<div id="can" ><canvas id="canvas"></canvas></div>-->
 			</div>
-			<button id=lucha onClick="iniciaCombate()"> Luchar </button>
+			<button id=lucha onClick="(iniciaCombate('${user.getHeroe()}','${rival}')) "> Luchar </button>
 			<br/>
-			<button id=reinicia onClick="reinicia()"> Reiniciar </button>
+			<button id=reinicia onClick="reinicia(${user.getHeroe()}, ${rival})"> Reiniciar </button>
 		</div>
 	</div>
 	<div id="footer">

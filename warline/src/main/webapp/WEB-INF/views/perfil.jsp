@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
-<script src="prueba.js"></script>
+
 <script src= "./ui/external/jquery/jquery.js"></script>
 <script src="./ui/jquery-ui.js"></script>
 
@@ -18,7 +18,7 @@
 			<div id = "divIzquierdo">
 				<div id = "panelNombreYFoto">
 					<h2> <c:out value="${user.getHeroe().nombre}"/> </h2>
-					<div id = "imagenPerfil"><img src = "resources/perfil/fotos/imagenPerfil.jpg"></div>
+					<div id = "imagenPerfil"><img src = "${user.getHeroe().imagen}"/></div>
 				</div>
 				<div id = "estadisticas">
 					<div id = "tablaEstad">

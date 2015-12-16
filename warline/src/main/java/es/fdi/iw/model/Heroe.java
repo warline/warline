@@ -43,7 +43,7 @@ public class Heroe {
 	private int fuerza;
 	private int velocidad;
 	private int precision;
-	
+	private String imagen;
 	private int nivel;
 	private int oro;
 	private int xp;
@@ -63,8 +63,16 @@ public class Heroe {
 		this.equipo = new ArrayList<Item>();
 		this.inventario = new ArrayList<Item>();
 		this.nivel = 1;
-		this.oro = 0;
+		this.oro = 50;
 		this.xp = 0;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	@Id

@@ -44,10 +44,10 @@
 
 						<p>
 							Tipo de objeto: <select name="tipoObj">
-								<option value="0">Espada</option>
-								<option value="1">Casco</option>
-								<option value="2">Botas</option>
-								<option value="3">Armadura</option>
+								<option value="ESPADA">Espada</option>
+								<option value="CASCO">Casco</option>
+								<option value="BOTAS">Botas</option>
+								<option value="ARMADURA">Armadura</option>
 							</select>
 						</p>
 

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -69,7 +70,9 @@ public class User {
 		System.arraycopy(saltBytes, 0, toHash, passBytes.length, saltBytes.length);
 		return byteArrayToHexString(sha1hash(toHash));
 		*/
-		return bcryptEncoder.encode(pass);
+		String s = bcryptEncoder.encode(pass);
+		System.err.println(s);
+		return s;
 	}	
 
 	/**
@@ -135,6 +138,7 @@ public class User {
 	}
 
 	@OneToOne(targetEntity = Heroe.class, fetch= FetchType.EAGER)
+	@JoinColumn(name = "heroe",nullable = true)
 	public Heroe getHeroe() {
 		return heroe;
 	}

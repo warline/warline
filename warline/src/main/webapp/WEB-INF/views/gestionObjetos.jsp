@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
-<script src="prueba.js"></script>
+
 <script src="./ui/external/jquery/jquery.js"></script>
 <script src="./ui/jquery-ui.js"></script>
 
@@ -34,36 +34,39 @@
 					</form>
 					
 					<a href = "nuevoObjeto">
-						<button class="botonesGUsu" id="añadir"></button>
+						<button class="botonesGUsu" id="aï¿½adir"></button>
 					</a>
 					<a href = "nuevoObjeto">
 						<button class="botonesGUsu" id="modificar"></button>
 					</a>
 					<button class="botonesGUsu" id="eliminar"></button>
-					
-					<div class="apanel" id ="panelScroll">
-						<table>
-							<tr>
-								<td id="imagen"></td>
-								<td>IMAGEN</td>
-								<td>NOMBRE</td>
-								<td>TIPO</td>
-								<td>NIVEL</td>
-							</tr>
-							 <c:forEach var="i" items="${objetos}">
-    								<tr>
-										<td><input type="checkbox"></td>
-										<td></td>
-										<td><c:out value="${i.nombre}"/></td>
-										<td><c:out value="${i.tipo}"/></td>
-										<td><c:out value="${i.nivel}"/></td>
-									</tr>
-    							</c:forEach><td>
-							</tr>
-						</table>
-					</div>
 
+				<div class="apanel">
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th>IMAGEN</th>
+								<th>NOMBRE</th>
+								<th>TIPO</th>
+								<th>NIVEL</th>
+							</tr>
+						<thead>
+						<tbody>
+							<c:forEach var="i" items="${objetos}">
+								<tr>
+									<td><input type="checkbox"></td>
+									<td></td>
+									<td><c:out value="${i.nombre}" /></td>
+									<td><c:out value="${i.tipo}" /></td>
+									<td><c:out value="${i.nivel}" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
+
+			</div>
 			</div>
 		</div>
 		<div id="footer"></div>

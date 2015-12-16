@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 
-<script src="prueba.js"></script>
+
 <script src="./ui/external/jquery/jquery.js"></script>
 <script src="./ui/jquery-ui.js"></script>
 
@@ -36,7 +36,7 @@
 					</form>
 					
 					<a href = "nuevaBestia">
-						<button class="botonesGUsu" id="añadir"></button>
+						<button class="botonesGUsu" id="aï¿½adir"></button>
 					</a>
 					<a href = "nuevaBestia">
 						<button class="botonesGUsu" id="modificar"></button>
@@ -54,7 +54,7 @@
 							<c:forEach var="b" items="${bestias}">
 								<tr>
 									<td><input type="checkbox"></td>
-									<td></td>
+									<td><img class="bicho"  src="resources/arcade/images/${b.nombre}.jpg"/></td>
 									<td><c:out value="${b.nombre}" /></td>
 									<td><c:out value="${b.nivel}" /></td>
 								</tr>
