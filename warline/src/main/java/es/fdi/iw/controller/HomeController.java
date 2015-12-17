@@ -1,8 +1,12 @@
 package es.fdi.iw.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -15,13 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.fdi.iw.ContextInitializer;
@@ -183,14 +190,15 @@ public class HomeController {
 				u = (User)entityManager.createNamedQuery("userByLogin")
 						.setParameter("loginParam", formLogin).getSingleResult();
 				if (u.isPassValid(formPass)) {
-					logger.info("pass was valid");				
-					session.setAttribute("user", u);
-					if(u.getRole().equals("User"))
-						formSource = "perfil";
-					else if(u.getRole().equals("Admin"))
-						formSource = "gestionUsuarios";
 					// sets the anti-csrf token
 					getTokenForSession(session);
+					logger.info("pass was valid");				
+					session.setAttribute("user", u);
+					if(u.getRole().equals("user"))
+						formSource = "perfil";
+					else if(u.getRole().equals("admin")){
+						return gestionUsuarios(model, session);
+					}
 				} else {
 					logger.info("pass was NOT valid");
 					model.addAttribute("loginError", "error en usuario o contraseña");
@@ -278,17 +286,6 @@ public class HomeController {
 
 
 	/**
-	 * Returns an anti-csrf token for a session, and stores it in the session
-	 * @param session
-	 * @return
-	 */
-	static String getTokenForSession (HttpSession session) {
-		String token=UUID.randomUUID().toString();
-		session.setAttribute("csrf_token", token);
-		return token;
-	}
-
-	/**
 	 * Logout (also returns to home view).
 	 */
 	@RequestMapping(value = "/logout", 
@@ -311,16 +308,13 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.GET)
-	public String gestionUsuarios(Locale locale, Model model,HttpSession session) {
+	public String gestionUsuarios(Model model,HttpSession session) {
 		String formSource = "gestionUsuarios";
 		List<User> u = null;
 		try{
 			u = (List<User>)entityManager.createNamedQuery("allUsers").getResultList();
 			model.addAttribute("users", u);
-			User user = (User)session.getAttribute("user");
-			if(user == null) formSource = "login";
-			else if(! user.getRole().equals("admin")) formSource = "perfil";
-			
+			if(!isAdmin(session)) formSource = "login";
 		} catch(NoResultException nre){}
 		return formSource;
 	}
@@ -361,9 +355,7 @@ public class HomeController {
 		try{
 			o = (List<Item>)entityManager.createNamedQuery("allItems").getResultList();
 			model.addAttribute("objetos", o);
-			User user = (User)session.getAttribute("user");
-			if(user == null) formSource = "login";
-			else if(!ser.getRole().equals("admin")) formSource = "perfil";
+			if(!isAdmin(session)) formSource = "login";
 		} catch(NoResultException nre){}
 		return "gestionObjetos";
 	}
@@ -433,9 +425,7 @@ public class HomeController {
 		try{
 			b = (List<Bestia>)entityManager.createNamedQuery("bestiasPorNivel").getResultList();
 			model.addAttribute("bestias", b);
-			User user = (User)session.getAttribute("user");
-			if(user == null) formSource = "login";
-			else if(! user.getRole().equals("admin")) formSource = "perfil";
+			if(!isAdmin(session)) formSource = "login";
 		} catch(NoResultException nre){}
 		return formSource;
 	}
@@ -466,16 +456,15 @@ public class HomeController {
 			String formSource = "nuevaBestia";
 		        
 			// validate request
-			if (photo.isEmpty()) {
-				model.addAttribute("bestiaError", "Debe subir una imagen");
-			}
-			else if (formNombre == "") {
+			if (formNombre == "") {
 				model.addAttribute("bestiaError", "Debe asignar un nombre");
 			} else {
-				Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
+				
+					Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
 						,formVelocidad, formNivel, formNombre, formExp, formOro, "resources/arcade/images/"+formNombre+".jpg");
-				Bestia b = null;
-				try{
+					Bestia b = null;
+	
+				try {
 					b = (Bestia)entityManager.createNamedQuery("bestiaByName")
 							.setParameter("nombreParam", formNombre).getSingleResult();
 					if (b != null) {
@@ -516,6 +505,55 @@ public class HomeController {
 		return null;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/bestia/photo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] bestiaPhoto(@RequestParam("nombre") String nombre) throws IOException {
+	    File f = ContextInitializer.getFile("bestia", nombre);
+	    InputStream in = null;
+	    if (f.exists()) {
+	    	in = new BufferedInputStream(new FileInputStream(f));
+	    } else {
+	    	in = new BufferedInputStream(
+	    			this.getClass().getClassLoader().getResourceAsStream("unknown-user.jpg"));
+	    }
+	    
+	    return IOUtils.toByteArray(in);
+	}
+
 /******************************************************************************/
+	
+	/** 
+	 * Returns true if the user is logged in and is an admin
+	 */
+	static boolean isAdmin(HttpSession session) {
+		User u = (User)session.getAttribute("user");
+		if (u != null) {
+			return u.getRole().equals("admin");
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Returns an anti-csrf token for a session, and stores it in the session
+	 * @param session
+	 * @return
+	 */
+	static String getTokenForSession (HttpSession session) {
+		String token=UUID.randomUUID().toString();
+		session.setAttribute("csrf_token", token);
+		return token;
+	}
+	
+	
+	/**
+	 * Checks the anti-csrf token for a session against a value
+	 * @param session
+	 * @param token
+	 * @return the token
+	 */
+	static boolean isTokenValid(HttpSession session, String token) {
+	    Object t=session.getAttribute("csrf_token");
+	    return (t != null) && t.equals(token);
+	}
 }

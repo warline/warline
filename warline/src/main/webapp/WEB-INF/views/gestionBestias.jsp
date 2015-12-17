@@ -53,7 +53,7 @@
 							<c:forEach var="b" items="${bestias}">
 								<tr>
 									<td><input type="checkbox"></td>
-									<td><img class="bicho" src="bestia/photo?id=${b.nombre}"/></td>
+									<td><img class="bicho" src="bestia/photo?nombre=${b.nombre}"/></td>
 									<td><c:out value="${b.nombre}" /></td>
 									<td><c:out value="${b.nivel}" /></td>
 								</tr>

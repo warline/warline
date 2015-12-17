@@ -35,7 +35,7 @@
 					<button class="botonesPrincipales" id="arcade">Bestias</button>
 				</a>
 			<p>
-				<a href= "login">
+				<a href= "logout">
 					<button class="botonesPrincipales" id="salir">Salir</button>
 				</a>
 		</div>
