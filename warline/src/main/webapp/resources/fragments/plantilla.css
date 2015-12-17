@@ -138,12 +138,12 @@ button{
 	color: #fff08c; /*color marfil*/
 	border: 6px #905520 outset; /*marron beige*/
 }
-button: active{
+button:active{
 	border: 6px #623711 inset;
 }
 .botonesPrincipales:active{
 	border: 6px #623711 inset;
-	font-size: 28px;
+	/*font-size: 28px;*/
 }
 
 #sidebar p {
