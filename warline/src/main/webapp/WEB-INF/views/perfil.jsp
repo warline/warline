@@ -25,11 +25,11 @@
 						<table>
 						<thead>
 							<tr>  <td> Nivel </td><td> <c:out value="${user.getHeroe().nivel}"/> </td>  </tr>
-							<tr>  <td> Vida </td><td> <c:out value="${user.getHeroe().vida}"/> </td>  </tr>
-							<tr>  <td> Fuerza </td><td> <c:out value="${user.getHeroe().fuerza}"/></td>  </tr>
-							<tr>  <td> Precisión </td><td> <c:out value="${user.getHeroe().precision}"/> </td> </tr>
-							<tr>  <td> Defensa </td><td> <c:out value="${user.getHeroe().defensa}"/> </td>  </tr>
-							<tr>  <td> Velocidad </td><td> <c:out value="${user.getHeroe().velocidad}"/> </td>  </tr>
+							<tr>  <td> Vida </td><td> <c:out value="${user.getHeroe().vida}"/> </td> <td><button id = "masVida">+</button></td> </tr>
+							<tr>  <td> Fuerza </td><td> <c:out value="${user.getHeroe().fuerza}"/></td> <td><button id = "masFuerza">+</button></td> </tr>
+							<tr>  <td> PrecisiÃ³n </td><td> <c:out value="${user.getHeroe().precision}"/> </td><td><button id = "masPrecision">+</button></td> </tr>
+							<tr>  <td> Defensa </td><td> <c:out value="${user.getHeroe().defensa}"/> </td> <td><button id = "masDefensa">+</button></td> </tr>
+							<tr>  <td> Velocidad </td><td> <c:out value="${user.getHeroe().velocidad}"/> </td> <td><button id = "masVelocidad">+</button></td> </tr>
 							<tr>  <td> Oro </td><td> <c:out value="${user.getHeroe().oro}"/> </td>  </tr>
 							<tr>  <td> Experiencia </td><td> <c:out value="${user.getHeroe().xp}"/> </td>  </tr>
 						</table>
