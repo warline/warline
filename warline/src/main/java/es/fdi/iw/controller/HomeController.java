@@ -1,5 +1,8 @@
 package es.fdi.iw.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import es.fdi.iw.ContextInitializer;
 import es.fdi.iw.model.Bestia;
 import es.fdi.iw.model.Heroe;
 import es.fdi.iw.model.Item;
@@ -359,7 +363,7 @@ public class HomeController {
 			model.addAttribute("objetos", o);
 			User user = (User)session.getAttribute("user");
 			if(user == null) formSource = "login";
-			else if(! user.getRole().equals("admin")) formSource = "perfil";
+			else if(!ser.getRole().equals("admin")) formSource = "perfil";
 		} catch(NoResultException nre){}
 		return "gestionObjetos";
 	}
@@ -456,12 +460,16 @@ public class HomeController {
 			@RequestParam("velocidad") int formVelocidad,
 			@RequestParam("exp") int formExp,
 			@RequestParam("oro") int formOro,
-			@RequestParam("foto") MultipartFile foto,
+			@RequestParam("photo") MultipartFile photo,
 			Model model,HttpSession session) {
 		
 			String formSource = "nuevaBestia";
+		        
 			// validate request
-			if (formNombre == "") {
+			if (photo.isEmpty()) {
+				model.addAttribute("bestiaError", "Debe subir una imagen");
+			}
+			else if (formNombre == "") {
 				model.addAttribute("bestiaError", "Debe asignar un nombre");
 			} else {
 				Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
@@ -475,10 +483,30 @@ public class HomeController {
 					} else {
 						entityManager.persist(bestia);
 						formSource = gestionBestias(model,session);
+						try{
+							   byte[] bytes = photo.getBytes();
+				                BufferedOutputStream stream =
+				                        new BufferedOutputStream(
+				                        		new FileOutputStream(ContextInitializer.getFile("bestia", formNombre)));
+				                stream.write(bytes);
+				                stream.close();
+						} catch (IOException e) {
+							System.err.println("fallo");
+						}
 					}
 				} catch(NoResultException nre){
 						entityManager.persist(bestia);				
 						formSource = gestionBestias(model,session);
+						try{
+							   byte[] bytes = photo.getBytes();
+				                BufferedOutputStream stream =
+				                        new BufferedOutputStream(
+				                        		new FileOutputStream(ContextInitializer.getFile("bestia", formNombre)));
+				                stream.write(bytes);
+				                stream.close();
+						} catch (IOException e) {
+							System.err.println("fallo");
+						}
 				}
 			}
 			return formSource;

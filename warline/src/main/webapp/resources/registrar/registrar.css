@@ -51,14 +51,13 @@ li {
 #imgizd, #imgder{
 	height: 80px;
 	top: 35px;
-	position:relative;
+	/*position:relative;*/
 	width: 80px;
 }
 
 #imgcen{
 	height: 150px;
 	width: 150px;
-	
 }
 
 

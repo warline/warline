@@ -13,7 +13,7 @@ function pintar(i){
 	
 }
 
-window.onload = setTimeout(function(){pintar(a);},30);
+window.onload = setTimeout(function(){pintar(a);},200);
 
 
 function rotarder(){

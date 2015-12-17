@@ -26,3 +26,4 @@ insert into Bestia values(111, 900, 750, 900, 23, 'hydra', 1500, 95, 245, 950);
 insert into Heroe values (1,10,10,'resources/combates/fotos/fuerte.png',1,'user',50,30,5,100,0);
 insert into User values (1,false, '$2a$10$E44pf9xwD4CFda8FtvrWGeX1Axj2RnC49AK/vjttAWARoyGfrSGPm', 'user', 'user',2);
 insert into User values (2,false, '$2a$10$EhYtXcHYOMXXUWAyiOfKIO21uxLRf4dNDdXZL73NLfMVQqiFdZncW', 'admin', 'admin',null);
+insert into User values (3, false, '$2a$10$sj7CegQYfvKqcuxKoVbis.rId1sdR/qpfNOua63XFUTlTOnLXazLO', 'adminw', 'admin', null);

@@ -112,7 +112,7 @@ div #capaMadre{
 }
 
 #anadir{
-	background-image:url("fotos/a�adir.png");
+	background-image:url("fotos/añadir.png");
 }
 
 #admin{
@@ -136,7 +136,8 @@ div #capaMadre{
 #eliminar{
 	background-image:url("fotos/eliminar.png");
 }
-.bicho{
+
+.bicho {
 	width: 120px;
 	height: 120px;
-	}
+}

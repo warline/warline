@@ -63,7 +63,7 @@ public class Heroe {
 		this.equipo = new ArrayList<Item>();
 		this.inventario = new ArrayList<Item>();
 		this.nivel = 1;
-		this.oro = 50;
+		this.oro = 0;
 		this.xp = 0;
 	}
 

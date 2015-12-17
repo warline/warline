@@ -14,8 +14,6 @@
 
 	<!--<img id="fondo" src="./fotos/background.png"/>-->
 	<div id="container">
-
-
 		<div id="main">
 			<div id="capaMadre">
 				<div class="cabecera">
@@ -25,50 +23,47 @@
 					</div>
 				</div>
 
-				<div id="acuerpo">
-					<form>
-						<!--Filtro:<br> -->
-						<div id="find">
-							<input type="text" name="filtro">
-							<button class="botonesGUsu" id="filtrar">Buscar</button>
-						</div>
+			<div id="acuerpo">
+				<form>
+					<div id="find">
+						<input type="text" name="filtro">
+						<button class="botonesGUsu" id="filtrar">Buscar</button>
+					</div>
 
-					</form>
-					
-					<a href = "nuevaBestia">
-						<button class="botonesGUsu" id="a�adir"></button>
-					</a>
-					<a href = "nuevaBestia">
-						<button class="botonesGUsu" id="modificar"></button>
-					</a>
-					<button class="botonesGUsu" id="eliminar"></button>
-					
-					<div class="apanel" id = "panelScroll">
-						<table>
+				</form>
+
+				<a href="nuevaBestia">
+					<button class="botonesGUsu" id="anadir"></button>
+				</a> <a href="nuevaBestia">
+					<button class="botonesGUsu" id="modificar"></button>
+				</a>
+				<button class="botonesGUsu" id="eliminar"></button>
+
+				<div class="apanel">
+					<table>
+						<thead>
 							<tr>
-								<td id="imagen"></td>
-								<td>IMAGEN</td>
-								<td>NOMBRE</td>
-								<td>NIVEL</td>
+								<th></th>
+								<th>IMAGEN</th>
+								<th>NOMBRE</th>
+								<th>NIVEL</th>
 							</tr>
+						</thead>
+						<tbody>
 							<c:forEach var="b" items="${bestias}">
 								<tr>
 									<td><input type="checkbox"></td>
-									<td><img class="bicho"  src="resources/arcade/images/${b.nombre}.jpg"/></td>
+									<td><img class="bicho" src="bestia/photo?id=${b.nombre}"/></td>
 									<td><c:out value="${b.nombre}" /></td>
 									<td><c:out value="${b.nivel}" /></td>
 								</tr>
 							</c:forEach>
-
-						</table>
-					</div>
-
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-		<div id="footer"></div>
-
 	</div>
-
+</div>
 </body>
 </html>

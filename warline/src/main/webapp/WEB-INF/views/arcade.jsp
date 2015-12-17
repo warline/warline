@@ -43,9 +43,9 @@
 							<img id="imagenRival" src="resources/arcade/images/pantera.jpg" /></td>
 					</tr>
 					<tr class="nombres">
-						<td class="casillaNombre"><h2>BOQUER�N</h2></td>
+						<td class="casillaNombre"><h2>BOQUERÓN</h2></td>
 						<td class="casillaNombre"><h2>RATAS</h2></td>
-						<td class="casillaNombre"><h2>TEJ�N</h2></td>
+						<td class="casillaNombre"><h2>TEJÓN</h2></td>
 						<td class="casillaNombre"><h2>KOMODO</h2></td>
 						<td class="casillaNombre"><h2>LOBO</h2></td>
 						<td class="casillaNombre"><h2>PANTERA</h2></td>
@@ -69,7 +69,7 @@
 						<td class="casillaNombre"><h2>TIGRE</h2></td>
 						<td class="casillaNombre"><h2>RHINO</h2></td>
 						<td class="casillaNombre"><h2>ELEFANTE</h2></td>
-						<td class="casillaNombre"><h2>DRAG�N</h2></td>
+						<td class="casillaNombre"><h2>DRAGÓN</h2></td>
 						<td class="casillaNombre"><h2>HYDRA</h2></td>
 					</tr>-->
 				</table>

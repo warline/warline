@@ -3,7 +3,7 @@
 	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevaBestia.css">
-
+<script src="resources/gestion/nuevaBestia.js"></script>
 <div id="container">
 	<div id="main">
 		<div id="capaMadre">
@@ -13,47 +13,19 @@
 					<hr>
 				</div>
 			</div>
-			<form action="registrarBestia" method="POST" enctype="multipart/form-data">
+			<form method="POST" enctype="multipart/form-data" action="registrarBestia">
 				<div id="divIzquierdo">
-					
 					<div id="panelBotonSubirImagen">
-     				<input type="file" id="files" name="files[]" />
-      				<br />
-        			<output id="list"></output>
-         
-        <script>
-              function archivo(evt) {
-                  var files = evt.target.files; // FileList object
-             
-                  // Obtenemos la imagen del campo "file".
-                  for (var i = 0, f; f = files[i]; i++) {
-                    //Solo admitimos imágenes.
-                    if (!f.type.match('image.*')) {
-                        continue;
-                    }
-             
-                    var reader = new FileReader();
-                    reader.onload = (function(theFile) {
-                        return function(e) {
-                          // Insertamos la imagen
-                         document.getElementById("list").innerHTML = ['<img class="bicho" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-                        };
-                    })(f);
-             
-                    reader.readAsDataURL(f);
-                  }
-              }
-             
-              document.getElementById('files').addEventListener('change', archivo, false);
-      </script>
-    
-						<button type="submit" id="subirImagen" >Subir imagen</button>
+						<input type="file" id="files" name="photo" /> <br />
+						<output id="list"></output>
+						<script> document.getElementById('files').addEventListener('change', archivo, false);</script>
+
 					</div>
 				</div>
 				<!-- divIzquierdo -->
-		<form action="registrarBestia" method="POST" >
+
 				<div id="divDerecho">
-				
+
 					<p>
 						Nombre: <input type="text" name="nombreBestia" />
 					</p>
@@ -112,19 +84,12 @@
 					<div id="panelBotonNuevo">
 						<button type="submit">Guardar Bestia</button>
 					</div>
+				</div>
+				<!-- divDerecho -->
+
 			</form>
-
-			<c:if test="${not empty bestiaError}">
-				<c:out value="${bestiaError}" />
-			</c:if>
-
-
-
 		</div>
-		<!-- divDerecho -->
 	</div>
-</div>
-
 </div>
 <!-- container -->
 </body>
