@@ -31,13 +31,11 @@
 					<table>
 						<caption> ARMERIA </caption>
 						<c:forEach var="i" items="${items}">
-								<tr>
-									<!-- <td><img class="bicho" src = "${b.imagen}"/></td> -->
-									<td><c:out value="${i.nombre}" /></td>
-									<td><c:out value="${i.precio} monedas" /></td>
-									<td><c:out value="${i.tipo}" /></td>
-								</tr>
-							</c:forEach>	
+							<c:set var = "j" value = "0" scope = "session"/>
+							<c:if test="${j%5 == 0}"> <tr> </c:if>
+							<td> <img src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </td>
+							<c:set var = "j" value = "${j+1}"/>
+						</c:forEach>
 					</table>
 				</div>
 				<div class = "apanel" id = "aobjeto">

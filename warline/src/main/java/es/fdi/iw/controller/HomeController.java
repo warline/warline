@@ -387,7 +387,7 @@ public class HomeController {
 			if (formNombre == null) {
 				model.addAttribute("objetoError", "Debe asignar un nombre");
 			} else {
-				Item item = new Item(formNombre, " ", formVida,formFuerza, formDefensa,
+				Item item = new Item(formNombre, formVida,formFuerza, formDefensa,
 						formVelocidad, formPrecision, formTipo , formPrecio,formNivel);
 				Item i = null;
 				try{

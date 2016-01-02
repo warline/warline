@@ -17,8 +17,6 @@ import javax.persistence.NamedQuery;
         query="select i from Item i where i.nombre = :nombreParam"),
     @NamedQuery(name="delItem",
     	query="delete from Item i where i.id= :idParam"),
-    @NamedQuery(name="itemByImagen",
-    	query = "select i.imagen from Item i where i.id = :idParam"),
     @NamedQuery(name="estadisticas",
     	query ="select i.vida, i.defensa, i.fuerza, i.velocidad, i.precision from Item i where i.id = :idParam")
 })
@@ -26,7 +24,6 @@ import javax.persistence.NamedQuery;
 public class Item {
 	private long id;
 	private String nombre;
-	private String imagen;
 	private int nivel;
 	//Estadisticas
 	private double vida;
@@ -39,9 +36,8 @@ public class Item {
 	//private boolean disponibilidad
 	public Item() {}
 	
-	public Item(String nombre, String img, double vida, int fu, int def, int vel, int pre, TipoItem t , int precio, int nivel){
+	public Item(String nombre, double vida, int fu, int def, int vel, int pre, TipoItem t , int precio, int nivel){
 		this.nombre = nombre;
-		this.imagen = img;
 		this.vida = vida;
  		this.fuerza = fu;
  		this.defensa = def;
@@ -83,10 +79,6 @@ public class Item {
 		return nombre;
 	}
 
-	public String getImagen() {
-		return imagen;
-	}
-
 	public int getFuerza() {
 		return fuerza;
 	}
@@ -105,10 +97,6 @@ public class Item {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
 	}
 
 	public void setVida(double vida) {

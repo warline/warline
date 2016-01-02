@@ -37,14 +37,18 @@ h3{
 table{
 	margin-right: 10px;
 	margin-left: 10px;
-	height: 80%;
-	width: 93%;
 	background-color: grey;
 	color: white;
 }
 td{
 	border: 5px grey inset;
 	background-color: #474747; /*gris oscuro*/
+	height: 36px;
+	width: 36px;
+}
+img{
+	height: 36px;
+	width: 36px;
 }
 td:hover{
 	border-color: #fff08c; /*color marfil*/
