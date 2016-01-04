@@ -13,10 +13,10 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name="miHeroe",
-            query="select h from Heroe h where h.id= :idParam"),
-    @NamedQuery(name="delHeroe",
-    		query="delete from Heroe h where h.id= :idParam")
+	@NamedQuery(name="miHeroe",
+			query="select h from Heroe h where h.id= :idParam"),
+	@NamedQuery(name="delHeroe",
+	query="delete from Heroe h where h.id= :idParam")
 })
 public class Heroe {
 	public static int NUM_ITEMS_EQUIP = 5;
@@ -27,12 +27,18 @@ public class Heroe {
 	public static int MAX_VELOCIDAD = 250;
 	public static int MAX_PRECISION = 100;
 	public static int MAX_NIVEL = 100;
-	
+
+	public static double VIDA_POR_PUNTO = 1;
+	public static int DEF_POR_PUNTO = 1;
+	public static int FUE_POR_PUNTO = 1;
+	public static int VEL_POR_PUNTO = 1;
+	public static int PREC_POR_PUNTO = 1;
+
 	/* La xp necesaria para subir de nivel es 200*nivelActual 
 	 * es decir para subir del 3 al 4 se necesita 600 xp */
-	
+
 	public static int XP_POR_NIVEL = 200;
-	
+
 	private long id;
 	private String nombre;
 
@@ -46,12 +52,12 @@ public class Heroe {
 	private int nivel;
 	private int oro;
 	private int xp;
-	
+	private int puntosHab;
 	private List<Item> equipo; //id de objetos equipados
 	private List<Item> inventario; //id de objetos en el inventario
-	
+
 	public Heroe() {}
-	
+
 	public Heroe(String nombre) {
 		this.nombre = nombre;
 		this.vida = 100;
@@ -64,6 +70,7 @@ public class Heroe {
 		this.nivel = 1;
 		this.oro = 0;
 		this.xp = 0;
+		this.puntosHab = 10;
 	}
 
 	public String getImagen() {
@@ -83,7 +90,7 @@ public class Heroe {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	@Column(unique=true)
 	public String getNombre() {
 		return nombre;
@@ -150,7 +157,7 @@ public class Heroe {
 	public void setInventario(List<Item> inventario) {
 		this.inventario = inventario;
 	}
-	
+
 	public int getNivel() {
 		return nivel;
 	}
@@ -174,4 +181,28 @@ public class Heroe {
 	public void setXp(int xp) {
 		this.xp = xp;
 	}
+
+	public void equipar(Item i){
+		for(Item item: equipo){
+			if(item.getTipo().equals(i.getTipo())){
+				equipo.remove(item);
+				equipo.add(i);
+				return;
+			}
+		}
+		equipo.add(i);
+	}
+	
+	public void comprarObjeto(Item i){
+		if(inventario.size() < TAM_INVENT)
+			inventario.add(inventario.size(),i);
+	}
+	public int getPuntosHab() {
+		return puntosHab;
+	}
+
+	public void setPuntosHab(int puntosHab) {
+		this.puntosHab = puntosHab;
+	}
+
 }

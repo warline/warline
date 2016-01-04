@@ -102,6 +102,7 @@ public class User {
 		return r;
 	}
 	
+	
 	@Id
 	@GeneratedValue
 	public long getId() {

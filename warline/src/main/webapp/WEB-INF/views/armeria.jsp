@@ -3,7 +3,13 @@
 <%@ include file="fragments/header.jspf" %>
 
 <script src= "./ui/external/jquery/jquery.js"></script>
-<script src="./ ui/jquery-ui.js"></script>
+<script src="./ui/jquery-ui.js"></script>
+<script src="resources/armeria/armeria.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="http://mysite.com/jquery.min.js"><\/script>')
+</script>
 
 <link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
@@ -20,11 +26,18 @@
 				<div class = "apanel" id = "ainventario">
 					<table>
 						<caption> INVENTARIO </caption>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>
-						<tr> <td></td><td></td><td></td><td></td><td></td> </tr>		
+						<c:forEach var="i" items="${user.getHeroe().getInventario()}">
+							<c:set var = "k" value = "0" scope = "session"/>
+							<c:if test="${k%5 == 0}"> <tr> </c:if>
+									<td> <div id = "imagenObjeto" onmouseover = "desaparece('${i.getFuerza()}', '${i.getDefensa()}', '${i.getVelocidad()}', '${i.getPrecision()}', '${i.getNivel()}', '${i.getVida()}', '${i.getPrecio()}', '${i.getTipo()}', '${i.getNombre()}')">
+									<img src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </div> </td>
+							
+							<c:set var = "k" value = "${k+1}"/>
+						</c:forEach>
+						<c:forEach begin = "${user.getHeroe().getInventario().size()}" end = "24" varStatus="loop">
+							<c:if test="${loop.index%5 == 0}"> <tr> </c:if>
+							<td></td>
+						</c:forEach>	
 					</table>
 					<p id = "adinero"> Monedas: <c:out value="${user.getHeroe().oro}" /></p></div>
 				<div class = "apanel" id = "avendedor">
@@ -33,32 +46,44 @@
 						<c:forEach var="i" items="${items}">
 							<c:set var = "j" value = "0" scope = "session"/>
 							<c:if test="${j%5 == 0}"> <tr> </c:if>
-							<td> <img src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </td>
+									<td>
+										<div id = "imagenObjeto" onmouseover = "desaparece('${i.getFuerza()}', '${i.getDefensa()}', '${i.getVelocidad()}', '${i.getPrecision()}', '${i.getNivel()}', '${i.getVida()}', '${i.getPrecio()}', '${i.getTipo()}', '${i.getNombre()}')" > 
+											<form action="comprarObjeto" method="POST">
+												<button name="idObjeto" type = "submit" value = "${i.id}"><img src = "resources/armeria/images/${i.nombre}.png" align="middle"/></button> 
+											</form>
+										</div>
+									</td>
 							<c:set var = "j" value = "${j+1}"/>
+						</c:forEach>
+						<c:forEach begin = "${items.size() }" end = "24" varStatus="loop">
+							<c:if test="${loop.index%5 == 0}"> <tr> </c:if>
+							<td></td>
 						</c:forEach>
 					</table>
 				</div>
 				<div class = "apanel" id = "aobjeto">
 					<div class = "panelObjeto" id = "panelObjetoDcha">
-						<p> Fuerza: 10 </p>
-						<p> Velocidad: 5 </p>
-						<p> Defensa: 0 </p>
-						<p> Vida: 0 </p>
+						<div class = "descripcion" id = "estadisticas">
+							<table id = "stats">
+							<caption id = "idNombre"> </caption>
+							<tr><td id = "idFuerza"> </td><td id = "idNivel"> </td></tr>
+							<tr><td id = "idDefensa"> </td><td id = "idVida"></td></tr>
+							<tr><td id = "idVelocidad"> </td><td id = "idTipo"></td></tr>
+							<tr><td id = "idPrecision"> </td><td id = "idPrecio"></td></tr>
+							</table>
+						</div>
 					</div>
-					<div class = "panelObjeto" id = "panelObjetoIzda"></div>
+					<div class = "panelObjeto" id = "panelObjetoIzda">
+					<div class = "descripcion" id = "foto">
+						<img id = idFoto align="middle"/>
+					</div>
 					
 				</div>
 			
 			</div>
 		</div>
 	</div>
-
-
-	<div id="footer">
-		
-	</div>
-
 </div>
-
+</div>
 </body>
 </html>

@@ -34,34 +34,38 @@
 					</form>
 					
 					<a href = "nuevoObjeto">
-						<button class="botonesGUsu" id="a�adir"></button>
+						<button class="botonesGUsu" id="añadir"></button>
 					</a>
 					<a href = "nuevoObjeto">
 						<button class="botonesGUsu" id="modificar"></button>
 					</a>
-					<button class="botonesGUsu" id="eliminar"></button>
-
 				<div class="apanel">
 					<table>
 						<thead>
 							<tr>
-								<th></th>
 								<th>IMAGEN</th>
 								<th>NOMBRE</th>
 								<th>TIPO</th>
 								<th>NIVEL</th>
+								<th></th>
 							</tr>
 						<thead>
 						<tbody>
+						
 							<c:forEach var="i" items="${objetos}">
 								<tr>
-									<td><input type="checkbox"></td>
-									<td></td>
-									<td><c:out value="${i.nombre}" /></td>
-									<td><c:out value="${i.tipo}" /></td>
-									<td><c:out value="${i.nivel}" /></td>
+										<td><img class = "bicho" src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </td>
+										<td><c:out value="${i.nombre}" /></td>
+										<td><c:out value="${i.tipo}" /></td>
+										<td><c:out value="${i.nivel}" /></td>
+										<td>
+											<form action="borrarObjeto" method="POST">
+												<button name="idObjeto" class="botonesGUsu" id="eliminar" type = "submit" value = "${i.id}"></button>
+											</form>
+										</td>
 								</tr>
 							</c:forEach>
+							
 						</tbody>
 					</table>
 				</div>

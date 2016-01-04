@@ -147,12 +147,11 @@ li {
 }
 
 #userlogin {
-	border-width: 2px 0px;
-	border-color: #860b09 #000 #860b09;
+	border: 5px solid black;
 	border-style: solid;
 	height: 500px;
 	width: 400px;
-	
+	margin-top: 38px;
 	overflow: hidden;
 	background: #4b1a04;
 }

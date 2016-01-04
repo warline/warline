@@ -118,8 +118,6 @@ public class HomeController {
 	}
 
 	
-	
-	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -129,11 +127,15 @@ public class HomeController {
 		return "login";
 	}
 
+	/*******************************************************************************/
+
+	/**************************** ARMERIA ******************************/
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/armeria", method = RequestMethod.GET)
-	public String armeria(Locale locale, Model model , HttpSession session) {
+	public String armeria(Model model , HttpSession session) {
 		String formSource = "armeria";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
@@ -144,8 +146,26 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return formSource;
 	}
+	
+	@Transactional
+	@RequestMapping(value = "/comprarObjeto", method = RequestMethod.POST)
+	public String comprarObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model,HttpSession session) {
+			String formSource = "armeria";
+			try{
+				Item i = (Item)entityManager.getReference(Item.class, id);
+				User u = (User)session.getAttribute("user");
+				u.getHeroe().comprarObjeto(i);
+				//entityManager.refresh(u.getHeroe());
+				session.removeAttribute("user");
+				session.setAttribute("user", u);
+			} catch(NoResultException nre){}
+			return armeria(model,session);
+		}
 
-
+	/*******************************************************************************/
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -297,7 +317,52 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-
+	/*********************** PERFIL ********************************/
+	@Transactional
+	@RequestMapping(value = "/subirStats", method = RequestMethod.POST)
+	public String subirStats(
+			@RequestParam("id") long id,
+			@RequestParam("subir") String stat,
+			HttpSession session,
+			Model model) {
+		User u = entityManager.getReference(User.class, id);
+		Heroe h = u.getHeroe();
+		boolean modificado = false;
+		if (h.getPuntosHab() > 0) {
+			if (stat.equals("subirVida") && (h.getVida() < Heroe.MAX_VIDA)) {
+				double vida = h.getVida() + Heroe.VIDA_POR_PUNTO;
+				h.setVida(vida);
+				modificado = true;
+			} else if (stat.equals("subirFue") && (h.getFuerza() < Heroe.MAX_FUERZA)) {
+				int fuerza = h.getFuerza() + Heroe.FUE_POR_PUNTO;
+				h.setFuerza(fuerza);
+				modificado = true;
+			} else if (stat.equals("subirPrec") && (h.getPrecision() < Heroe.MAX_PRECISION)) {
+				int precision = h.getPrecision() + Heroe.PREC_POR_PUNTO;
+				h.setPrecision(precision);
+				modificado = true;
+			} else if (stat.equals("subirDef") && (h.getDefensa() < Heroe.MAX_DEFENSA)) {
+				int defensa = h.getDefensa() + Heroe.DEF_POR_PUNTO;
+				h.setDefensa(defensa);
+				modificado = true;
+			} else if (h.getVelocidad() < Heroe.MAX_VELOCIDAD){
+				int velocidad = h.getVelocidad() + Heroe.VEL_POR_PUNTO;
+				h.setVelocidad(velocidad);
+				modificado = true;
+			}
+			if (modificado) {
+				h.setPuntosHab(h.getPuntosHab() - 1);
+				entityManager.refresh(h);
+				User aux = (User)session.getAttribute("user");
+				aux.setHeroe(h);
+				session.setAttribute("user", aux);
+				//entityManager.flush();
+			}
+		}
+		return "/perfil";
+	}
+	
+	
 	/*
 	 ********************* FUNCIONES DE LA GESTION *****************************
 	 */
@@ -318,6 +383,46 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return formSource;
 	}
+	
+	@Transactional
+	@RequestMapping(value = "/borrarUsuario", method = RequestMethod.POST)
+	public String borrarUsuario(
+			@RequestParam("idUsuario") long id,
+			Model model,HttpSession session) {
+			String formSource = "gestionBestias";
+			User aux = (User)session.getAttribute("user");
+			if(aux.getRole().equals("admin")){	
+				try{
+					User i = (User)entityManager.getReference(User.class, id);
+					entityManager.remove(i);
+					System.err.println("deberia borrar");
+				} catch(NoResultException nre){
+					System.err.println("basura");
+				}
+			}
+			return gestionUsuarios(model,session);
+		}
+	
+	@Transactional
+	@RequestMapping(value = "/banearUsuario", method = RequestMethod.POST)
+	public String banearUsuario(
+			@RequestParam("idUsuario") long id,
+			Model model,HttpSession session) {
+			String formSource = "gestionBestias";
+			User aux = (User)session.getAttribute("user");
+			if(aux.getRole().equals("admin")){	
+				try{
+					User i = (User)entityManager.getReference(User.class, id);
+					if(i.isBanned()) i.setBanned(false);
+					else{i.setBanned(true);}
+					entityManager.persist(i);
+					System.err.println("deberia borrar");
+				} catch(NoResultException nre){
+					System.err.println("basura");
+				}
+			}
+			return gestionUsuarios(model,session);
+		}
 	
 	/*@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
 	@Transactional
@@ -405,6 +510,26 @@ public class HomeController {
 				}
 			}
 			return formSource;
+		}
+	
+	@Transactional
+	@RequestMapping(value = "/borrarObjeto", method = RequestMethod.POST)
+	public String borrarObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model,HttpSession session) {
+			String formSource = "gestionObjetos";
+			User aux = (User)session.getAttribute("user");
+			if(aux.getRole().equals("admin")){	
+				try{
+					Item i = (Item)entityManager.getReference(Item.class, id);
+					entityManager.flush();
+					entityManager.remove(i);
+					System.err.println("deberia borrar");
+				} catch(NoResultException nre){
+					System.err.println("basura");
+				}
+			}
+			return gestionObjetos(model,session);
 		}
 	
 	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.POST)
@@ -500,6 +625,27 @@ public class HomeController {
 			}
 			return formSource;
 		}
+	
+	@Transactional
+	@RequestMapping(value = "/borrarBestia", method = RequestMethod.POST)
+	public String borrarBestia(
+			@RequestParam("idBestia") long id,
+			Model model,HttpSession session) {
+			String formSource = "gestionBestias";
+			User aux = (User)session.getAttribute("user");
+			if(aux.getRole().equals("admin")){	
+				try{
+					Bestia i = (Bestia)entityManager.getReference(Bestia.class, id);
+					entityManager.flush();
+					entityManager.remove(i);
+					System.err.println("deberia borrar");
+				} catch(NoResultException nre){
+					System.err.println("basura");
+				}
+			}
+			return gestionBestias(model,session);
+		}
+	
 	
 	public String editarBestias() {
 		return null;

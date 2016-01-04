@@ -54,12 +54,16 @@
 							<button type="submit" class="botonesPrincipales" id="registrar">
 								Registrarse</button>
 						</p>
+						
 					</div>
 					<c:if test="${not empty registrerError}">
 						<c:out value="${registrerError}"/>
 					</c:if>
 				</form>
-				
+				<p>
+					<button type="submit" class="botonesPrincipales" id="registrar">
+						Volver</button>
+				</p>
 				</div>
 			</div>
 			</div>

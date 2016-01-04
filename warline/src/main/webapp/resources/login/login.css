@@ -95,7 +95,7 @@ li {
 	width: 400px;
 	height: 338px;
 	left: 400px;
-	bottom: 300px;
+	bottom: 310px;
 	
 }
 
@@ -124,12 +124,10 @@ li {
 }
 
 #userlogin {
-	border-width: 2px 0px;
-	border-color: #860b09 #000 #860b09;
+	border: 5px solid black;
 	border-style: solid;
-	height: 334px;
+	height: 338px;
 	width: 400px;
-	
 	overflow: hidden;
 	background: #4b1a04;
 }
@@ -215,6 +213,7 @@ li {
 	float : none;
 	position: relative;
 	top: 38px;
+	border: 5px solid black;
 }
 
 #leon{

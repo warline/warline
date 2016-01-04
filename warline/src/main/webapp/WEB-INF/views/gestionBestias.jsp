@@ -37,25 +37,28 @@
 				</a> <a href="nuevaBestia">
 					<button class="botonesGUsu" id="modificar"></button>
 				</a>
-				<button class="botonesGUsu" id="eliminar"></button>
 
 				<div class="apanel">
 					<table>
 						<thead>
 							<tr>
-								<th></th>
 								<th>IMAGEN</th>
 								<th>NOMBRE</th>
 								<th>NIVEL</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="b" items="${bestias}">
 								<tr>
-									<td><input type="checkbox"></td>
 									<td><img class="bicho" src="bestia/photo?nombre=${b.nombre}"/></td>
 									<td><c:out value="${b.nombre}" /></td>
 									<td><c:out value="${b.nivel}" /></td>
+									<td>
+										<form action="borrarBestia" method="POST">
+											<button name="idBestia" class="botonesGUsu" id="eliminar" type = "submit" value = "${b.id}"></button>
+										</form>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>

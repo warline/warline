@@ -31,40 +31,47 @@
 						<button class="botonesGUsu" id="filtrar">Buscar</button>
 					</div>
 				</form>
-
-				<button class="botonesGUsu" id="banear"></button>
-				<button class="botonesGUsu" id="eliminar"></button>
+				
 				<button class="botonesGUsu" id="admin"></button>
 				<button class="botonesGUsu" id="usuario"></button>
 
 				<div class="apanel" id="panelScroll">
-				    <form id="selected" method="POST">
 					<table>
 						<thead>
 							<tr>
-								<th id = "checkbox"></th>
 								<th>USUARIO</th>
 								<th>CORREO</th>
 								<th>BANEADO</th>
 								<th>ROL</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 						
 							<c:forEach var="i" items="${users}">
 							<tr>
-									<td id = "checkbox"><input type="checkbox" name="selected"></td>
 									<td><c:out value="${i.getHeroe().nombre}" /></td>
 									<td><c:out value="${i.login}" /></td>
 									<td><c:out value="${i.banned}" /></td>
 									<td><c:out value="${i.role}" /></td>
+									
+									<td>
+										<form action="borrarUsuario" method="POST">
+											<button name="idUsuario" class="botonesGUsu" id="eliminar" type = "submit" value = "${i.id}"></button>
+										</form>
+									</td>
+									<td>
+										<form action="banearUsuario" method="POST">
+											<button name="idUsuario" class="botonesGUsu" id="banear" type = "submit" value = "${i.id}"></button>
+										</form>
+									</td>
 									</tr>
 							</c:forEach>
 						
 						</tbody>
 					</table>
 					<input type="hidden" id="op" name="op"/>
-					</form>
 				</div>
 			</div>
 		</div>

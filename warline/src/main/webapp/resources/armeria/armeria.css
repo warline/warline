@@ -46,9 +46,30 @@ td{
 	height: 36px;
 	width: 36px;
 }
-img{
+#imagenObjeto img{
 	height: 36px;
 	width: 36px;
+}
+.descripcion{
+	display: none;
+}
+.descripcion img{
+	height: 270px;
+	width: 270px;
+}
+.descripcion td{
+	border: 0px;
+}
+#stats{
+	position:relative;
+	margin-top: 10px;
+	margin-left: 20px;
+	width: 92%;
+	height: 220px;
+	border: none;
+}
+#stats td{
+	padding-left: 10px;
 }
 td:hover{
 	border-color: #fff08c; /*color marfil*/
@@ -85,10 +106,15 @@ caption{
 #panelObjetoDcha{
 	color: white;
 	float: right;
+	height: 270px;
+	width: 480px;
 	margin-right: 10px;
 }
+
 #panelObjetoIzda{
 	float: left;
+	width: 270px;
+	height: 270px;
 	margin-left: 10px;
 }
 p.apanel{
