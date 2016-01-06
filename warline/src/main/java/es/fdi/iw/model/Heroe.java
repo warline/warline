@@ -194,8 +194,15 @@ public class Heroe {
 	}
 	
 	public void comprarObjeto(Item i){
-		if(inventario.size() < TAM_INVENT)
+		if(inventario.size() < TAM_INVENT){
 			inventario.add(inventario.size(),i);
+			//this.oro -= i.getPrecio();
+		}
+	}
+	
+	public void venderObjeto(Item i){
+		this.oro += i.getPrecio() * 0.8;
+		inventario.remove(i);
 	}
 	public int getPuntosHab() {
 		return puntosHab;

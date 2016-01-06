@@ -24,7 +24,7 @@
 						
 							<td><h2> <c:out value="${b.nombre}" /></h2>
 						
-							<p><img class= bicho src="resources/arcade/images/${b.nombre}.jpg"/></td>
+							<p><img class= bicho src="bestia/photo?nombre=${b.nombre}"/></td>
 						
 					</c:forEach>
 				</tbody>

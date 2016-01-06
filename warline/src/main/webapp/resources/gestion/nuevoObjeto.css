@@ -14,9 +14,14 @@
 	background: transparent;
 }
 
-#fotoObjeto, #panelBotonSubirImagen{
-	width: 255px;
-    height: 255px;
+#capaMadre .bicho{
+	width:200px;
+	height: 200px;
+	}
+
+ #panelBotonSubirImagen{
+	width: 230px;
+    height: 230px;
 	background-color: #0a2735;
 	margin-right: auto;
 	margin-left: auto;
@@ -24,10 +29,7 @@
 	border: #474747 solid 3px;
 }
 
-#panelBotonSubirImagen {
-	height: 50px;
-	width: 200px;
-}
+
 
 #panelBotonSubirImagen button {
 	height: 100%;

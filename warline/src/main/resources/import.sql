@@ -36,5 +36,3 @@ insert into Item values(8, 45, 0, 5, 'Escudo redondo', 50, 5, 4, 10, 65);
 insert into Heroe values (1,10,10,'resources/combates/fotos/fuerte.png',1,'user',50,30,5,100,0);
 insert into User values (1,false, '$2a$10$E44pf9xwD4CFda8FtvrWGeX1Axj2RnC49AK/vjttAWARoyGfrSGPm', 'user', 'user',1);
 insert into User values (2,false, '$2a$10$EhYtXcHYOMXXUWAyiOfKIO21uxLRf4dNDdXZL73NLfMVQqiFdZncW', 'admin', 'admin',null);
-insert into User values (3, false, '$2a$10$sj7CegQYfvKqcuxKoVbis.rId1sdR/qpfNOua63XFUTlTOnLXazLO', 'adminw', 'admin', null);
-insert into User values (4, false, '$2a$10$Vt9RrxPqdyPDRRLMfyZnzOv6nFIPMzmiKgFSF90vCaABgmm75O29C', 'jasandov@ucm.es', 'admin', null);

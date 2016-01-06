@@ -34,7 +34,7 @@ public class Bestia {
 	
 	public Bestia() {}
 	
-	public Bestia(int f, int d, int hp, int p, int vel, int n, String name, int x, int o, String imagen){
+	public Bestia(int f, int d, int hp, int p, int vel, int n, String name, int x, int o){
 		this.fuerza = f;
 		this.defensa = d;
 		this.vida = hp;

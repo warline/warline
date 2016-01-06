@@ -1,0 +1,59 @@
+#panelNuevoAdmin {
+	width: 500px;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#panelNuevoAdmin table {
+	color: white;
+	font-size: 20px;
+	width: 100%;
+	height: 100%;
+}
+
+#panelNuevoAdmin table td {
+	width: 200px
+}
+
+#panelNuevoAdmin table td input[type= "text"] {
+	font-size: 20px;
+	text-align: center;	
+}
+
+#panelNuevoAdmin table td input[type= "password"] {
+	font-size: 20px;
+	text-align: center;	
+}
+
+
+
+#panelBotonNuevo {
+	width: 500px;
+	height: 50px;
+	margin-top: 100px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#panelVolver {
+	width: 200px;
+	height: 50px;
+	float: left;
+}
+
+#crearAdmin {
+	width: 200px;
+	height: 50px;
+	float: right;
+}
+
+#panelVolver button {
+	height: 100%;
+	width: 100%
+}
+
+#crearAdmin button {
+	height: 100%;
+	width: 100%
+}

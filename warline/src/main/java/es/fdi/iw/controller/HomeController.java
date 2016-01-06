@@ -72,7 +72,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
-	public String perfil(Locale locale, Model model , HttpSession session) {
+	public String perfil(Model model , HttpSession session) {
 		String formSource = "perfil";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
@@ -114,10 +114,10 @@ public class HomeController {
 		Bestia rival=(Bestia)entityManager.createNamedQuery("bestiaByName").setParameter("nombreParam", nombre).getSingleResult();;
 		model.addAttribute("rival", rival);
 		System.err.println(nombre+"s");
-	
+
 	}
 
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -130,7 +130,7 @@ public class HomeController {
 	/*******************************************************************************/
 
 	/**************************** ARMERIA ******************************/
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -146,26 +146,43 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return formSource;
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/comprarObjeto", method = RequestMethod.POST)
 	public String comprarObjeto(
 			@RequestParam("idObjeto") long id,
 			Model model,HttpSession session) {
-			String formSource = "armeria";
-			try{
-				Item i = (Item)entityManager.getReference(Item.class, id);
-				User u = (User)session.getAttribute("user");
-				u.getHeroe().comprarObjeto(i);
-				//entityManager.refresh(u.getHeroe());
-				session.removeAttribute("user");
-				session.setAttribute("user", u);
-			} catch(NoResultException nre){}
-			return armeria(model,session);
-		}
+		String formSource = "armeria";
+		try{
+			Item i = (Item)entityManager.getReference(Item.class, id);
+			User u = (User)session.getAttribute("user");
+			u.getHeroe().comprarObjeto(i);
+			//entityManager.refresh(u.getHeroe());
+			session.removeAttribute("user");
+			session.setAttribute("user", u);
+		} catch(NoResultException nre){}
+		return armeria(model,session);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/venderObjeto", method = RequestMethod.POST)
+	public String venderObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model,HttpSession session) {
+		String formSource = "armeria";
+		try{
+			Item i = (Item)entityManager.getReference(Item.class, id);
+			User u = (User)session.getAttribute("user");
+			u.getHeroe().venderObjeto(i);
+			//entityManager.refresh(u.getHeroe());
+			session.removeAttribute("user");
+			session.setAttribute("user", u);
+		} catch(NoResultException nre){}
+		return armeria(model,session);
+	}
 
 	/*******************************************************************************/
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -225,19 +242,7 @@ public class HomeController {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				}
 			} catch (NoResultException nre) {
-				if (formPass.length() == 4) {
-					// UGLY: register new users if they do not exist and pass is 4 chars long
-					logger.info("no-such-user; creating user {}", formLogin);				
-					User user = User.createUser(formLogin, formPass, "user", "Hola");
-					entityManager.persist(user.getHeroe());
-					entityManager.persist(user);	
-					//session.setAttribute("heroe", user.getHeroe());
-					session.setAttribute("user", user);
-					// sets the anti-csrf token
-					getTokenForSession(session);					
-				} else {
-					logger.info("no such login: {}", formLogin);
-				}
+				logger.info("no such login: {}", formLogin);
 				model.addAttribute("loginError", "error en usuario o contraseña");
 			}
 		}
@@ -361,8 +366,23 @@ public class HomeController {
 		}
 		return "/perfil";
 	}
-	
-	
+	@Transactional
+	@RequestMapping(value = "/equiparObjeto", method = RequestMethod.POST)
+	public String equiparObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model,HttpSession session) {
+		String formSource = "perfil";
+		try{
+			Item i = (Item)entityManager.getReference(Item.class, id);
+			User u = (User)session.getAttribute("user");
+			u.getHeroe().equipar(i);
+			//entityManager.refresh(u.getHeroe());
+			session.removeAttribute("user");
+			session.setAttribute("user", u);
+		} catch(NoResultException nre){}
+		return perfil(model,session);
+	}
+
 	/*
 	 ********************* FUNCIONES DE LA GESTION *****************************
 	 */
@@ -383,64 +403,95 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return formSource;
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/borrarUsuario", method = RequestMethod.POST)
 	public String borrarUsuario(
 			@RequestParam("idUsuario") long id,
 			Model model,HttpSession session) {
-			String formSource = "gestionBestias";
-			User aux = (User)session.getAttribute("user");
-			if(aux.getRole().equals("admin")){	
-				try{
-					User i = (User)entityManager.getReference(User.class, id);
-					entityManager.remove(i);
-					System.err.println("deberia borrar");
-				} catch(NoResultException nre){
-					System.err.println("basura");
-				}
+		String formSource = "gestionBestias";
+		User aux = (User)session.getAttribute("user");
+		if(aux.getRole().equals("admin")){	
+			try{
+				User i = (User)entityManager.getReference(User.class, id);
+				Heroe h = i.getHeroe();
+				entityManager.remove(i);
+				entityManager.remove(h);
+			} catch(NoResultException nre){
 			}
-			return gestionUsuarios(model,session);
 		}
-	
+		return gestionUsuarios(model,session);
+	}
+
 	@Transactional
 	@RequestMapping(value = "/banearUsuario", method = RequestMethod.POST)
 	public String banearUsuario(
 			@RequestParam("idUsuario") long id,
 			Model model,HttpSession session) {
-			String formSource = "gestionBestias";
-			User aux = (User)session.getAttribute("user");
-			if(aux.getRole().equals("admin")){	
-				try{
-					User i = (User)entityManager.getReference(User.class, id);
-					if(i.isBanned()) i.setBanned(false);
-					else{i.setBanned(true);}
-					entityManager.persist(i);
-					System.err.println("deberia borrar");
-				} catch(NoResultException nre){
-					System.err.println("basura");
-				}
-			}
-			return gestionUsuarios(model,session);
+		User aux = (User)session.getAttribute("user");
+		if(aux.getRole().equals("admin")){	
+			try{
+				User i = (User)entityManager.getReference(User.class, id);
+				if(i.isBanned()) i.setBanned(false);
+					else i.setBanned(true);
+				entityManager.persist(i);
+			} catch(NoResultException nre){}
 		}
-	
-	/*@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
-	@Transactional
-	public String banearUsuarios(Model model) {
-		return "gestionUsuarios";
+		return gestionUsuarios(model,session);
 	}
 	
-	//@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
-	//@Transactional
-	//public String convertirEnAdmins(Model model) {
-	//	return "gestionUsuarios";
-	//}
+	@RequestMapping(value = "/nuevoAdmin", method = RequestMethod.GET)
+	public String nuevoAdmin(Model model) {
+		return "nuevoAdmin";
+	}
 	
-	//@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
-	//@Transactional
-	//public String convertirEnUsers(Model model) {
-	//	return "gestionUsuarios";
-	//}
+	/**
+	 * Intercepts login requests generated by the header; then continues to load normal page
+	 */
+	@RequestMapping(value = "/crearAdmin", method = RequestMethod.POST)
+	@Transactional
+	public String crearAdmin(
+			@RequestParam("correo") String formLogin,
+			@RequestParam("password") String formPass,
+			@RequestParam("repassword") String formRePass,
+			HttpSession session, Model model) {
+
+		String formSource = "nuevoAdmin";
+		// validate request
+		if (formLogin == null || formLogin.length() < 4 || formPass == null || formPass.length() < 4) {
+			model.addAttribute("registrerError", "correo y contraseñas: 4 caracteres mínimo");
+		} else {
+			User user = User.createUser(formLogin, formPass, "admin", null);
+			User u = null;
+			try{
+				u = (User)entityManager.createNamedQuery("userByLogin")
+						.setParameter("loginParam", formLogin).getSingleResult();
+				if (u != null) {
+					model.addAttribute("registrerError", "El administrador ya existe");
+				} else {
+					if(formPass.equals(formRePass)){
+						entityManager.persist(user.getHeroe());
+						entityManager.persist(user);	
+						formSource = gestionUsuarios(model, session);
+					} else {
+						model.addAttribute("registrerError", "la contraseña no es la misma en los dos campos");
+						formSource = "nuevoAdmin";
+					}
+				}
+			}catch(NoResultException nre){
+				if(formPass.equals(formRePass)){
+					entityManager.persist(user.getHeroe());
+					entityManager.persist(user);				
+					formSource = gestionUsuarios(model, session);
+				} else {
+					formSource = "nuevoAdmin";
+				}
+			}
+		}
+
+		// redirects to view from which login was requested
+		return formSource;
+	}
 	
 	@RequestMapping(value = "/gestionUsuarios", method = RequestMethod.POST)
 	public String buscarUsuario(Model model) {
@@ -470,71 +521,125 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.GET)
 	public String nuevoObjeto(Model model) {
+		if(model.containsAttribute("objeto")){
+			//preguntar como borrar
+		}
 		return "nuevoObjeto";
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/registrarItem", method = RequestMethod.POST)
 	public String registrarItem(
+			@RequestParam("idObj") long formid,
 			@RequestParam("nombreObj") String formNombre,
 			@RequestParam("tipoObj") TipoItem formTipo,
 			@RequestParam("nivelObj") int formNivel,
-			@RequestParam("vidaObj") int formVida,
+			@RequestParam("vidaObj") double formVida,
 			@RequestParam("fuerzaObj") int formFuerza,
 			@RequestParam("precisionObj") int formPrecision,
 			@RequestParam("defObj") int formDefensa,
 			@RequestParam("velObj") int formVelocidad,
 			@RequestParam("precioObj") int formPrecio,
+			@RequestParam("photo") MultipartFile photo,
 			Model model,HttpSession session) {
-			//TipoItem tipo = TipoItem.parseo(formTipo);
-			String formSource = "nuevoObjeto";
-			// validate request
-			if (formNombre == null) {
-				model.addAttribute("objetoError", "Debe asignar un nombre");
-			} else {
-				Item item = new Item(formNombre, formVida,formFuerza, formDefensa,
-						formVelocidad, formPrecision, formTipo , formPrecio,formNivel);
-				Item i = null;
+		//TipoItem tipo = TipoItem.parseo(formTipo);
+		String formSource = "nuevoObjeto";
+		// validate request
+		if (formNombre == null) {
+			model.addAttribute("objetoError", "Debe asignar un nombre");
+		} else {
+			Item aux = (Item)entityManager.getReference(Item.class, formid);
+			entityManager.remove(aux);
+			Item item = new Item(formNombre, formVida,formFuerza, formDefensa,
+					formVelocidad, formPrecision, formTipo , formPrecio,formNivel);
+			Item i = null;
+			try{
+				i = (Item)entityManager.createNamedQuery("itemByName")
+						.setParameter("nombreParam", formNombre).getSingleResult();
+				entityManager.persist(item);
+				formSource = gestionObjetos(model,session);
 				try{
-					i = (Item)entityManager.createNamedQuery("itemByName")
-							.setParameter("nombreParam", formNombre).getSingleResult();
-					if (i != null) {
-						model.addAttribute("objetoError", "el nombre ya esta en uso");
-					} else {
-						entityManager.persist(item);
-						formSource = gestionObjetos(model,session);
-					}
-				} catch(NoResultException nre){
-						entityManager.persist(item);				
-						formSource = gestionObjetos(model,session);
+					byte[] bytes = photo.getBytes();
+					BufferedOutputStream stream =
+							new BufferedOutputStream(
+									new FileOutputStream(ContextInitializer.getFile("objeto", formNombre)));
+					stream.write(bytes);
+					stream.close();
+				} catch (IOException e) {
+					System.err.println("fallo");
+				}
+			} catch(NoResultException nre){
+				entityManager.persist(item);				
+				formSource = gestionObjetos(model,session);
+				try{
+					byte[] bytes = photo.getBytes();
+					BufferedOutputStream stream =
+							new BufferedOutputStream(
+									new FileOutputStream(ContextInitializer.getFile("objeto", formNombre)));
+					stream.write(bytes);
+					stream.close();
+				} catch (IOException e) {
+					System.err.println("fallo");
 				}
 			}
-			return formSource;
 		}
-	
+		return formSource;
+	}
+
 	@Transactional
 	@RequestMapping(value = "/borrarObjeto", method = RequestMethod.POST)
 	public String borrarObjeto(
 			@RequestParam("idObjeto") long id,
 			Model model,HttpSession session) {
-			String formSource = "gestionObjetos";
-			User aux = (User)session.getAttribute("user");
-			if(aux.getRole().equals("admin")){	
-				try{
-					Item i = (Item)entityManager.getReference(Item.class, id);
-					entityManager.flush();
-					entityManager.remove(i);
-					System.err.println("deberia borrar");
-				} catch(NoResultException nre){
-					System.err.println("basura");
-				}
+		String formSource = "gestionObjetos";
+		User aux = (User)session.getAttribute("user");
+		if(aux.getRole().equals("admin")){	
+			try{
+				Item i = (Item)entityManager.getReference(Item.class, id);
+				entityManager.flush();
+				entityManager.remove(i);
+				System.err.println("deberia borrar");
+			} catch(NoResultException nre){
+				System.err.println("basura");
 			}
-			return gestionObjetos(model,session);
 		}
-	
+		return gestionObjetos(model,session);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/modificarObjeto", method = RequestMethod.POST)
+	public String modificarObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model,HttpSession session) {
+		User aux = (User)session.getAttribute("user");
+		if(aux.getRole().equals("admin")){	
+			try{
+				Item i = (Item)entityManager.getReference(Item.class, id);
+				model.addAttribute("objeto", i);
+			} catch(NoResultException nre){
+				System.err.println("basura");
+			}
+		}
+		return nuevoObjeto(model);
+	}
+
 	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.POST)
 	public String editarObjeto(Model model) {
 		return "nuevoObjeto";
+	}
+	@ResponseBody
+	@RequestMapping(value="/objeto/photo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] objetoPhoto(@RequestParam("nombre") String nombre) throws IOException {
+		File f = ContextInitializer.getFile("objeto", nombre);
+		InputStream in = null;
+		if (f.exists()) {
+			in = new BufferedInputStream(new FileInputStream(f));
+		} else {
+			in = new BufferedInputStream(
+					this.getClass().getClassLoader().getResourceAsStream("unknown-user.jpg"));
+		}
+
+		return IOUtils.toByteArray(in);
 	}
 
 	/*******************************************************************************/
@@ -554,7 +659,7 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return formSource;
 	}
-	
+
 	@RequestMapping(value = "/nuevaBestia", method = RequestMethod.GET)
 	public String nuevaBestia(Model model) {
 		return "nuevaBestia";
@@ -577,97 +682,97 @@ public class HomeController {
 			@RequestParam("oro") int formOro,
 			@RequestParam("photo") MultipartFile photo,
 			Model model,HttpSession session) {
-		
-			String formSource = "nuevaBestia";
-		        
-			// validate request
-			if (formNombre == "") {
-				model.addAttribute("bestiaError", "Debe asignar un nombre");
-			} else {
-				
-					Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
-						,formVelocidad, formNivel, formNombre, formExp, formOro, "resources/arcade/images/"+formNombre+".jpg");
-					Bestia b = null;
-	
-				try {
-					b = (Bestia)entityManager.createNamedQuery("bestiaByName")
-							.setParameter("nombreParam", formNombre).getSingleResult();
-					if (b != null) {
-						model.addAttribute("bestiaError", "el nombre ya esta en uso");
-					} else {
-						entityManager.persist(bestia);
-						formSource = gestionBestias(model,session);
-						try{
-							   byte[] bytes = photo.getBytes();
-				                BufferedOutputStream stream =
-				                        new BufferedOutputStream(
-				                        		new FileOutputStream(ContextInitializer.getFile("bestia", formNombre)));
-				                stream.write(bytes);
-				                stream.close();
-						} catch (IOException e) {
-							System.err.println("fallo");
-						}
+
+		String formSource = "nuevaBestia";
+
+		// validate request
+		if (formNombre == "") {
+			model.addAttribute("bestiaError", "Debe asignar un nombre");
+		} else {
+
+			Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision
+					,formVelocidad, formNivel, formNombre, formExp, formOro);
+			Bestia b = null;
+
+			try {
+				b = (Bestia)entityManager.createNamedQuery("bestiaByName")
+						.setParameter("nombreParam", formNombre).getSingleResult();
+				if (b != null) {
+					model.addAttribute("bestiaError", "el nombre ya esta en uso");
+				} else {
+					entityManager.persist(bestia);
+					formSource = gestionBestias(model,session);
+					try{
+						byte[] bytes = photo.getBytes();
+						BufferedOutputStream stream =
+								new BufferedOutputStream(
+										new FileOutputStream(ContextInitializer.getFile("bestia", formNombre)));
+						stream.write(bytes);
+						stream.close();
+					} catch (IOException e) {
+						System.err.println("fallo");
 					}
-				} catch(NoResultException nre){
-						entityManager.persist(bestia);				
-						formSource = gestionBestias(model,session);
-						try{
-							   byte[] bytes = photo.getBytes();
-				                BufferedOutputStream stream =
-				                        new BufferedOutputStream(
-				                        		new FileOutputStream(ContextInitializer.getFile("bestia", formNombre)));
-				                stream.write(bytes);
-				                stream.close();
-						} catch (IOException e) {
-							System.err.println("fallo");
-						}
+				}
+			} catch(NoResultException nre){
+				entityManager.persist(bestia);				
+				formSource = gestionBestias(model,session);
+				try{
+					byte[] bytes = photo.getBytes();
+					BufferedOutputStream stream =
+							new BufferedOutputStream(
+									new FileOutputStream(ContextInitializer.getFile("bestia", formNombre)));
+					stream.write(bytes);
+					stream.close();
+				} catch (IOException e) {
+					System.err.println("fallo");
 				}
 			}
-			return formSource;
 		}
-	
+		return formSource;
+	}
+
 	@Transactional
 	@RequestMapping(value = "/borrarBestia", method = RequestMethod.POST)
 	public String borrarBestia(
 			@RequestParam("idBestia") long id,
 			Model model,HttpSession session) {
-			String formSource = "gestionBestias";
-			User aux = (User)session.getAttribute("user");
-			if(aux.getRole().equals("admin")){	
-				try{
-					Bestia i = (Bestia)entityManager.getReference(Bestia.class, id);
-					entityManager.flush();
-					entityManager.remove(i);
-					System.err.println("deberia borrar");
-				} catch(NoResultException nre){
-					System.err.println("basura");
-				}
+		String formSource = "gestionBestias";
+		User aux = (User)session.getAttribute("user");
+		if(aux.getRole().equals("admin")){	
+			try{
+				Bestia i = (Bestia)entityManager.getReference(Bestia.class, id);
+				entityManager.flush();
+				entityManager.remove(i);
+				System.err.println("deberia borrar");
+			} catch(NoResultException nre){
+				System.err.println("basura");
 			}
-			return gestionBestias(model,session);
 		}
-	
-	
+		return gestionBestias(model,session);
+	}
+
+
 	public String editarBestias() {
 		return null;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="/bestia/photo", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	public byte[] bestiaPhoto(@RequestParam("nombre") String nombre) throws IOException {
-	    File f = ContextInitializer.getFile("bestia", nombre);
-	    InputStream in = null;
-	    if (f.exists()) {
-	    	in = new BufferedInputStream(new FileInputStream(f));
-	    } else {
-	    	in = new BufferedInputStream(
-	    			this.getClass().getClassLoader().getResourceAsStream("unknown-user.jpg"));
-	    }
-	    
-	    return IOUtils.toByteArray(in);
+		File f = ContextInitializer.getFile("bestia", nombre);
+		InputStream in = null;
+		if (f.exists()) {
+			in = new BufferedInputStream(new FileInputStream(f));
+		} else {
+			in = new BufferedInputStream(
+					this.getClass().getClassLoader().getResourceAsStream("unknown-user.jpg"));
+		}
+
+		return IOUtils.toByteArray(in);
 	}
 
-/******************************************************************************/
-	
+	/******************************************************************************/
+
 	/** 
 	 * Returns true if the user is logged in and is an admin
 	 */
@@ -679,7 +784,7 @@ public class HomeController {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Returns an anti-csrf token for a session, and stores it in the session
 	 * @param session
@@ -690,8 +795,8 @@ public class HomeController {
 		session.setAttribute("csrf_token", token);
 		return token;
 	}
-	
-	
+
+
 	/**
 	 * Checks the anti-csrf token for a session against a value
 	 * @param session
@@ -699,7 +804,7 @@ public class HomeController {
 	 * @return the token
 	 */
 	static boolean isTokenValid(HttpSession session, String token) {
-	    Object t=session.getAttribute("csrf_token");
-	    return (t != null) && t.equals(token);
+		Object t=session.getAttribute("csrf_token");
+		return (t != null) && t.equals(token);
 	}
 }

@@ -105,11 +105,17 @@
 	height: 36px;
 	width: 36px;
 }
-.imagenObjeto {
+#imagenObjeto {
 	height: 36px;
 	width: 36px;
 }
-
+#imagenObjeto button{
+	padding: 0px;
+	border: 0px;
+	height: 36px;
+	width: 36px;
+	background-color: transparent;
+}
 #equipo table {
     border-spacing: 5px;
 	height: 85%;

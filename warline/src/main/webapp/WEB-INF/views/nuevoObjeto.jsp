@@ -9,6 +9,7 @@
 	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevoObjeto.css">
+<script src="resources/gestion/nuevo.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -20,26 +21,32 @@
 						<hr>
 					</div>
 				</div>
+				<form action="registrarItem" enctype="multipart/form-data" method="POST">
+				<input type="hidden" name="idObj" value = "${objeto.id}"/>
 				<div id="divIzquierdo">
-					<div id="fotoObjeto"></div>
 					<div id="panelBotonSubirImagen">
-						<button type="submit" id="subirImagen">Subir imagen</button>
-					</div>
+						<input type="file" id="files" name="photo" /> 
+						<output id="list"></output>
+						<script> document.getElementById('files').addEventListener('change', archivo, false);</script>
 
-					<div id="panelDisponibilidad">
+					</div>
+	
+
+					<!--  <div id="panelDisponibilidad">
 						<p>
 							<input type="checkbox" id="disponible"> </input> Disponible en
 							armeria
 						</p>
-					</div>
+					</div>-->
 
 				</div>
 				<!-- divIzquierdo -->
 
 				<div id="divDerecho">
-					<form action="registrarItem" method="POST">
+						
+						
 						<p>
-							Nombre: <input type="text" name="nombreObj" />
+							Nombre: <input type="text" name="nombreObj" value = "${objeto.nombre}"/>
 						</p>
 
 						<p>
@@ -58,32 +65,32 @@
 									<thead>
 										<tr>
 											<td>Nivel</td>
-											<td><input type="text" name="nivelObj" value="10" /></td>
+											<td><input type="text" name="nivelObj" value="${objeto.nivel}" /></td>
 										</tr>
 										<tr>
 											<td>Vida</td>
-											<td><input type="text" name="vidaObj" value="0" /></td>
+											<td><input type="text" name="vidaObj" value="${objeto.vida}" /></td>
 										</tr>
 										<tr>
 											<td>Fuerza</td>
-											<td><input type="text" name="fuerzaObj" value="25" /></td>
+											<td><input type="text" name="fuerzaObj" value="${objeto.fuerza}" /></td>
 										</tr>
 										<tr>
 											<td>Habilidad</td>
-											<td><input type="text" name="precisionObj" value="5" />
+											<td><input type="text" name="precisionObj" value="${objeto.precision}" />
 											</td>
 										</tr>
 										<tr>
 											<td>Defensa</td>
-											<td><input type="text" name="defObj" value="0" /></td>
+											<td><input type="text" name="defObj" value="${objeto.defensa}" /></td>
 										</tr>
 										<tr>
 											<td>Velocidad</td>
-											<td><input type="text" name="velObj" value="-2" /></td>
+											<td><input type="text" name="velObj" value="${objeto.velocidad}" /></td>
 										</tr>
 										<tr>
 											<td>Precio</td>
-											<td><input type="text" name="precioObj" value="100" />
+											<td><input type="text" name="precioObj" value="${objeto.precio}" />
 											</td>
 										</tr>
 								</table>
@@ -95,7 +102,6 @@
 								<button type="submit" id="guardarObj">Guardar objeto</button>
 							</a>
 						</div>
-
 					</form>
 
 					<c:if test="${not empty objetoError}">

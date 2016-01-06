@@ -3,9 +3,11 @@
 
 <script src= "resources/ui/external/jquery/jquery.js"></script>
 <script src="resources/ui/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="resources\ui\jquery-ui.css"/>
-
 <script src="resources/perfil/perfil.js"></script>
+<script src="resources/armeria/armeria.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="resources\ui\jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
 <link rel = "stylesheet" type = "text/css" href = "resources/perfil/perfil.css">
 
@@ -70,7 +72,7 @@
 							<c:set var = "j" value = "0" scope = "session"/>
 							<c:if test="${j%3 == 0}"> <tr> </c:if>
 									<td> <div class = "imagenObjeto" >
-									<img src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </div> </td>
+									<img src = "resources/armeria/images/${i.nombre}.png" align="middle"/></div> </td>
 							
 							<c:set var = "j" value = "${j+1}"/>
 						</c:forEach>
@@ -87,9 +89,11 @@
 							<c:set var = "k" value = "0" scope = "session"/>
 							<c:if test="${k%5 == 0}"> <tr> </c:if>
 									<td>
-										<div class = "imagenObjeto" onClick = "${user.getHeroe().equipar(i)}">
-											<img src = "resources/armeria/images/${i.nombre}.png" align="middle" />
-										</div> 
+										<div id = "imagenObjeto" onmouseover = "desaparece('${i.getFuerza()}', '${i.getDefensa()}', '${i.getVelocidad()}', '${i.getPrecision()}', '${i.getNivel()}', '${i.getVida()}', '${i.getPrecio()}', '${i.getTipo()}', '${i.getNombre()}')" > 
+											<form action="equiparObjeto" method="POST">
+												<button name="idObjeto" type = "submit" value = "${i.id}"><img src = "resources/armeria/images/${i.nombre}.png" align="middle"/></button> 
+											</form>
+										</div>
 									</td>
 							<c:set var = "k" value = "${k+1}"/>
 						</c:forEach>

@@ -34,38 +34,42 @@
 					</form>
 					
 					<a href = "nuevoObjeto">
-						<button class="botonesGUsu" id="añadir"></button>
+						<button class="botonesGUsu" id="anadir"></button>
 					</a>
-					<a href = "nuevoObjeto">
-						<button class="botonesGUsu" id="modificar"></button>
-					</a>
+
 				<div class="apanel">
 					<table>
 						<thead>
 							<tr>
-								<th>IMAGEN</th>
-								<th>NOMBRE</th>
-								<th>TIPO</th>
-								<th>NIVEL</th>
-								<th></th>
+								<th id = "imagen">IMAGEN</th>
+								<th id = "nombre">NOMBRE</th>
+								<th id = "tipo">TIPO</th>
+								<th id = "nivel">NIVEL</th>
+								<th id = "aux"></th>
+								<th id = "aux"></th>
+								<th id = "scroll"></th>
 							</tr>
 						<thead>
 						<tbody>
-						
 							<c:forEach var="i" items="${objetos}">
 								<tr>
-										<td><img class = "bicho" src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </td>
-										<td><c:out value="${i.nombre}" /></td>
-										<td><c:out value="${i.tipo}" /></td>
-										<td><c:out value="${i.nivel}" /></td>
-										<td>
-											<form action="borrarObjeto" method="POST">
-												<button name="idObjeto" class="botonesGUsu" id="eliminar" type = "submit" value = "${i.id}"></button>
-											</form>
-										</td>
+									<td id = "imagen"><img class = "bicho" src = "objeto/photo?nombre=${i.nombre}" align="middle"/> </td>
+									<td id = "nombre"><c:out value="${i.nombre}" /></td>
+									<td id = "tipo"><c:out value="${i.tipo}" /></td>
+									<td id = "nivel"><c:out value="${i.nivel}" /></td>
+									<td id = "aux"> 
+										<form action="modificarObjeto" method="POST">
+											<button name="idObjeto" class="botonesInternos" id="modificar" type = "submit" value = "${i.id}">
+											</button>
+										</form> 
+									</td>
+									<td id = "aux"> 
+										<form action="borrarObjeto" method="POST">
+											<button name="idObjeto" class="botonesInternos" id="eliminar" type = "submit" value = "${i.id}"></button>
+										</form> 
+									</td>
 								</tr>
 							</c:forEach>
-							
 						</tbody>
 					</table>
 				</div>

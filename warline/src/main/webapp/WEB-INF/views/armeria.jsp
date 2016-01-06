@@ -2,14 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
-<script src= "./ui/external/jquery/jquery.js"></script>
-<script src="./ui/jquery-ui.js"></script>
+<script src= "resources/ui/external/jquery/jquery.js"></script>
+<script src="resources/ui/jquery-ui.js"></script>
 <script src="resources/armeria/armeria.js"></script>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>
-window.jQuery || document.write('<script src="http://mysite.com/jquery.min.js"><\/script>')
-</script>
 
 <link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
@@ -29,9 +24,13 @@ window.jQuery || document.write('<script src="http://mysite.com/jquery.min.js"><
 						<c:forEach var="i" items="${user.getHeroe().getInventario()}">
 							<c:set var = "k" value = "0" scope = "session"/>
 							<c:if test="${k%5 == 0}"> <tr> </c:if>
-									<td> <div id = "imagenObjeto" onmouseover = "desaparece('${i.getFuerza()}', '${i.getDefensa()}', '${i.getVelocidad()}', '${i.getPrecision()}', '${i.getNivel()}', '${i.getVida()}', '${i.getPrecio()}', '${i.getTipo()}', '${i.getNombre()}')">
-									<img src = "resources/armeria/images/${i.nombre}.png" align="middle"/> </div> </td>
-							
+									<td>
+										<div id = "imagenObjeto" onmouseover = "desaparece('${i.getFuerza()}', '${i.getDefensa()}', '${i.getVelocidad()}', '${i.getPrecision()}', '${i.getNivel()}', '${i.getVida()}', '${i.getPrecio()}', '${i.getTipo()}', '${i.getNombre()}')" > 
+											<form action="venderObjeto" method="POST">
+												<button name="idObjeto" type = "submit" value = "${i.id}"><img src = "resources/armeria/images/${i.nombre}.png" align="middle"/></button> 
+											</form>
+										</div>
+									</td>
 							<c:set var = "k" value = "${k+1}"/>
 						</c:forEach>
 						<c:forEach begin = "${user.getHeroe().getInventario().size()}" end = "24" varStatus="loop">

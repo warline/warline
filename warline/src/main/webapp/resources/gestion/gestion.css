@@ -1,6 +1,5 @@
-
 #main {
-height:600px;
+	height:600px;
 }
 
 h3{
@@ -14,12 +13,8 @@ h3{
 	min-height: 100%;
 	margin-left: 35px;
 }
-/*#apie {
-    position: absolute; bottom: 0; height: 40px;
-    background-color: #4b1a04; color: #fff; text-align: center; width: 100%; clear: both;
-}*/
 
-.apanel{
+.apanel {
 	margin-top: 30px;
     height: 300px;
     width: 800px;
@@ -44,26 +39,61 @@ h3{
 	background-size: 40px;
 }
 
-table {
-	margin: auto;
-	width: 93%;
-	height: 93%;
-	position: relative;
+.apanel table {
+	width: 800px;
+	height: 300px;
+	position: absolute;
+	margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 table thead {
 	color: white;
 	position: absolute;
-	left: 5px;
-	top: 5px;
-	right: 5px;
-	width: 734px;
+	width: 800px;
 }
 
 table thead tr th {
 	border-bottom: 3px solid white;
 	text-align: center;
-	width: 734px;
+	width: 260px;
+}
+
+#imagen {
+	width: 230px;
+}
+
+#nombre {
+	width: 200px;
+}
+
+#recompensas {
+	width: 140px;
+}
+
+#aux {
+	width: 80px;
+}
+
+#tipo {
+	width: 140px;
+}
+
+#nivel {
+	width: 50px;
+}
+
+.botonesInternos {
+	width: 50px;
+	height: 50px;
+	background-size: 40px;
+	margin: 5px 5px 5px 5px;
+}
+
+#scroll {
+	width: 20px;
+	border-bottom: none;
 }
 
 table tbody {
@@ -73,21 +103,13 @@ table tbody {
 	overflow-x: hidden;
 	overflow-y: auto;
 	height: 250px;
-	width: 734px;
-	left: 5px;
-	right: 5px;
-	bottom: 5px;
+	width: 800px;
 }
 
-table tbody tr td, #checkbox {
-	padding: 7px 9px 8px 9px;
-	width: 168px;
+table tbody tr td {
 	text-align: center;
 	font-size: 20px;
-}
-
-#checkbox {
-	width: 10px;
+	width: 240px;
 }
 
 caption{
@@ -112,15 +134,11 @@ div #capaMadre{
 }
 
 #anadir{
-	background-image:url("fotos/añadir.png");
+	background-image:url("fotos/anadir.png");
 }
 
 #admin{
 	background-image:url("fotos/admin.png");
-}
-
-#usuario{
-	background-image:url("fotos/usuario.png");
 }
 
 #filtrar{

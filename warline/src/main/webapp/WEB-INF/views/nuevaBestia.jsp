@@ -3,7 +3,7 @@
 	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevaBestia.css">
-<script src="resources/gestion/nuevaBestia.js"></script>
+<script src="resources/gestion/nuevo.js"></script>
 <div id="container">
 	<div id="main">
 		<div id="capaMadre">
