@@ -8,7 +8,15 @@
 
 <link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
+
+<!-- lo de arriba debería ser sólo un include -->
+
 <link rel="stylesheet" type="text/css" href="resources/armeria/armeria.css"/>
+
+<script>
+var listaDeObjetos = ${listaDeObjetos};
+[[10, 18, 12, 14, 15], [], []]; 
+</script>
 
 <div id="container">
 	<div id="main">
@@ -38,7 +46,8 @@
 							<td></td>
 						</c:forEach>	
 					</table>
-					<p id = "adinero"> Monedas: <c:out value="${user.getHeroe().oro}" /></p></div>
+					<p class = "adinero" id = "monedas"> Monedas: <c:out value="${user.getHeroe().oro}" /></p></div>
+					
 				<div class = "apanel" id = "avendedor">
 					<table>
 						<caption> ARMERIA </caption>
@@ -59,6 +68,10 @@
 							<td></td>
 						</c:forEach>
 					</table>
+					<p class = "adinero" id = "errorDinero">
+						<c:if test="${not empty errorDinero}">
+							<c:out value="${errorDinero}"/>
+						</c:if>
 				</div>
 				<div class = "apanel" id = "aobjeto">
 					<div class = "panelObjeto" id = "panelObjetoDcha">
@@ -78,6 +91,10 @@
 					</div>
 					
 				</div>
+				<p id = "errorDinero">
+				<c:if test="${not empty errorDinero}">
+					<c:out value="${errorDinero}"/>
+				</c:if>
 			
 			</div>
 		</div>

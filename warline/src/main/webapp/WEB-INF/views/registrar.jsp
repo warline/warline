@@ -61,11 +61,8 @@
 					</c:if>
 				</form>
 				<p>
-					<a href = "login">
-						<button class="botonesPrincipales" id="registrar" >
-							Volver
-						</button>
-					</a>
+					<button type="submit" class="botonesPrincipales" id="registrar">
+						Volver</button>
 				</p>
 				</div>
 			</div>

@@ -193,11 +193,16 @@ public class Heroe {
 		equipo.add(i);
 	}
 	
-	public void comprarObjeto(Item i){
-		if(inventario.size() < TAM_INVENT){
+	public boolean comprarObjeto(Item i){
+		boolean hayPasta = true;
+		if(oro < i.getPrecio()){
+			hayPasta = false;
+		}
+		else if(inventario.size() < TAM_INVENT){
 			inventario.add(inventario.size(),i);
 			//this.oro -= i.getPrecio();
 		}
+		return hayPasta;
 	}
 	
 	public void venderObjeto(Item i){

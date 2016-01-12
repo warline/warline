@@ -52,7 +52,7 @@
 						<tbody>
 							<c:forEach var="b" items="${bestias}">
 								<tr>
-									<td id = "imagen"><img class="bicho" src="bestia/photo?nombre=${b.nombre}"/></td>
+									<td id = "imagen"><img class="bicho" src="bestia/photo?id=${b.id}"/></td>
 									<td id = "nombre"><c:out value="${b.nombre}" /></td>
 									<td id = "nivel"><c:out value="${b.nivel}" /></td>
 									<td id = "recompensas"> 

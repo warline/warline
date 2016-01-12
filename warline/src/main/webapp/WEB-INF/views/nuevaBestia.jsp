@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />
@@ -78,16 +79,29 @@
 								</tr>
 							</table>
 						</div>
-						<div id="panelObjetos"></div>
-					</div>
-
-					<div id="panelBotonNuevo">
-						<button type="submit">Guardar Bestia</button>
+						<!-- <div id="panelObjetos"></div> -->
 					</div>
 				</div>
 				<!-- divDerecho -->
-
+				
+				<div id = "crearBestia">
+					<button type="submit">Guardar bestia</button>
+				</div>
 			</form>
+			
+				<div id = "panelVolver">
+					<a href = "gestionBestias">
+						<button>Volver</button>
+					</a>
+				</div>
+						
+				<div id = "mensajeError">
+					<c:if test="${not empty bestiaError}">
+						<p id = "mensajeError">
+							<c:out value="${bestiaError}" />
+						</p>
+					</c:if>
+				</div>
 		</div>
 	</div>
 </div>

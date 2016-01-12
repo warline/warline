@@ -53,15 +53,13 @@
 						<tbody>
 							<c:forEach var="i" items="${objetos}">
 								<tr>
-									<td id = "imagen"><img class = "bicho" src = "objeto/photo?nombre=${i.nombre}" align="middle"/> </td>
+									<td id = "imagen"><img class = "bicho" src = "objeto/photo?id=${i.id}" align="middle"/> </td>
 									<td id = "nombre"><c:out value="${i.nombre}" /></td>
 									<td id = "tipo"><c:out value="${i.tipo}" /></td>
 									<td id = "nivel"><c:out value="${i.nivel}" /></td>
 									<td id = "aux"> 
-										<form action="modificarObjeto" method="POST">
-											<button name="idObjeto" class="botonesInternos" id="modificar" type = "submit" value = "${i.id}">
-											</button>
-										</form> 
+										<button class="botonesInternos" id="modificar" value = "${i.id}">
+										</button> 
 									</td>
 									<td id = "aux"> 
 										<form action="borrarObjeto" method="POST">

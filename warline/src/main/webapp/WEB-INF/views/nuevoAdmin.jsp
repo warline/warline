@@ -1,8 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 
-
-
 <script src="./ui/external/jquery/jquery.js"></script>
 <script src="./ui/jquery-ui.js"></script>
 
@@ -27,7 +25,7 @@
 				<div id = "panelNuevoAdmin">
 					<table>
 						<tbody>
-							<tr><td>Nombre:</td>
+							<tr><td>Correo:</td>
 								<td><input type="text" id = "datosAdmin" name="correo" /></td>
 							</tr>
 							<tr><td>Contraseña: </td>
@@ -39,17 +37,20 @@
 						</tbody>
 					</table>
 				</div>
-				<div id = "panelBotonNuevo">
-					<div id = "panelVolver">
-						<a href = "gestionUsuarios">
-							<button>Volver</button>
-						</a>
-					</div>
-					<div id = "crearAdmin">
-						<button type = "submit">Crear Admin</button> 
-					</div>
+				<div id = "mensajeError">
+					<c:if test="${not empty registrerError}">
+						<p> <c:out value="${registrerError}"/> </p>
+					</c:if>
+				</div>
+				<div id = "crearAdmin">
+					<button type = "submit">Crear Admin</button> 
 				</div>
 			</form>
+				<div id = "panelVolver">
+					<a href = "gestionUsuarios">
+						<button>Volver</button>
+					</a>
+				</div>
 		</div>
 		</div>
 	</div>

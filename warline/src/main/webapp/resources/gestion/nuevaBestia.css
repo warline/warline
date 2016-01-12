@@ -1,5 +1,5 @@
 #main {
-	height: 750px;
+	height: 620px;
 }
 
 #capaMadre img {
@@ -8,15 +8,15 @@
 }
 
 #capaMadre .bicho{
-	width:200px;
+	width: 200px;
 	height: 200px;
-	}
+}
 
 #divIzquierdo {
 	float: left;
 	width: 300px;
-	height: 655px;
-	background: transparent;
+	height: 430px;
+	background-color: transparent;
 }
 
 #fotoBestia, #panelBotonSubirImagen{
@@ -36,7 +36,7 @@
 #divDerecho {
 	float: right;
     width: 580px;
-    height: 650px;
+    height: 430px;
     background-color: transparent;
 }
 
@@ -107,19 +107,6 @@
 	height: 120px;
 	background-color: transparent;
 }
-	
-#panelBotonNuevo {
-	width: 250px;
-	height: 50px;
-	margin-top: 20px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-#panelBotonNuevo button {
-	height: 100%;
-	width: 100%;
-}
 
 #capaMadre h1 {
     text-align: center;
@@ -131,3 +118,37 @@
 	margin-top: 8px;
 }
 
+#panelVolver {
+	width: 200px;
+	height: 50px;
+	margin-left: 350px;
+	float: left;
+}
+
+#crearBestia {
+	width: 200px;
+	height: 50px;
+	margin-right: 50px;
+	float: right
+}
+
+#panelVolver button {
+	height: 100%;
+	width: 100%
+}
+
+#crearBestia button {
+	height: 100%;
+	width: 100%
+}
+
+#mensajeError {
+	height: 25px;
+	margin-top: 490px;
+}
+
+#mensajeError p {
+	font-size: 15px;
+	color: red;
+	text-align: center;
+}
