@@ -1,6 +1,5 @@
 package es.fdi.iw.model;
 
-import javax.persistence.Entity;
 
 
 public class Combate {

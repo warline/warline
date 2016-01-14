@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -426,6 +425,23 @@ public class HomeController {
 			}
 			return formSource;
 		}
+	@Transactional
+	@RequestMapping(value = "/buscarUsuarios", method = RequestMethod.POST)
+	public String buscarUsuarios(
+			@RequestParam("busqueda") String elemento,
+			Model model, HttpSession session) {
+		String formSource = "gestionUsuarios";
+		List<User> u = null;
+		if(!isAdmin(session)) formSource = perfil(model,session);
+		else {
+			try{
+				u = (List<User>)entityManager.createNamedQuery("findUser").setParameter("busqueda", elemento + "%").getResultList();
+				model.addAttribute("users", u);
+			} catch(NoResultException nre){}
+		}
+		return formSource;
+	}
+	
 	
 	@RequestMapping(value = "/nuevoAdmin", method = RequestMethod.GET)
 	public String nuevoAdmin(Model model, HttpSession session) {

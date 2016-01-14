@@ -18,7 +18,9 @@ import javax.persistence.OneToMany;
 	@NamedQuery(name="delHeroe",
 		query="delete from Heroe h where h.id= :idParam"),
 	@NamedQuery(name="topDiez",
-			query = "select h from Heroe h Order By nivel Desc")
+			query = "select h from Heroe h Order By nivel Desc"),
+    @NamedQuery(name="buscarHeroe",
+		query="select h from Heroe h where h.nombre LIKE :busqueda")
 })
 public class Heroe {
 	public static int NUM_ITEMS_EQUIP = 5;

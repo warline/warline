@@ -16,8 +16,10 @@
 			<div id="acuerpo">
 				<!--Filtro:<br> -->
 				<div id="find">
-					<input type="text" name="filtro">
-					<button class="botonesGUsu" id="filtrar">Buscar</button>
+					<form action = "buscarUsuarios" method ="POST" >
+						<input name="busqueda" type="text"/>
+						<button type="submit" class="botonesGUsu" id="filtrar">Buscar</button>
+					</form>
 				</div>
 				
 				<a href = "nuevoAdmin">
