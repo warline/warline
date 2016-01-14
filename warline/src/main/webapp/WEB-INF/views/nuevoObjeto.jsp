@@ -1,12 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 
-<script src="./ui/external/jquery/jquery.js"></script>
-<script src="./ui/jquery-ui.js"></script>
-
-<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css" />
-<link rel="stylesheet" type="text/css"
-	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevoObjeto.css">
 <script src="resources/gestion/nuevo.js"></script>
@@ -19,8 +12,8 @@
 					Nuevo objeto
 					<hr>
 				</div>
-			</div>
-			<form action="registrarItem" enctype="multipart/form-data" method="POST">
+				<form action="registrarItem" enctype="multipart/form-data" method="POST">
+				<input type="hidden" name="idObj" value = "${objeto.id}"/>
 				<div id="divIzquierdo">
 					<div id="panelBotonSubirImagen">
 						<input type="file" id="files" name="photo" />
@@ -43,7 +36,7 @@
 				<div id="divDerecho">
 
 					<p>
-						Nombre: <input type="text" name="nombreObj" />
+						Nombre: <input type="text" name="nombreObj" value = "${objeto.nombre}"/>
 					</p>
 
 					<p>
@@ -62,32 +55,32 @@
 								<thead>
 									<tr>
 										<td>Nivel</td>
-										<td><input type="text" name="nivelObj" value="10" /></td>
+										<td><input type="text" name="nivelObj" value="${objeto.nivel}" /></td>
 									</tr>
 									<tr>
 										<td>Vida</td>
-										<td><input type="text" name="vidaObj" value="0" /></td>
+										<td><input type="text" name="vidaObj" value="${objeto.vida}" /></td>
 									</tr>
 									<tr>
 										<td>Fuerza</td>
-										<td><input type="text" name="fuerzaObj" value="25" /></td>
+										<td><input type="text" name="fuerzaObj" value="${objeto.fuerza}" /></td>
 									</tr>
 									<tr>
-										<td>Habilidad</td>
-										<td><input type="text" name="precisionObj" value="5" />
+										<td>Precision</td>
+										<td><input type="text" name="precisionObj" value="${objeto.precision}" />
 										</td>
 									</tr>
 									<tr>
 										<td>Defensa</td>
-										<td><input type="text" name="defObj" value="0" /></td>
+										<td><input type="text" name="defObj" value="${objeto.defensa}" /></td>
 									</tr>
 									<tr>
 										<td>Velocidad</td>
-										<td><input type="text" name="velObj" value="-2" /></td>
+										<td><input type="text" name="velObj" value="${objeto.velocidad}" /></td>
 									</tr>
 									<tr>
 										<td>Precio</td>
-										<td><input type="text" name="precioObj" value="100" /></td>
+										<td><input type="text" name="precioObj" value="${objeto.precio}" /></td>
 									</tr>
 							</table>
 						</div>

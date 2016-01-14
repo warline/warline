@@ -1,13 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
 
-<script src="./ui/external/jquery/jquery.js"></script>
-<script src="./ui/jquery-ui.js"></script>
-
-<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css" />
-<link rel="stylesheet" type="text/css"
-	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/gestion.css">
 
@@ -58,8 +50,10 @@
 									<td id = "tipo"><c:out value="${i.tipo}" /></td>
 									<td id = "nivel"><c:out value="${i.nivel}" /></td>
 									<td id = "aux"> 
-										<button class="botonesInternos" id="modificar" value = "${i.id}">
-										</button> 
+										<form action="modificarObjeto" method="POST">
+											<button name="idObjeto" class="botonesInternos" id="modificar" type = "submit" value = "${i.id}">
+											</button>
+										</form> 
 									</td>
 									<td id = "aux"> 
 										<form action="borrarObjeto" method="POST">

@@ -142,6 +142,12 @@
 	border-spacing: 0;
 	background-color: #0a2735;
 }
+#toptitle{
+	font-weight: bold;
+	color: white;
+	text-align: left;
+	background-color: #474747;
+}
 #top{
 	font-weight: bold;
 	border-right: 5px double white;

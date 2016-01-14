@@ -1,14 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
-<script src= "resources/ui/external/jquery/jquery.js"></script>
-<script src="resources/ui/jquery-ui.js"></script>
 <script src="resources/perfil/perfil.js"></script>
 <script src="resources/armeria/armeria.js"></script>
 
-
-<link rel="stylesheet" type="text/css" href="resources\ui\jquery-ui.css"/>
-<link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
 <link rel = "stylesheet" type = "text/css" href = "resources/perfil/perfil.css">
 
 <script type="text/javascript">
@@ -37,7 +31,6 @@
 					<div id = "tablaEstad">
 					<form method = POST action = "subirStats">
 						<table>
-							<tr> <td> <input hidden="submit" name="id" value="${user.id}" /> </td> </tr>
 							<tr>  <td> Nivel </td><td> <c:out value="${user.getHeroe().nivel}"/> </td>
 							<tr>  <td> Vida </td><td> <c:out value="${user.getHeroe().vida}"/> </td>
 								  <td> <button id="subirVida" name = "subir" value = "subirVida" type="submit"> + </button> </td> 
@@ -72,7 +65,8 @@
 							<c:set var = "j" value = "0" scope = "session"/>
 							<c:if test="${j%3 == 0}"> <tr> </c:if>
 									<td> <div class = "imagenObjeto" >
-									<img src = "resources/armeria/images/${i.nombre}.png" align="middle"/></div> </td>
+									<img src = "resources/armeria/images/${i.nombre}.png" align="middle"/></div> 
+									</td>
 							
 							<c:set var = "j" value = "${j+1}"/>
 						</c:forEach>

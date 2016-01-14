@@ -1,16 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
-<script src= "resources/ui/external/jquery/jquery.js"></script>
-<script src="resources/ui/jquery-ui.js"></script>
+
 <script src="resources/armeria/armeria.js"></script>
-
-<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
-<link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
-
-<!-- lo de arriba debería ser sólo un include -->
-
 <link rel="stylesheet" type="text/css" href="resources/armeria/armeria.css"/>
 
 <script>
@@ -43,7 +34,7 @@ var listaDeObjetos = ${listaDeObjetos};
 						</c:forEach>
 						<c:forEach begin = "${user.getHeroe().getInventario().size()}" end = "24" varStatus="loop">
 							<c:if test="${loop.index%5 == 0}"> <tr> </c:if>
-							<td></td>
+							<td></td> <!-- Celdas de inventario vacias -->
 						</c:forEach>	
 					</table>
 					<p class = "adinero" id = "monedas"> Monedas: <c:out value="${user.getHeroe().oro}" /></p></div>
@@ -69,8 +60,8 @@ var listaDeObjetos = ${listaDeObjetos};
 						</c:forEach>
 					</table>
 					<p class = "adinero" id = "errorDinero">
-						<c:if test="${not empty errorDinero}">
-							<c:out value="${errorDinero}"/>
+						<c:if test="${not empty errorCompra}">
+							<c:out value="${errorCompra}"/>
 						</c:if>
 				</div>
 				<div class = "apanel" id = "aobjeto">
@@ -90,12 +81,7 @@ var listaDeObjetos = ${listaDeObjetos};
 						<img id = idFoto align="middle"/>
 					</div>
 					
-				</div>
-				<p id = "errorDinero">
-				<c:if test="${not empty errorDinero}">
-					<c:out value="${errorDinero}"/>
-				</c:if>
-			
+				</div>			
 			</div>
 		</div>
 	</div>

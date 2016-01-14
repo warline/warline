@@ -16,18 +16,20 @@ import javax.persistence.OneToMany;
 	@NamedQuery(name="miHeroe",
 			query="select h from Heroe h where h.id= :idParam"),
 	@NamedQuery(name="delHeroe",
-	query="delete from Heroe h where h.id= :idParam")
+		query="delete from Heroe h where h.id= :idParam"),
+	@NamedQuery(name="topDiez",
+			query = "select h from Heroe h Order By nivel Desc")
 })
 public class Heroe {
 	public static int NUM_ITEMS_EQUIP = 5;
 	public static int TAM_INVENT = 25;
-	public static int MAX_VIDA = 1000;
+	public static double MAX_VIDA = 1000;
 	public static int MAX_DEFENSA = 500;
 	public static int MAX_FUERZA = 500;
 	public static int MAX_VELOCIDAD = 250;
 	public static int MAX_PRECISION = 100;
 	public static int MAX_NIVEL = 100;
-
+	
 	public static double VIDA_POR_PUNTO = 1;
 	public static int DEF_POR_PUNTO = 1;
 	public static int FUE_POR_PUNTO = 1;
@@ -68,7 +70,7 @@ public class Heroe {
 		this.equipo = new ArrayList<Item>();
 		this.inventario = new ArrayList<Item>();
 		this.nivel = 1;
-		this.oro = 0;
+		this.oro = 100;
 		this.xp = 0;
 		this.puntosHab = 10;
 	}
@@ -140,7 +142,7 @@ public class Heroe {
 		this.precision = precision;
 	}
 
-	@OneToMany(targetEntity = Item.class)
+	@OneToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
 	public List<Item> getEquipo() {
 		return equipo;
 	}
@@ -182,33 +184,53 @@ public class Heroe {
 		this.xp = xp;
 	}
 
-	public void equipar(Item i){
-		for(Item item: equipo){
-			if(item.getTipo().equals(i.getTipo())){
-				equipo.remove(item);
-				equipo.add(i);
-				return;
+	public boolean equipar(Item i){
+		boolean equipado = true;
+		if (i.getNivel() > this.nivel) equipado = false;
+		else {
+			equipado = true;
+			TipoItem[] tipos = TipoItem.values();
+			
+			int pos = 0;
+			while (pos < 5 && i.getTipo() != tipos[pos]) {
+				System.err.println(i.getTipo() + "    " + tipos[pos]);
+				pos++;
 			}
+			
+			//Si tienes algo equipado se desequipa
+			if(!equipo.get(pos).equals(null)) {
+				inventario.add(equipo.get(pos));
+				equipo.remove(pos);
+			} 
+			equipo.add(pos, i);
+			inventario.remove(i);
 		}
-		equipo.add(i);
+		return equipado;
 	}
 	
-	public boolean comprarObjeto(Item i){
-		boolean hayPasta = true;
-		if(oro < i.getPrecio()){
-			hayPasta = false;
+	public void desequipar(Item i) {
+		inventario.add(i);
+		equipo.remove(i);
+	}
+	
+	public void comprarObjeto(Item i) throws Exception{
+		if (this.inventario.contains(i)) {
+			throw new Exception("Ya tienes este objeto.");
+		} else if (this.oro < i.getPrecio()) {
+			throw new Exception("No tienes dinero suficiente.");
+		} else if (this.inventario.size() >= TAM_INVENT) {
+			throw new Exception("No tienes hueco en el inventario");
+		} else {
+			inventario.add(inventario.size(), i);
+			this.oro -= i.getPrecio();
 		}
-		else if(inventario.size() < TAM_INVENT){
-			inventario.add(inventario.size(),i);
-			//this.oro -= i.getPrecio();
-		}
-		return hayPasta;
 	}
 	
 	public void venderObjeto(Item i){
 		this.oro += i.getPrecio() * 0.8;
 		inventario.remove(i);
 	}
+	
 	public int getPuntosHab() {
 		return puntosHab;
 	}

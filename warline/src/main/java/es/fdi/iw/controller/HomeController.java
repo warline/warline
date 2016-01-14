@@ -51,30 +51,22 @@ public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Model model) {
 		return "login";
 	}
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
 	public String perfil(Model model , HttpSession session) {
 		String formSource = "perfil";
 		User u = (User)session.getAttribute("user");
+		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
 		if(u == null) formSource = "login";
 		return formSource;
 	}
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/arcade", method = RequestMethod.GET)
-	public String arcade(Locale locale, Model model , HttpSession session) {
+	public String arcade(Model model , HttpSession session) {
 		String formSource = "arcade";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
@@ -90,7 +82,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/arena", method = RequestMethod.GET)
-	public String arena(Locale locale, Model model , HttpSession session) {
+	public String arena(Model model , HttpSession session) {
 		String formSource = "combates";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
@@ -100,99 +92,37 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/escoge", method = RequestMethod.POST)
-	public void escoge(String nombre,Locale locale, Model model) {
-
+	public void escoge(String nombre, Model model) {
 		Bestia rival=(Bestia)entityManager.createNamedQuery("bestiaByName").setParameter("nombreParam", nombre).getSingleResult();;
 		model.addAttribute("rival", rival);
 		System.err.println(nombre+"s");
-	
 	}
 
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
-
+	public String login(Model model) {
 		return "login";
 	}
 
 	/*******************************************************************************/
 
-	/**************************** ARMERIA ******************************/
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/armeria", method = RequestMethod.GET)
-	public String armeria(Model model , HttpSession session) {
-		String formSource = "armeria";
-		User u = (User)session.getAttribute("user");
-		if(u == null) formSource = "login";
-		List<Item> i = null;
-		try{
-			i = (List<Item>)entityManager.createNamedQuery("itemsPorPrecio").getResultList();
-			model.addAttribute("items", i);
-		} catch(NoResultException nre){}
-		model.addAttribute("pageExtraCSS", new String[] {"armeria/armeria"});
-		return formSource;
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/comprarObjeto", method = RequestMethod.POST)
-	public String comprarObjeto(
-			@RequestParam("idObjeto") long id,
-			Model model,HttpSession session) {
-			boolean hayPasta = true;
-			try{
-				Item i = (Item)entityManager.getReference(Item.class, id);
-				User u = (User)session.getAttribute("user");
-				User us = (User)entityManager.find(User.class,u.getId());
-				hayPasta = us.getHeroe().comprarObjeto(i);
-				if(!hayPasta){
-					model.addAttribute("errorDinero", "No tienes suficiente dinero.");
-				}
-				else{
-					session.setAttribute("user", us);
-				}
-			} catch(NoResultException nre){}
-			return armeria(model,session);
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/venderObjeto", method = RequestMethod.POST)
-	public String venderObjeto(
-			@RequestParam("idObjeto") long id,
-			Model model,HttpSession session) {
-			try{
-				Item i = (Item)entityManager.getReference(Item.class, id);
-				User u = (User)session.getAttribute("user");
-				User us = (User)entityManager.find(User.class,u.getId());
-				us.getHeroe().venderObjeto(i);
-				session.setAttribute("user", us);
-			} catch(NoResultException nre){}
-			return armeria(model,session);
-	}
-
-	/*******************************************************************************/
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/lobby", method = RequestMethod.GET)
-	public String lobby(Locale locale, Model model , HttpSession session) {
+	public String lobby(Model model , HttpSession session) {
 		String formSource = "lobby";
+		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
+		List<Heroe> t = null;		
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
+		try{
+		t = (List<Heroe>)entityManager.createNamedQuery("topDiez").setMaxResults(10).getResultList();
+		model.addAttribute("heroes", t);
+		} catch(NoResultException nre){}
 		return formSource;
 	}
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/registrar", method = RequestMethod.GET)
-	public String registrar(Locale locale, Model model) {
+	public String registrar(Model model) {
 		return "registrar";
 	}
 
@@ -221,14 +151,20 @@ public class HomeController {
 				u = (User)entityManager.createNamedQuery("userByLogin")
 						.setParameter("loginParam", formLogin).getSingleResult();
 				if (u.isPassValid(formPass)) {
-					// sets the anti-csrf token
-					getTokenForSession(session);
-					logger.info("pass was valid");				
-					session.setAttribute("user", u);
-					if(u.getRole().equals("user"))
-						formSource = "perfil";
-					else if(u.getRole().equals("admin")){
-						return gestionUsuarios(model, session);
+					if (!u.isBanned()) {
+						// sets the anti-csrf token
+						getTokenForSession(session);
+						logger.info("pass was valid");				
+						session.setAttribute("user", u);
+						if(u.getRole().equals("user"))
+							formSource = "perfil";
+						else if(u.getRole().equals("admin")){
+							return gestionUsuarios(model, session);
+						}
+					} else {
+						logger.info("you are banned");
+						model.addAttribute("loginError", "Su cuenta esta baneada");
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 					}
 				} else {
 					logger.info("pass was NOT valid");
@@ -236,19 +172,7 @@ public class HomeController {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				}
 			} catch (NoResultException nre) {
-				if (formPass.length() == 4) {
-					// UGLY: register new users if they do not exist and pass is 4 chars long
-					logger.info("no-such-user; creating user {}", formLogin);				
-					User user = User.createUser(formLogin, formPass, "user", "Hola");
-					entityManager.persist(user.getHeroe());
-					entityManager.persist(user);	
-					//session.setAttribute("heroe", user.getHeroe());
-					session.setAttribute("user", user);
-					// sets the anti-csrf token
-					getTokenForSession(session);					
-				} else {
-					logger.info("no such login: {}", formLogin);
-				}
+				logger.info("no such login: {}", formLogin);
 				model.addAttribute("loginError", "error en usuario o contraseña");
 			}
 		}
@@ -279,7 +203,7 @@ public class HomeController {
 			model.addAttribute("registrerError", "usuarios y contraseñas: 4 caracteres mínimo");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
-			User user = User.createUser(formLogin, formPass, "admin", formNombre);
+			User user = User.createUser(formLogin, formPass, "user", formNombre);
 			User u = null;
 			try{
 				u = (User)entityManager.createNamedQuery("userByLogin")
@@ -312,7 +236,7 @@ public class HomeController {
 		}
 
 		// redirects to view from which login was requested
-		return formSource;
+		return "redirect:" + formSource;
 	}
 
 
@@ -329,16 +253,24 @@ public class HomeController {
 	}
 
 	/*********************** PERFIL ********************************/
+	
 	@Transactional
 	@RequestMapping(value = "/subirStats", method = RequestMethod.POST)
 	public String subirStats(
-			@RequestParam("id") long id,
 			@RequestParam("subir") String stat,
 			HttpSession session,
 			Model model) {
-		User u = entityManager.getReference(User.class, id);
-		Heroe h = u.getHeroe();
+		
+		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
+		
 		boolean modificado = false;
+		
+		User u = (User)session.getAttribute("user");
+		if (u == null) return "redirect:login";
+		
+		User us = (User)entityManager.find(User.class, u.getId());
+		Heroe h = us.getHeroe();
+		
 		if (h.getPuntosHab() > 0) {
 			if (stat.equals("subirVida") && (h.getVida() < Heroe.MAX_VIDA)) {
 				double vida = h.getVida() + Heroe.VIDA_POR_PUNTO;
@@ -363,31 +295,79 @@ public class HomeController {
 			}
 			if (modificado) {
 				h.setPuntosHab(h.getPuntosHab() - 1);
-				entityManager.refresh(h);
-				User aux = (User)session.getAttribute("user");
-				aux.setHeroe(h);
-				session.setAttribute("user", aux);
-				//entityManager.flush();
+				session.setAttribute("user", us);
 			}
 		}
-		return "/perfil";
+		return "redirect:perfil";
 	}
 	
 	@Transactional
 	@RequestMapping(value = "/equiparObjeto", method = RequestMethod.POST)
 	public String equiparObjeto(
 			@RequestParam("idObjeto") long id,
+			Model model, HttpSession session) {
+			//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
+			try{
+				Item i = (Item)entityManager.getReference(Item.class, id);
+				User u = (User)session.getAttribute("user");
+				User us = (User)entityManager.find(User.class, u.getId());
+				us.getHeroe().equipar(i);
+				session.setAttribute("user", us);
+			} catch(NoResultException nre){}
+			//DUDA: ES NECESARIO LLAMAR A PERFIL () O  VALDRIA PERFIL
+			return "redirect:" + perfil(model,session);
+	}
+	
+	/**************************** ARMERIA ******************************/
+	
+	@RequestMapping(value = "/armeria", method = RequestMethod.GET)
+	public String armeria(Model model , HttpSession session) {
+		String formSource = "armeria";
+		User u = (User)session.getAttribute("user");
+		if(u == null) formSource = "login";
+		List<Item> i = null;
+		try{
+			i = (List<Item>)entityManager.createNamedQuery("itemsPorPrecio").getResultList();
+			model.addAttribute("items", i);
+		} catch(NoResultException nre){}
+		return formSource;
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/comprarObjeto", method = RequestMethod.POST)
+	public String comprarObjeto(
+			@RequestParam("idObjeto") long id,
 			Model model,HttpSession session) {
 			try{
 				Item i = (Item)entityManager.getReference(Item.class, id);
 				User u = (User)session.getAttribute("user");
-				u.getHeroe().equipar(i);
-				//entityManager.refresh(u.getHeroe());
-				session.removeAttribute("user");
-				session.setAttribute("user", u);
+				User us = (User)entityManager.find(User.class, u.getId());
+				try {
+					us.getHeroe().comprarObjeto(i);
+					session.setAttribute("user", us);
+				} catch(Exception e) {
+					model.addAttribute("errorCompra", e.getMessage());
+				}
 			} catch(NoResultException nre){}
-			return perfil(model,session);
+			return "redirect:" + armeria(model,session);
 	}
+	
+	@Transactional
+	@RequestMapping(value = "/venderObjeto", method = RequestMethod.POST)
+	public String venderObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model, HttpSession session) {
+			try{
+				Item i = (Item)entityManager.getReference(Item.class, id);
+				User u = (User)session.getAttribute("user");
+				User us = (User)entityManager.find(User.class, u.getId());
+				us.getHeroe().venderObjeto(i);
+				session.setAttribute("user", us);
+			} catch(NoResultException nre){}
+			return "redirect:" + armeria(model, session);
+	}
+
+	/*******************************************************************************/
 	
 	/*
 	 ********************* FUNCIONES DE LA GESTION *****************************
@@ -618,7 +598,26 @@ public class HomeController {
 		}
 		return formSource;
 	}
-	
+
+	@Transactional
+	@RequestMapping(value = "/modificarObjeto", method = RequestMethod.POST)
+	public String modificarObjeto(
+			@RequestParam("idObjeto") long id,
+			Model model,HttpSession session) {
+		
+		String formSource;
+		if(isAdmin(session)){	
+			try{
+				Item i = (Item)entityManager.getReference(Item.class, id);
+				model.addAttribute("objeto", i);
+			} catch(NoResultException nre){}
+			formSource = nuevoObjeto(model, session);
+		} else {
+			formSource = perfil(model, session);
+		}
+		return formSource;
+	}
+
 	@RequestMapping(value = "/nuevoObjeto", method = RequestMethod.POST)
 	public String editarObjeto(Model model) {
 		return "nuevoObjeto";

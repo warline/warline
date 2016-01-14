@@ -1,12 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
 <script src="resources/combates/combates.js"></script>
-<script src= "resources/ui/external/jquery/jquery.js"></script>
-<script src="resources/ui/jquery-ui.js"></script>
-
-<link rel="stylesheet" type="text/css" href="resources\ui\jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/combates/combates.css"/>
 
 <div id="container">
