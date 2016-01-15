@@ -1,5 +1,7 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
+<link rel="stylesheet" type="text/css"
+	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevaBestia.css">
 <script src="resources/gestion/nuevo.js"></script>

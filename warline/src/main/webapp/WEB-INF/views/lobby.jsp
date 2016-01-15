@@ -1,5 +1,9 @@
 <%@ include file="fragments/header.jspf" %>
+
 	<link rel="stylesheet" type="text/css" href="resources/combates/lobby.css"/>
+	<link rel="stylesheet" type="text/css"
+	href="resources/fragments/plantilla.css" />
+
 	<div id="container">
 		<div id="main">
 		 <div id="capaMadre">

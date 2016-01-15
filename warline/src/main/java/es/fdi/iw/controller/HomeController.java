@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -32,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.fdi.iw.ContextInitializer;
 import es.fdi.iw.model.Bestia;
+import es.fdi.iw.model.CombateBestia;
 import es.fdi.iw.model.Heroe;
 import es.fdi.iw.model.Item;
 import es.fdi.iw.model.TipoItem;
@@ -44,24 +46,25 @@ import es.fdi.iw.model.User;
 @Controller
 public class HomeController {
 
-
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Locale locale, Model model) {
 		return "login";
 	}
 
 	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
 	public String perfil(Model model , HttpSession session) {
-		String formSource = "perfil";
 		User u = (User)session.getAttribute("user");
 		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
-		if(u == null) formSource = "login";
-		return formSource;
+		if(u == null) return "login";
+		else {
+			//model.addAttribute("constantesHeroe", Heroe.getJsonConstants());
+			return "perfil";
+		}
 	}
 
 	@RequestMapping(value = "/arcade", method = RequestMethod.GET)
@@ -85,8 +88,6 @@ public class HomeController {
 		String formSource = "combates";
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
-		Bestia rival=(Bestia)entityManager.createNamedQuery("bestiaByName").setParameter("nombreParam", "boqueron").getSingleResult();;
-		model.addAttribute("rival", rival);
 		return formSource;
 	}
 
@@ -305,16 +306,17 @@ public class HomeController {
 	public String equiparObjeto(
 			@RequestParam("idObjeto") long id,
 			Model model, HttpSession session) {
+		logger.info("Equipando objeto con ID " + id);
 			//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
 			try{
-				Item i = (Item)entityManager.getReference(Item.class, id);
+				Item i = (Item)entityManager.find(Item.class, id);
 				User u = (User)session.getAttribute("user");
 				User us = (User)entityManager.find(User.class, u.getId());
 				us.getHeroe().equipar(i);
 				session.setAttribute("user", us);
 			} catch(NoResultException nre){}
 			//DUDA: ES NECESARIO LLAMAR A PERFIL () O  VALDRIA PERFIL
-			return "redirect:" + perfil(model,session);
+			return "redirect:perfil";
 	}
 	
 	/**************************** ARMERIA ******************************/
@@ -349,6 +351,14 @@ public class HomeController {
 				}
 			} catch(NoResultException nre){}
 			return "redirect:" + armeria(model,session);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/objetosUsuario", method = RequestMethod.GET)
+	public String venderObjeto(HttpSession session) {
+		User u = (User)session.getAttribute("user");
+		User us = (User)entityManager.find(User.class, u.getId());
+		return us.getHeroe().itemListAsJson();
 	}
 	
 	@Transactional
@@ -425,23 +435,6 @@ public class HomeController {
 			}
 			return formSource;
 		}
-	@Transactional
-	@RequestMapping(value = "/buscarUsuarios", method = RequestMethod.POST)
-	public String buscarUsuarios(
-			@RequestParam("busqueda") String elemento,
-			Model model, HttpSession session) {
-		String formSource = "gestionUsuarios";
-		List<User> u = null;
-		if(!isAdmin(session)) formSource = perfil(model,session);
-		else {
-			try{
-				u = (List<User>)entityManager.createNamedQuery("findUser").setParameter("busqueda", elemento + "%").getResultList();
-				model.addAttribute("users", u);
-			} catch(NoResultException nre){}
-		}
-		return formSource;
-	}
-	
 	
 	@RequestMapping(value = "/nuevoAdmin", method = RequestMethod.GET)
 	public String nuevoAdmin(Model model, HttpSession session) {
@@ -789,6 +782,35 @@ public class HomeController {
 	    }
 	    
 	    return IOUtils.toByteArray(in);
+	}
+
+	/*************************************************************/
+	
+	@Transactional
+	@RequestMapping(value = "/arena", method = RequestMethod.POST)
+	public String combate(
+		@RequestParam("nombre") String nombre,Model model,HttpSession session){
+		String formsource="arena(model)";
+		Bestia b = (Bestia)entityManager.createNamedQuery("bestiaByName")
+				.setParameter("nombreParam", nombre).getSingleResult();
+		model.addAttribute("rival", b);
+		System.err.println(b.getNombre());
+		return arena(model,session);
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/luchar", method = RequestMethod.POST)
+	public String luchar(
+		@RequestParam ("formNombre") String n,Model model,HttpSession session){
+		String formsource="arena";
+		System.err.println(n);
+		User u=(User)session.getAttribute("user");
+		Bestia b = (Bestia)entityManager.createNamedQuery("bestiaByName")
+				.setParameter("nombreParam", n).getSingleResult();
+		CombateBestia c=new CombateBestia(u.getHeroe(),b);
+		c.intercambio();
+		
+		return arena(model,session);
 	}
 
 /******************************************************************************/

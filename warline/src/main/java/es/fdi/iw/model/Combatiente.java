@@ -1,28 +1,54 @@
 package es.fdi.iw.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
-
+@Entity
+@NamedQueries({
+	@NamedQuery(name="combatiente",
+			query="select h from Combatiente h where h.id= :idParam"),
+	@NamedQuery(name="delCombatiente",
+	query="delete from Combatiente h where h.id= :idParam")
+})
 public class Combatiente {
 
-	Personaje p;
+	Heroe h;
 	double vida;
 	long ultimo;
 	Ataque ataque;
+	long id;
 	
-	public Combatiente(Personaje a, double d, long ultimo, Ataque ataque) {
+	public Combatiente(Heroe h, double d, long ultimo, Ataque ataque) {
 		super();
-		this.p = a;
+		this.h = h;
 		this.vida = d;
 		this.ultimo = ultimo;
 		this.ataque = ataque;
+		id=h.getId();
 	}
 	
-	public Personaje getPerso() {
-		return p;
+	@Id
+	public long getId() {
+		return id;
 	}
-	public void setHeroe(Personaje p) {
-		this.p = p;
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	@OneToOne(targetEntity = Heroe.class, fetch= FetchType.EAGER)
+	public Heroe getHeroe() {
+		return h;
+	}
+	public void setHeroe(Heroe h) {
+		this.h = h;
 	}
 	public double getVida() {
 		return vida;
@@ -36,6 +62,7 @@ public class Combatiente {
 	public void setUltimo(long ultimo) {
 		this.ultimo = ultimo;
 	}
+	@OneToOne(targetEntity = Ataque.class, fetch= FetchType.EAGER)
 	public Ataque getAtaque() {
 		return ataque;
 	}

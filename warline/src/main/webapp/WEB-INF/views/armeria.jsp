@@ -1,7 +1,16 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
-
+<script src= "resources/ui/external/jquery/jquery.js"></script>
+<script src="resources/ui/jquery-ui.js"></script>
 <script src="resources/armeria/armeria.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css"/>
+<link rel="stylesheet" type="text/css" href="resources/fragments/plantilla.css"/>
+
+<!-- lo de arriba debería ser sólo un include -->
+
 <link rel="stylesheet" type="text/css" href="resources/armeria/armeria.css"/>
 
 <script>

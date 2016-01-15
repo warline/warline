@@ -1,6 +1,12 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/header.jspf" %>
 
 <script src="resources/combates/combates.js"></script>
+<script src= "resources/ui/external/jquery/jquery.js"></script>
+<script src="resources/ui/jquery-ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="resources\ui\jquery-ui.css"/>
 <link rel="stylesheet" type="text/css" href="resources/combates/combates.css"/>
 
 <div id="container">
@@ -43,7 +49,7 @@
 						<h2><c:out value="${rival.nombre}" /></h2>
 						<hr>
 						
-						<div class="imgm" id="dmalo" ><img class= "foto" id="imalo" src="resources/arcade/images/${rival.nombre}.jpg"></img></div>
+						<div class="imgm" id="dmalo" ><img class= "foto" id="imalo" src="bestia/photo?id=${rival.id}"></img></div>
 						
 						<div class="sangre" id="dsangrem"><img class= "foto" id="isangrem" src ="resources/combates/fotos/sangre.png"></img></div>
 						
@@ -65,7 +71,9 @@
 				<div  id="versus" ><img id="vs" src ="resources/combates/fotos/versus.png"></img></div>
 				<!--<div id="can" ><canvas id="canvas"></canvas></div>-->
 			</div>
-			<button id=lucha onClick="(iniciaCombate('${user.getHeroe()}','${rival}')) "> Luchar </button>
+			<form action="luchar" method="POST">
+					<button id=lucha name=formNombre type="submit" value=("${rival.getNombre()}")>Lucha</button>
+			</form>
 			<br/>
 			<button id=reinicia onClick="reinicia(${user.getHeroe()}, ${rival})"> Reiniciar </button>
 		</div>

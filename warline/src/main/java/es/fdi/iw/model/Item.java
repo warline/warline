@@ -60,8 +60,8 @@ public class Item {
 		return precio;
 	}
 	
-	public void setPrecio(int _precio){
-		precio = _precio;
+	public void setPrecio(int precio){
+		this.precio = precio;
 	}
 	
 	@Id
@@ -131,6 +131,9 @@ public class Item {
 		return tipo;
 	}	
 	
-	
+    @Override
+	public boolean equals(Object o) {
+		return o instanceof Item && ((Item)o).getId() == id;
+	}
 	
 }

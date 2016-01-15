@@ -1,4 +1,4 @@
-function activarDesactivarBotones(vid, fue, prec, def, vel, puntHab) {
+function activarDesactivarBotones(statsHeroe, constantesHeroe) {
 	var botonVida=$("#subirVida");
 	var botonFuerza=$("#subirFuerza");
 	var botonPrecision=$("#subirPrecision");
@@ -13,19 +13,19 @@ function activarDesactivarBotones(vid, fue, prec, def, vel, puntHab) {
 		botonVelocidad.css("visibility","hidden");
 	} else {
 		
-		if (vid >= 'Heroe.MAX_VIDA') {
+		if (statsHeroe.vida >= constantesHeroe.vida) {
 			botonVida.css("visibility","hidden");
 		}
-		if (fue >= Heroe.MAX_FUERZA) {
+		if (statsHeroe.fuerza >= constantesHeroe.fuerza) {
 			botonFuerza.css("visibility","hidden");
 		}
-		if (prec >= Heroe.MAX_PRECISION) {
+		if (statsHeroe.precision >= constantesHeroe.precision) {
 			botonPrecision.css("visibility","hidden");
 		}
-		if (def >= Heroe.MAX_DEFENSA) {
+		if (statsHeroe.defensa >= constantesHeroe.defensa) {
 			botonDefensa.css("visibility","hidden");
 		}
-		if (vel >= Heroe.MAX_VELOCIDAD) {
+		if (statsHeroe.velocidad >= constantesHeroe.velocidad) {
 			botonVelocidad.css("visibility","hidden");
 		}
 	}

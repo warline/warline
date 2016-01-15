@@ -1,4 +1,14 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
+
+
+
+<script src="./ui/external/jquery/jquery.js"></script>
+<script src="./ui/jquery-ui.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/gestion.css">
 
@@ -16,10 +26,8 @@
 			<div id="acuerpo">
 				<!--Filtro:<br> -->
 				<div id="find">
-					<form action = "buscarUsuarios" method ="POST" >
-						<input name="busqueda" type="text"/>
-						<button type="submit" class="botonesGUsu" id="filtrar">Buscar</button>
-					</form>
+					<input type="text" name="filtro">
+					<button class="botonesGUsu" id="filtrar">Buscar</button>
 				</div>
 				
 				<a href = "nuevoAdmin">

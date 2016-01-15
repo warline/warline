@@ -7,25 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+import com.google.gson.Gson;
 
 @Entity
 @NamedQueries({
 	@NamedQuery(name="miHeroe",
 			query="select h from Heroe h where h.id= :idParam"),
 	@NamedQuery(name="delHeroe",
-		query="delete from Heroe h where h.id= :idParam"),
-	@NamedQuery(name="topDiez",
-			query = "select h from Heroe h Order By nivel Desc"),
-    @NamedQuery(name="buscarHeroe",
-		query="select h from Heroe h where h.nombre LIKE :busqueda")
+	query="delete from Heroe h where h.id= :idParam")
 })
 public class Heroe {
 	public static int NUM_ITEMS_EQUIP = 5;
 	public static int TAM_INVENT = 25;
-	public static double MAX_VIDA = 1000;
+	public static double MAX_VIDA = 101;
 	public static int MAX_DEFENSA = 500;
 	public static int MAX_FUERZA = 500;
 	public static int MAX_VELOCIDAD = 250;
@@ -69,14 +68,22 @@ public class Heroe {
 		this.fuerza = 10;
 		this.velocidad = 5;
 		this.precision = 30;
-		this.equipo = new ArrayList<Item>();
-		this.inventario = new ArrayList<Item>();
+		this.equipo = new ArrayList<Item>(NUM_ITEMS_EQUIP);
+		this.inventario = new ArrayList<Item>(TAM_INVENT);
 		this.nivel = 1;
-		this.oro = 100;
+		this.oro = 200;
 		this.xp = 0;
 		this.puntosHab = 10;
 	}
 
+	public static String getJsonConstants() {
+		return  "{\"MAX_VIDA\" : " + MAX_VIDA + ","
+				+"\"MAX_DEFENSA\" : " +  MAX_DEFENSA + ","
+				+"\"MAX_FUERZA\" : " + MAX_FUERZA + ","
+				+"\"MAX_VELOCIDAD\" : " + MAX_VELOCIDAD + ","
+				+"\"MAX_PRECISION\" : " + MAX_PRECISION + "}";
+	}
+	
 	public String getImagen() {
 		return imagen;
 	}
@@ -144,16 +151,23 @@ public class Heroe {
 		this.precision = precision;
 	}
 
-	@OneToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
+	@ManyToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
 	public List<Item> getEquipo() {
 		return equipo;
+	}
+	
+	public String itemListAsJson() {
+		Gson g1 = new Gson();
+		Gson g2 = new Gson();
+		return "{ \"equipo\": " + g1.toJson(getEquipo()) 
+			+ ", \"inventario\": " + g2.toJson(getInventario()) + "}";
 	}
 
 	public void setEquipo(List<Item> equipo) {
 		this.equipo = equipo;
 	}
 
-	@OneToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
+	@ManyToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
 	public List<Item> getInventario() {
 		return inventario;
 	}
@@ -186,33 +200,45 @@ public class Heroe {
 		this.xp = xp;
 	}
 
-	public boolean equipar(Item i){
-		boolean equipado = true;
-		if (i.getNivel() > this.nivel) equipado = false;
-		else {
-			equipado = true;
-			TipoItem[] tipos = TipoItem.values();
-			
-			int pos = 0;
-			while (pos < 5 && i.getTipo() != tipos[pos]) {
-				System.err.println(i.getTipo() + "    " + tipos[pos]);
-				pos++;
-			}
-			
-			//Si tienes algo equipado se desequipa
-			if(!equipo.get(pos).equals(null)) {
-				inventario.add(equipo.get(pos));
-				equipo.remove(pos);
-			} 
-			equipo.add(pos, i);
-			inventario.remove(i);
+	public int posObjetoMismoTipo(TipoItem t) {
+		int pos = 0;
+		for (Item i : equipo) {
+			if (i.getTipo() == t) return pos;
+			pos ++;
 		}
-		return equipado;
+		return -1;
+	}
+	
+	public boolean equipar(Item i){
+		if (i.getNivel() > this.nivel) {
+			return false;
+		}
+		
+		int ne = equipo.size();
+		int ni = inventario.size();
+		int total = ne + ni;
+		
+		int pos = posObjetoMismoTipo(i.getTipo());
+		if (pos == -1) {//Si no hay un item del mismo tipo
+			equipo.add(i);
+			inventario.remove(i);
+		} else {//Reemplazamos item. El antes equipado vuelve al inventario.
+			Item viejo = equipo.remove(pos);
+			equipo.add(i);
+			inventario.remove(i);
+			inventario.add(viejo);
+		}
+		
+		assert(total == inventario.size() + equipo.size());
+		
+		return true;
 	}
 	
 	public void desequipar(Item i) {
-		inventario.add(i);
-		equipo.remove(i);
+		if(inventario.size()<TAM_INVENT){
+			inventario.add(i);
+			equipo.remove(i);
+		}
 	}
 	
 	public void comprarObjeto(Item i) throws Exception{
@@ -223,7 +249,7 @@ public class Heroe {
 		} else if (this.inventario.size() >= TAM_INVENT) {
 			throw new Exception("No tienes hueco en el inventario");
 		} else {
-			inventario.add(inventario.size(), i);
+			inventario.add(i);
 			this.oro -= i.getPrecio();
 		}
 	}
