@@ -1,49 +1,8 @@
-JOSE MANUEL
-
-
-Buscar en Drive
-
-Drive
-.
-Ruta de carpeta
-Mi unidad
-IW
-Cambios combate
-NUEVO 
-Carpetas y vistas
-Mi unidad
-Compartido conmigo
-Google Fotos
-Reciente
-Destacado
-Papelera
-.
-
-Hoja de estilo
-combates.css
-
-Archivo binario
-combates.jsp
-Hoja de estilo
-combates.css
-Detalles
-Actividad
-LA SEMANA PASADA
-J
-JAVIER SANDOVAL FERRANDISha subido un elemento
-vie. 12:59
-Hoja de estilo
-combates.css
-No hay actividad registrada antes del 27 de noviembre de 2015
-317 MB utilizado
-Se ha anulado la selección de todos los elementos 
-
-
-
 body, h1, h2, h3, #header ul {
 	padding: 0;
 	margin: 0;
 }
+
 #cuerpo h2{
 	text-transform: uppercase;
 	font-style: italic;
@@ -60,6 +19,10 @@ a img {
 p {
 	margin: 0;
 	padding: 11px;
+}
+
+.sangre{
+	display:none;
 }
 
 /*#container {
@@ -127,7 +90,7 @@ div {
 	color: white;
 	width: 890px;
 	margin: 0 auto;
-	height: 100%;
+	height: 110%;
 	background-color: transparent;
 	position: relative;
 	font-size: 120%;
@@ -138,12 +101,10 @@ div {
 #capaHijaCombate {
 	opacity: 0.9;
 	background-color: #000000;
-	height:410px ;
+	height:456px ;
 	width: 100%;
 	position: absolute;
 }
-
-
 
 #cuerpo {
 	position: relative;
@@ -159,6 +120,16 @@ div {
 	width: 100%;
 	background-color: #4b1a04;
 	border: 5px solid black;
+}
+
+.textoFlotante{
+	opacity: 1;
+	color: red;
+	position:absolute;
+	font-size: 40px;
+	height: 50px;
+	top: 200px;
+	text-align: center;
 }
 
 .hero {
@@ -250,7 +221,6 @@ td {
 	width: 350px;
 	height: 350px;
 	opacity: 0.65;
-	display: none;
 	bottom: 40px;
 }
 
@@ -293,6 +263,15 @@ td {
 	top: 15px;
 }
 
+#enemigoUsuario{
+		right: 20px;
+	top: 15px;	
+}
+
+#enemigoUsuario img{
+	transform: rotateY(180deg);
+}
+
 #versus {
 	position: relative;
 	left: 350px;
@@ -311,4 +290,11 @@ td {
 	position: relative;
 	left: 390px;
 	width: 120px;
+}
+
+#ataques{
+	text-align: center;
+}
+.pointlessButton{
+	display: none;
 }

@@ -21,22 +21,23 @@ h3{
     background-color: #4b1a04; color: #fff; text-align: center; width: 100%; clear: both;
 }*/
 .apanel{
-    height: 320px;
+    height: 340px;
     width: 280px;
     background-color: #0a2735; /*azul turquesa oscuro*/
 	border:3px solid #474747; /*gris oscuro*/
 }
 #ainventario{
     float: left;
-	margin-left; 1em;
+	margin-left: 1em;
 }
 #avendedor{
     margin-right: 0.3em;
     float: right;
 }
-table{
-	margin-right: 10px;
-	margin-left: 10px;
+
+.apanel table{
+	margin-right: auto;
+	margin-left: auto;
 	background-color: grey;
 	color: white;
 }
@@ -56,6 +57,13 @@ td{
 	height: 36px;
 	width: 36px;
 	background-color: transparent;
+}
+#bloqueado{
+	height: 36px;
+	width: 36px;
+	background-color: #9B1000;;
+	opacity: 0.5;
+	position: absolute;
 }
 .descripcion{
 	display: none;
@@ -135,8 +143,20 @@ p.apanel{
 .adinero{
 	color:white;
 	margin-left: 2em;
-	font-size: 100%;
+	font-size: 16px;
+}
+.adineroAjax{
+	color:white;
+	margin-left: 2em;
+	font-size: 16px;
 }
 div#capaMadre{
     height: 100%;
+}
+
+#excepciones{
+	color: white;
+	height: 30px;
+	width: 80%;
+	text-align: center;
 }

@@ -1,4 +1,3 @@
-function elige(nombre){
-	$("button").attr("value",nombre);
-	
+function elige(id){
+	$("button").attr("value",id);
 }

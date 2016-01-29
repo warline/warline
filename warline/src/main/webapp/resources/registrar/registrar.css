@@ -13,164 +13,46 @@ body {
 	letter-spacing: 1px;
 }
 
-a {
-	color: #fff;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #ea9a2e;
-}
-
-span {
-	display: none;
-}
-
-img {
-	border: none;
-}
-
-ul {
-	list-style-type: none;
-}
-
-li {
-	list-style-type: none;
-}
-
-#registrar{
-	height: 50px;
-}
-
-.imgheroe{
-	border: 1px solid white;
-	float: left;
-	margin: 10px;
-}
-
-#imgizd, #imgder{
-	height: 80px;
-	top: 35px;
-	/*position:relative;*/
-	width: 80px;
-}
-
-#imgcen{
-	height: 150px;
-	width: 150px;
-}
-
-
-.foto{
-	height: 100%;
-	width: 100%;
-	}
-	
-/* Page Header */
-
-#page_header {
-	width: 900px;
-	height: 135px;
-	background: url('images/BannerVersion3.png') no-repeat;
-	background-size:100%;
-	overflow: hidden;
-}
-
-#page_header h1 {
-	width: 330px;
-	height: 51px;
-	background: url('images/website_name.png') no-repeat;
-	float: left;
-}
-
-
-
-/* Page Menu */
-
-#page_menu {
-	width: 100%;
-	height: 50px;
-	background-color: #4c0000 ;
-	position: center;
-	float: right;
-	color: #fff08c;
-	text-align: center;
-	font-size: 40px;
-	height: 60px;
-	
-}
-
-#descr{
-	margin-top: 35px;
-	width: 1001px;
-	height: 50%;
-	background-color: black;
-	float: right;
-	color: #fff08c;
-	text-align: center;
-	font-size: 20px;
-}
-
-/* Page Forms */
-
 #page_forms {
 	text-align: center;
 	position: relative;
-	width: 400px;
-	height: 338px;
+	width: 410px;
+	height: 500px;
 	left: 400px;
 	opacity: 0.9;
-}
-
-#page_forms input {
-
-	color: #c6c4c4;
-	background-color: #373837;
-	border: #5b5d5b 1px solid;
-	font-family: tahoma, arial, sans-serif;
-	font-size: 13px;
-	font-weight: bold;
-
-}
-
-
-
-
-/* User Login */
-
-#userlogin_header h1 {
-	width: 100%;
-	height: 29px;
-	color:white;
-	text-align:center;
-	color: #fff08c;
 }
 
 #userlogin {
 	border: 5px solid black;
 	border-style: solid;
-	height: 500px;
-	width: 400px;
+	height: 105%;
+	width: 100%;
 	margin-top: 38px;
 	overflow: hidden;
 	background: #4b1a04;
-}
-
-#userlogin form {
-	width: 100%;
-	/*text-align: center;*/
 }
 
 #userlogin form h3 {
 	padding: 10px 12px 0px;
 }
 
-
-#field_username, #field_password {
-	display: block;
-	clear: both;
+#page_menu {
+	width: 100%;
+	background-color: #4c0000 ;
+	color: #fff08c;
+	text-align: center;
+	font-size: 40px;
+	height: 60px;
 }
 
+#userlogin_links {
+	width: 100%;
+	height:440px; 
+}
+
+#userlogin_links h1,h3{
+	color:#fff08c;
+}
 
 #userlogin input {
 	margin-right: 20px;
@@ -179,83 +61,64 @@ li {
 	clear: right;
 	color: #fff08c;
 	background-color: #4b0e07;
+	font-family: tahoma, arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
 }
 
-#userlogin input.button {
-	width: 120px;
-	height: 27px;
-	float: right;
-}
-
-#userlogin_links {
-	padding: 10px 12px 0px;
-}
-
-#userlogin_links h1,h3{
-	color:#fff08c;
-}
-
-/* Site Search */
-
-
-
-#sitesearch_header h2 {
-	width: 196px;
-	height: 25px;
-	background: url('images/sitesearch_header.gif') no-repeat 50% 100%;
-}
-
-#sitesearch {
-	width: 196px;
-}
-
-#sitesearch form {
-	margin: 12px 5px 20px;
-	width: 186px;
-	height: 25px;
+#field_username, #field_password {
+	display: block;
 	clear: both;
-	overflow: hidden;
+}
+
+#panelForm {
+	width: 100%;
+	height: 125px;
+}
+
+#imagenesHeroe {
+	width: 100%;
+	height: 160px;
+	margin-top: 15px;
+}
+
+.imgizq {
+	height: 80px;
+    float: left;
+    width: 80px;
+    cursor: pointer;
+}
+
+.imgder {
+	height: 80px;
+    float: right;
+    width: 80px;
+    cursor: pointer;
+}
+.imgcent {
+	height: 150px;
+	width: 150px;
+    display:inline-block;
+}
+
+.foto{
+	height: 100%;
+	width: 100%;
+}
+
+#reg_button {
+	margin-top: 30px;
+}
+
+#registrar{
+	height: 50px;
 }
 
 
-
-/* Content Body */
-
-#content_body {
-	clear: left;
-	float: left;
-	width: 774px;
+#excepciones{
+	margin: auto;
+	color: white;
+	height: 20px;
+	width: 90%;
+	font-size: 20px;
 }
-
-
-
-
-.content_entry {
-	padding: 23px 0px 0px;
-}
-
-.content_entry .thumbnail {
-	margin: 5px 0px 15px;
-	float: left;
-
-}
-
-.content_entry .thumbnail img {
-	float: left;
-}
-
-.content_entry .entry_text {
-	padding-right: 15px;
-	width: 210px;
-	float: right;
-	text-align: justify;
-}
-
-.content_entry .entry_text h3 a{
-	padding-bottom: 5px;
-	color: #c71212;
-	font-size: 10px;
-	font-weight: normal;
-}
-
-

@@ -3,8 +3,10 @@ package es.fdi.iw.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -21,11 +23,12 @@ public class Bestia {
 	private long id;
 	private String nombre;
 	private int nivel;
+	private Ataque ataque;
 	
 	//Estadisticas 
 	private int fuerza;
 	private int defensa;
-	private int vida;
+	private double vida;
 	private int precision;
 	private int velocidad;
 
@@ -34,7 +37,7 @@ public class Bestia {
 	
 	public Bestia() {}
 	
-	public Bestia(int f, int d, int hp, int p, int vel, int n, String name, int x, int o){
+	public Bestia(int f, int d, double hp, int p, int vel, int n, String name, int x, int o){
 		this.fuerza = f;
 		this.defensa = d;
 		this.vida = hp;
@@ -44,6 +47,7 @@ public class Bestia {
 		this.nombre = name;
 		this.exp = x;
 		this.oro = o;
+		ataque=new Ataque("Mordisco",1,1,1);
 	}
 	
 	@Id
@@ -54,6 +58,15 @@ public class Bestia {
 	
 	public void setId(long id) {
 		this.id = id;
+	}
+	@ManyToOne(targetEntity = Ataque.class, fetch= FetchType.EAGER)
+	
+	public Ataque getAtaque() {
+		return ataque;
+	}
+
+	public void setAtaque(Ataque ataque) {
+		this.ataque = ataque;
 	}
 	
 	@Column(unique=true)
@@ -90,11 +103,11 @@ public class Bestia {
 		this.defensa = defensa;
 	}
 	
-	public int getVida() {
+	public double getVida() {
 		return vida;
 	}
 	
-	public void setVida(int vida) {
+	public void setVida(double vida) {
 		this.vida = vida;
 	}
 	
@@ -129,5 +142,17 @@ public class Bestia {
 	public void setOro(int oro) {
 		this.oro = oro;
 	}
-	
+
+	public void modificar(Bestia copia){
+		nombre = copia.nombre;
+		nivel = copia.nivel;
+		fuerza = copia.fuerza;
+		defensa = copia.defensa;
+		vida = copia.vida;
+		precision = copia.precision;
+		velocidad = copia.velocidad;
+		exp = copia.exp;
+		oro = copia.oro;
+	}
+
 }

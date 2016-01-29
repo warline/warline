@@ -20,8 +20,8 @@
 	</div>
 	<div id="container">
 		<div id="combate">
-			<img id="leon" src="resources/login/images/leon.JPG"></img> <img
-				id="orco" src="resources/login/images/orco.JPG"></img>
+			<img id="foto1" src="resources/login/images/enano.png"></img> 
+			<img id="foto2" src="resources/login/images/dragon.png"></img>
 		</div>
 		<div id="page_forms">
 			<div id="userlogin">
@@ -49,7 +49,7 @@
 					</div>
 				</form>
 				<c:if test="${not empty loginError}">
-					<c:out value="${loginError}"/>
+					<p id="excepciones"><c:out value="${loginError}"/></p>
 				</c:if>
 				<div id="userlogin_links">
 					<h2>

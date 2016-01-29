@@ -22,6 +22,10 @@ h3{
 	border:3px solid #474747; /*gris oscuro*/
 }
 
+#find {
+	margin-top: 20px;
+}
+
 #find input[type= "text"]{
 	margin-right: 15px;
 	height: 25px;

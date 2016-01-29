@@ -2,36 +2,43 @@ package es.fdi.iw.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-
-import com.google.gson.Gson;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(name="allHeroes",
+            query="select h from Heroe h"),
 	@NamedQuery(name="miHeroe",
 			query="select h from Heroe h where h.id= :idParam"),
 	@NamedQuery(name="delHeroe",
-	query="delete from Heroe h where h.id= :idParam")
+		query="delete from Heroe h where h.id= :idParam"),
+	@NamedQuery(name="topDiez",
+			query = "select h from Heroe h Order By nivel Desc"),
+	@NamedQuery(name="todosMenosYo",
+    	query="select h from Heroe h where h.id!= :yo"),
+    @NamedQuery(name="buscarHeroe",
+		query="select h from Heroe h where h.nombre= :nombreParam")
 })
 public class Heroe {
 	public static int NUM_ITEMS_EQUIP = 5;
 	public static int TAM_INVENT = 25;
-	public static double MAX_VIDA = 101;
-	public static int MAX_DEFENSA = 500;
+	public static double MAX_VIDA = 1000;
+	public static double MAX_DEFENSA = 500;
 	public static int MAX_FUERZA = 500;
 	public static int MAX_VELOCIDAD = 250;
 	public static int MAX_PRECISION = 100;
 	public static int MAX_NIVEL = 100;
 	
-	public static double VIDA_POR_PUNTO = 1;
+	public static double VIDA_POR_PUNTO = 10;
 	public static int DEF_POR_PUNTO = 1;
 	public static int FUE_POR_PUNTO = 1;
 	public static int VEL_POR_PUNTO = 1;
@@ -40,7 +47,16 @@ public class Heroe {
 	/* La xp necesaria para subir de nivel es 200*nivelActual 
 	 * es decir para subir del 3 al 4 se necesita 600 xp */
 
-	public static int XP_POR_NIVEL = 200;
+	public static int XP_POR_NIVEL = 100;
+	private int expSiguienteNivel;
+
+	public int getExpSiguienteNivel() {
+		return expSiguienteNivel;
+	}
+
+	public void setExpSiguienteNivel(int expSiguienteNivel) {
+		this.expSiguienteNivel = expSiguienteNivel;
+	}
 
 	private long id;
 	private String nombre;
@@ -56,9 +72,16 @@ public class Heroe {
 	private int oro;
 	private int xp;
 	private int puntosHab;
-	private List<Item> equipo; //id de objetos equipados
 	private List<Item> inventario; //id de objetos en el inventario
-
+	
+	
+	private Item casco;
+	private Item espada;
+	private Item armadura;
+	private Item escudo;
+	private Item botas;
+	
+	
 	public Heroe() {}
 
 	public Heroe(String nombre) {
@@ -66,15 +89,185 @@ public class Heroe {
 		this.vida = 100;
 		this.defensa = 10;
 		this.fuerza = 10;
-		this.velocidad = 5;
+		this.velocidad = 20;
 		this.precision = 30;
-		this.equipo = new ArrayList<Item>(NUM_ITEMS_EQUIP);
 		this.inventario = new ArrayList<Item>(TAM_INVENT);
 		this.nivel = 1;
 		this.oro = 200;
 		this.xp = 0;
 		this.puntosHab = 10;
+		this.expSiguienteNivel=XP_POR_NIVEL;
+		
+		this.casco = null;
+		this.espada = null;
+		this.armadura = null;
+		this.escudo = null;
+		this.botas = null;
+		
 	}
+	
+	public void sumarObjetos(){
+		if(casco != null) sumarItem(casco);
+		if(espada != null) sumarItem(espada);
+		if(armadura != null) sumarItem(armadura);
+		if(escudo != null) sumarItem(escudo);
+		if(botas != null) sumarItem(botas);
+	}
+	
+	@ManyToOne(targetEntity = Item.class, fetch= FetchType.EAGER)
+	public Item getCasco() {
+		return casco;
+	}
+
+	public void setCasco(Item casco) {
+		this.casco = casco;
+		
+	}
+	public void sumarItem(Item i){
+		fuerza+= i.getFuerza();
+		vida+= i.getVida();
+		defensa+= i.getDefensa();
+		velocidad+= i.getVelocidad();
+		precision+= i.getPrecision();
+	}
+
+	@ManyToOne(targetEntity = Item.class, fetch= FetchType.EAGER)
+	public Item getEspada() {
+		return espada;
+	}
+
+	public void setEspada(Item espada) {
+		this.espada = espada;
+	}
+
+	@ManyToOne(targetEntity = Item.class, fetch= FetchType.EAGER)
+	public Item getArmadura() {
+		return armadura;
+	}
+
+	public void setArmadura(Item armadura) {
+		this.armadura = armadura;
+	}
+
+	@ManyToOne(targetEntity = Item.class, fetch= FetchType.EAGER)
+	public Item getEscudo() {
+		return escudo;
+	}
+
+	public void setEscudo(Item escudo) {
+		this.escudo = escudo;
+	}
+	
+	@ManyToOne(targetEntity = Item.class, fetch= FetchType.EAGER)
+	public Item getBotas() {
+		return botas;
+	}
+
+	public void setBotas(Item botas) {
+		this.botas = botas;
+	}
+	
+	
+	public void desequiparItem(Item i){
+		switch(i.getTipo()){
+		case CASCO:
+			this.casco = null;
+			break;
+		case ESPADA:
+			this.espada = null;
+			break;
+		case ARMADURA:
+			this.armadura = null;
+			break;
+		case ESCUDO:
+			this.escudo = null;
+			break;
+		case BOTAS:
+			this.botas = null;
+			break;
+		}
+		inventario.add(i);
+	}
+
+	public void equiparItem(Item i){
+		Item viejo = null;
+		switch(i.getTipo()){
+		case CASCO:
+			viejo = this.casco;
+			this.casco = i;
+			break;
+		case ESPADA:
+			viejo = this.espada;
+			this.espada = i;
+			break;
+		case ARMADURA:
+			viejo = this.armadura;
+			this.armadura = i;
+			break;
+		case ESCUDO:
+			viejo = this.escudo;
+			this.escudo = i;
+			break;
+		case BOTAS:
+			viejo = this.botas;
+			this.botas = i;
+			break;
+		}
+		inventario.remove(i);
+		if(viejo != null)
+			inventario.add(viejo);
+	}
+	/*
+	public String getJsonStatistics(){
+		double vida = 0;
+		int defensa = 0, fuerza = 0, velocidad = 0, precision = 0;
+		
+		if (this.casco != null) {
+			vida += this.casco.getVida();
+			defensa += this.casco.getDefensa();
+			fuerza += this.casco.getFuerza();
+			velocidad += this.casco.getVelocidad();
+			precision += this.casco.getPrecision();
+		}
+		
+		if (this.espada != null) {
+			vida += this.espada.getVida();
+			defensa += this.espada.getDefensa();
+			fuerza += this.espada.getFuerza();
+			velocidad += this.espada.getVelocidad();
+			precision += this.espada.getPrecision();
+		}
+		
+		if (this.armadura != null) {
+			vida += this.armadura.getVida();
+			defensa += this.armadura.getDefensa();
+			fuerza += this.armadura.getFuerza();
+			velocidad += this.armadura.getVelocidad();
+			precision += this.armadura.getPrecision();
+		}
+		
+		if (this.escudo != null) {
+			vida += this.escudo.getVida();
+			defensa += this.escudo.getDefensa();
+			fuerza += this.escudo.getFuerza();
+			velocidad += this.escudo.getVelocidad();
+			precision += this.escudo.getPrecision();
+		}
+		
+		if (this.botas != null) {
+			vida += this.botas.getVida();
+			defensa += this.botas.getDefensa();
+			fuerza += this.botas.getFuerza();
+			velocidad += this.botas.getVelocidad();
+			precision += this.botas.getPrecision();
+		}
+
+		return  "{\"vida\" : " + vida + ","
+				+"\"defensa\" : " +  defensa + ","
+				+"\"fuerza\" : " + fuerza + ","
+				+"\"velocidad\" : " + velocidad + ","
+				+"\"velocidad\" : " + precision + "}";
+	}*/
 
 	public static String getJsonConstants() {
 		return  "{\"MAX_VIDA\" : " + MAX_VIDA + ","
@@ -150,23 +343,14 @@ public class Heroe {
 	public void setPrecision(int precision) {
 		this.precision = precision;
 	}
-
-	@ManyToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
-	public List<Item> getEquipo() {
-		return equipo;
-	}
-	
+	/*
 	public String itemListAsJson() {
 		Gson g1 = new Gson();
 		Gson g2 = new Gson();
 		return "{ \"equipo\": " + g1.toJson(getEquipo()) 
 			+ ", \"inventario\": " + g2.toJson(getInventario()) + "}";
 	}
-
-	public void setEquipo(List<Item> equipo) {
-		this.equipo = equipo;
-	}
-
+*/
 	@ManyToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
 	public List<Item> getInventario() {
 		return inventario;
@@ -200,54 +384,13 @@ public class Heroe {
 		this.xp = xp;
 	}
 
-	public int posObjetoMismoTipo(TipoItem t) {
-		int pos = 0;
-		for (Item i : equipo) {
-			if (i.getTipo() == t) return pos;
-			pos ++;
-		}
-		return -1;
-	}
-	
-	public boolean equipar(Item i){
-		if (i.getNivel() > this.nivel) {
-			return false;
-		}
-		
-		int ne = equipo.size();
-		int ni = inventario.size();
-		int total = ne + ni;
-		
-		int pos = posObjetoMismoTipo(i.getTipo());
-		if (pos == -1) {//Si no hay un item del mismo tipo
-			equipo.add(i);
-			inventario.remove(i);
-		} else {//Reemplazamos item. El antes equipado vuelve al inventario.
-			Item viejo = equipo.remove(pos);
-			equipo.add(i);
-			inventario.remove(i);
-			inventario.add(viejo);
-		}
-		
-		assert(total == inventario.size() + equipo.size());
-		
-		return true;
-	}
-	
-	public void desequipar(Item i) {
-		if(inventario.size()<TAM_INVENT){
-			inventario.add(i);
-			equipo.remove(i);
-		}
-	}
-	
 	public void comprarObjeto(Item i) throws Exception{
-		if (this.inventario.contains(i)) {
-			throw new Exception("Ya tienes este objeto.");
-		} else if (this.oro < i.getPrecio()) {
+		if (this.oro < i.getPrecio()) {
 			throw new Exception("No tienes dinero suficiente.");
 		} else if (this.inventario.size() >= TAM_INVENT) {
-			throw new Exception("No tienes hueco en el inventario");
+			throw new Exception("No tienes hueco en el inventario.");
+		} else if (this.nivel < i.getNivel()) {
+			throw new Exception("No tienes nivel suficiente para comprar este objeto.");
 		} else {
 			inventario.add(i);
 			this.oro -= i.getPrecio();
@@ -266,5 +409,29 @@ public class Heroe {
 	public void setPuntosHab(int puntosHab) {
 		this.puntosHab = puntosHab;
 	}
-
-}
+	
+	public void recompensa(Bestia b){
+		oro+=b.getOro();
+		xp+=b.getExp();
+		if(xp>=expSiguienteNivel){
+			xp-=expSiguienteNivel;
+			nivel++;
+			expSiguienteNivel=XP_POR_NIVEL*nivel;
+			puntosHab+=10;
+		}
+	}
+	
+	public void recompensaHeroes(Heroe r){
+		if(this.nivel <= r.getNivel()){
+			xp += (r.getNivel())*40;
+			if(xp>=expSiguienteNivel){
+				xp-=expSiguienteNivel;
+				nivel++;
+				expSiguienteNivel=XP_POR_NIVEL*nivel;
+				puntosHab+=10;
+			}
+		}
+	}
+	
+	
+}//Fin de clase

@@ -1,7 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
-<link rel="stylesheet" type="text/css"
-	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevaBestia.css">
 <script src="resources/gestion/nuevo.js"></script>
@@ -17,18 +14,20 @@
 			<form method="POST" enctype="multipart/form-data" action="registrarBestia">
 				<div id="divIzquierdo">
 					<div id="panelBotonSubirImagen">
-						<input type="file" id="files" name="photo" /> <br />
 						<output id="list"></output>
-						<script> document.getElementById('files').addEventListener('change', archivo, false);</script>
-
 					</div>
+					<input type="file" id="files" name="photo" />
+					<script> 
+						document.getElementById('files').addEventListener('change', archivo, false);
+					</script> 
 				</div>
 				<!-- divIzquierdo -->
 
 				<div id="divDerecho">
-
+					<input type="hidden" name="nombreViejo" value = "${bestia.nombre}"/>
+					<input type="hidden" name="idBestia" value = "${bestia.id}"/>
 					<p>
-						Nombre: <input type="text" name="nombreBestia" />
+						Nombre: <input type="text" name="nombreBestia" value = "${bestia.nombre}"/>
 					</p>
 
 					<div id="panelStatsMonst">
@@ -38,27 +37,27 @@
 								<thead>
 									<tr>
 										<td>Nivel</td>
-										<td><input type="text" name="nivel" /></td>
+										<td><input type="text" name="nivel" value = "${bestia.nivel}"/></td>
 									</tr>
 									<tr>
 										<td>Vida</td>
-										<td><input type="text" name="vida" /></td>
+										<td><input type="text" name="vida" value = "${bestia.vida}"/></td>
 									</tr>
 									<tr>
 										<td>Fuerza</td>
-										<td><input type="text" name="fuerza" /></td>
+										<td><input type="text" name="fuerza" value = "${bestia.fuerza}"/></td>
 									</tr>
 									<tr>
 										<td>Precision</td>
-										<td><input type="text" name="precision" /></td>
+										<td><input type="text" name="precision" value = "${bestia.precision}"/></td>
 									</tr>
 									<tr>
 										<td>Defensa</td>
-										<td><input type="text" name="defensa" /></td>
+										<td><input type="text" name="defensa" value = "${bestia.defensa}"/></td>
 									</tr>
 									<tr>
 										<td>Velocidad</td>
-										<td><input type="text" name="velocidad" /></td>
+										<td><input type="text" name="velocidad" value = "${bestia.velocidad}"/></td>
 									</tr>
 							</table>
 						</div>
@@ -69,12 +68,12 @@
 							<table>
 								<tr>
 									<td>Experiencia:</td>
-									<td><input type="text" name="exp" /></td>
+									<td><input type="text" name="exp" value = "${bestia.exp}"/></td>
 									<td>puntos</td>
 								</tr>
 								<tr>
 									<td>Oro:</td>
-									<td><input type="text" name="oro" /></td>
+									<td><input type="text" name="oro" value = "${bestia.oro}"/></td>
 									<td>monedas</td>
 								</tr>
 							</table>

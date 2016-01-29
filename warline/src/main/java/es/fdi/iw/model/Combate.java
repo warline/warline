@@ -1,102 +1,178 @@
 package es.fdi.iw.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 
-@Entity
-@NamedQueries({
-	@NamedQuery(name="combate",
-			query="select h from Combate h where h.id= :idParam"),
-	@NamedQuery(name="delCombate",
-	query="delete from Combate h where h.id= :idParam")
-})
+import java.util.ArrayList;
+
 public class Combate {
-	
-	long id;
 	private Combatiente a;
 	private Combatiente b;
-	long ultimo;
+	private int t;
+	private String ganador;
+	private int i;
+	private boolean gan;
+	private Zascadas resumen;
+	
 
-	public long getUltimo() {
-		return ultimo;
+
+
+public Combate(Heroe h, Heroe b){
+	this.a=new Combatiente(h,0, new Ataque("Puñetazo", 80, 100 ,1001));
+	this.b=new Combatiente(b, 0, new Ataque("Puñetazo", 80, 100, 1001));
+	this.t=600;
+	ganador="no";
+	setGan(false);
+	i = 0;
+}
+
+public static class Golpe{
+	private String texto;
+	private int dano;
+	public Golpe(String texto, int dano) {
+		this.texto = texto;
+		this.dano = dano;
 	}
-	public void setUltimo(long ultimo) {
-		this.ultimo = ultimo;
-	}
-	public Combate(Heroe a, Heroe b) {
-		super();
-		
-		this.a = new Combatiente(a, a.getVida(),0,new Ataque());
-		this.b = new Combatiente(b, b.getVida(),0,new Ataque());;
-		this.ultimo=System.currentTimeMillis();
-	}
-	
-public	void intercambio(){
-		long dt=1000-ultimo;					//tiempo transcurrido desde la ultima actualizacion del combate
-		boolean pega=true;
-		while(pega && a.getHeroe().getVida()>0 && b.getHeroe().getVida()>=0){
-			pega=false;
-			long da=ultimo-a.getUltimo();			//tiempo en el que a pego por ultima vez
-			long db= ultimo-b.getUltimo();			//tiempo en el que b pego por ultima vez
-			long ta= a.getAtaque().getTiempo()-da;	//tiempo en el que pegara a
-			long tb= b.getAtaque().getTiempo()-db;	//tiempo en el que pegara a
-			if(ta<=dt){
-				pega=true;
-				zasca(a.getHeroe(),a.getAtaque(),b.getHeroe());
-				a.setUltimo(ta);
-			}
-			if(tb<=dt){
-				pega=true;
-				zasca(b.getHeroe(),b.getAtaque(),a.getHeroe());
-				a.setUltimo(ta);
-			}
-		}		
-	}
-	
-	void zasca(Heroe p, Ataque a, Heroe b){	
-		int alea = (int) Math.floor(Math.random()*100);
-		if(alea<= (50+p.getPrecision()/2)*a.getPorcPrecision()/100){//vemos si le acierta (con la precision)
-			int dano= (int) (p.getFuerza()*a.getPorcDano()); //calcula el daño del ataque
-			dano-=b.getDefensa(); //restamos la defensa del otro personaje
-			b.setVida(b.getVida()-dano);//quitamos la vida correspondiente
-			//actualizamos el combate
-		}
-		else{
-			//golpe fallido
-		}
-	}
-	
-	@OneToOne(targetEntity = Combatiente.class, fetch= FetchType.EAGER)
-	public Combatiente getA() {
+}
+
+public Combatiente getA() {
+	return a;
+}
+
+public void setA(Combatiente a) {
+	this.a = a;
+}
+
+public Combatiente getB() {
+	return b;
+}
+
+public void setB(Combatiente b) {
+	this.b = b;
+}
+
+private static class Zascadas {
+	private ArrayList<Golpe> a = new ArrayList<Golpe>();
+	private ArrayList<Golpe> b = new ArrayList<Golpe>();
+	public void addA(Golpe s) { a.add(s); }
+	public void addB(Golpe s) { b.add(s); }
+	public ArrayList<Golpe> getA() {
 		return a;
 	}
-	public void setA(Combatiente a) {
-		this.a = a;
-	}
-	
-	@OneToOne(targetEntity = Combatiente.class, fetch= FetchType.EAGER)
-	public Combatiente getB() {
+	public ArrayList<Golpe> getB() {
 		return b;
 	}
-	public void setB(Combatiente b) {
-		this.b = b;
-	}
-	@Id
-	@GeneratedValue
-	long getId(){
-		return id;
-	}
-	
-	void setId(long id){
-		this.id=id;
-	}
-	
-	
 }
+
+public void actualizaCombate(){
+	//tiempo transcurrido desde la ultima actualizacion del combate
+		i++;
+		boolean pega=true;
+		Zascadas zs = new Zascadas();
+		long ta= a.getAtaque().getTiempo()+(a.getUltimo());	//tiempo en el que pegara a. Podríamos restarle la velocidad (milisegundos)
+		long tb= b.getAtaque().getTiempo()+(b.getUltimo());	
+		while(pega && a.getHeroe().getVida()>0 && b.getHeroe().getVida()>0){
+			pega=false;
+			if(ta<=t*i){
+				pega=true;
+				zs.addA(golpe());
+				a.setUltimo(ta);
+				ta= a.getAtaque().getTiempo()+(a.getUltimo());
+			}
+			
+			if(tb<=t*i){
+				pega=true;
+				zs.addB(zasca());
+				b.setUltimo(tb);
+				tb= b.getAtaque().getTiempo()+(b.getUltimo());	
+			} 
+		}
+		setResumen(zs);		
+}
+
+public Golpe golpe(){	
+	Golpe golpe = new Golpe("Fallo",0);
+	int alea = (int) Math.floor(Math.random()*100);
+		if(alea<= (50+(a.getHeroe().getPrecision()/2)*(a.getAtaque().getPorcPrecision()/100))){//vemos si le acierta (con la precision)
+		int dano= (int) (a.getHeroe().getFuerza()*a.getAtaque().getPorcDano()/100); //calcula el daño del ataque
+		if(b.getHeroe().getDefensa() / Heroe.MAX_DEFENSA > 0.75)
+			dano -= dano*0.75;
+		else
+			dano -= dano * (b.getHeroe().getDefensa() / Heroe.MAX_DEFENSA); 		//restamos la defensa del otro personaje
+		golpe.texto=a.getAtaque().getNombre();	
+		if(dano>0){
+			b.setVida(b.getVida()-dano);//quitamos la vida correspondiente
+			golpe.dano=dano;
+			//actualizamos el combate
+			hayGanador();
+		}
+	}
+	return golpe;
+}
+
+public Golpe zasca(){
+	Golpe golpe = new Golpe("Fallo",0);
 	
+	int alea = (int) Math.floor(Math.random()*100);
+	if(alea<= (50+b.getHeroe().getPrecision()/2)){//vemos si le acierta (con la precision)
+		int dano= (int) (b.getHeroe().getFuerza()*(b.getAtaque().getPorcDano()/100)); //calcula el daño del ataque
+		if(a.getHeroe().getDefensa() / Heroe.MAX_DEFENSA > 0.75)
+			dano -= dano*0.75;
+		else
+			dano -= dano * (a.getHeroe().getDefensa() / Heroe.MAX_DEFENSA); 		//restamos la defensa del otro personaje
+		golpe.texto=b.getAtaque().getNombre();
+		if(dano>0){
+			a.setVida(a.getVida()-dano);//quitamos la vida correspondiente
+			golpe.dano=dano;	
+			//actualizamos el combate
+			hayGanador();
+			System.err.println(a.getHeroe().getNombre()+"= "+a.getVida());
+		}
+	}
+	return golpe;
+}
+
+public void hayGanador(){
+	if (a.getVida() <= 0 || b.getVida() <= 0) {
+		setGan(true);
+		ganador = "bestia";
+		if (b.getVida() <= 0) {
+			if(a.getVida()<=0 && a.getUltimo() > b.getUltimo()){
+				ganador = "bestia";
+				b.setVida(1);
+			}
+			else if(a.getVida()<=0){
+				ganador = "heroe";
+				a.setVida(1);
+			}else
+				ganador = "heroe";
+		}
+		if(ganador == "heroe") b.setVida(0);
+		else if(ganador == "bestia") a.setVida(0);
+	}
+}
+
+public String getGanador() {
+	return ganador;
+}
+
+public void setGanador(String ganador) {
+	this.ganador = ganador;
+}
+
+public boolean isGan() {
+	return gan;
+}
+
+public void setGan(boolean gan) {
+	this.gan = gan;
+}
+
+public Zascadas getResumen() {
+	return resumen;
+}
+
+public void setResumen(Zascadas resumen) {
+	this.resumen = resumen;
+}
+
+}
 

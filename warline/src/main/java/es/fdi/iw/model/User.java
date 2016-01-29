@@ -71,7 +71,6 @@ public class User {
 		return byteArrayToHexString(sha1hash(toHash));
 		*/
 		String s = bcryptEncoder.encode(pass);
-		System.err.println(s);
 		return s;
 	}	
 

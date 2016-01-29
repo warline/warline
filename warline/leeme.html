@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf8"><title>Leeme</title></head>
 <body>
-<h1>Entrega 2: Versión con JSPs y esquema de la BD</h1>
+<h1>Entrega 3: </h1>
 <p>Componentes del grupo "Warline"
 <ul>
 <li>Javier López de Lerma
@@ -17,23 +17,45 @@
 
 <li><a href="http://localhost:8080/login">Vista Login</a> - Página de entrada, donde el usuario se puede registrar. También incluye una descripción del juego. Es interesante y necesaria para que el usuario se registre y aparte es una incitación al jugador para que pruebe el juego. La funcionalidad de esta vista es presentar un banner propio y un estilo de paneles que iremos cambiando para mejorar la temática.
 <li>Vista común - Versión de la página de entrada cuando ya estás registrado. La zona de registro se sustituye ahora por un panel de botones para acceder a las demás vistas, además del botón de salir.
+<li> Las contraseñas de todos los usuarios son el correo, ejemplo correo:user contraseña:user , correo:admin contraseña:admin . 
 <h3> Vistas de administrador: </h3>
 <li><a href="http://localhost:8080/gestionUsuarios"> Gestion de usuarios</a> - El adminsitrador puede en esta vista, eliminar, banear y filtrar usuarios. Es muy útil para la gestión del programa.
+<li><a href="http://localhost:8080/gestionBestias"> Gestion de bestias</a> - El adminsitrador puede en esta vista, crear, modificar, eliminar y filtrar bestias. Útil por si se quieren añadir nuevos enemigos al juego.
 <li><a href="http://localhost:8080/gestionObjetos"> Gestion de objetos</a> - Igual que con los usuarios, el administrador tiene esas funciones además de crear un nuevo objeto. Bastante útil para administrar los objetos del juego.
 <li><a href="http://localhost:8080/nuevoObjeto"> Nuevo objeto</a> - Vista donde el administrador mete los datos para crear el nuevo objeto. Útil por ser la funcionalidad principal de la gestión de objetos.
 <li><a href="http://localhost:8080/nuevaBestia"> Nueva bestia</a> - Vista donde el administrador mete los datos para crear la nueva bestia.
 <h3> Vistas de usuario: </h3>
 <li><a href="http://localhost:8080/perfil">Perfil</a> - En ella se muestran las estadísticas, inventario, equipación, imagen del personaje... El jugador debe poder comprobar en todo momento el estado del personaje.
 <li><a href="http://localhost:8080/armeria">Armería</a> - Presenta tanto el inventario como los objetos que se pueden comprar en la armería y un visualizador para ellos. Lo más interesante de esta es que se puede ver claramente la descripción de los objetos (estadísticas, imágenes), así como proporcionar una visión clara del inventario y las mejoras sobre el personaje.
-<li><a href="http://localhost:8080/lobby">Lobby</a> - Se podrá organizar los combates y ver información general respecto a ellos. Sirve para dar paso a la vista principal de la arena.
-<li><a href="http://localhost:8080/arena">Arena</a> - En esta vista se podrán ver los combates entre personajes. Para las siguientes entregas tenemos pensado dividir esta vista en dos: configuración de combates(búsqueda de contrincantes) y combates en sí. Es muy interesante poder ver el avance general de un combate (quién golpea a quién, cuánta vida le quita) así como poder seleccionar los contrincantes.
-<li><a href="http://localhost:8080/arcade">Arcade</a> - Muestra una lista de niveles en los que se podrá luchar contra las bestias. Posee cualidades parecidas a la vista anterior, pero sin jugar contra otros usuarios. Mayoritariamente es una zona de prácticas.
+<li><a href="http://localhost:8080/lobby">Lobby</a> - La vista del Lobby es la precuela del combate. En ella podemos encontrar información interesante como es la lista de los 10 mejores luchadores registrados, con su ranking y su nivel. También podemos ver nuestras estadísticas y nuestro equipo antes de hacer frente a otro héroe. Tenemos disponibles dos formas de luchar contra otros héroes: <br>
+* Mediante la búsqueda. Introducimos el nombre de otro héroe y pasamos al combate contra él si existe. Si no, la página nos avisa de ello.<br>
+* Mediante el combate aleatorio. Si pulsamos el botón '¡Luchar ahora!' de combate aleatorio, pasamos directamente al combate contra otro héroe cualquiera existente. En el hipotético y triste caso de que no exista ningún otro héroe, la página avisará de ello.<br>
+<li><a href="http://localhost:8080/arena">Arena</a> - En esta vista se podrán ver los combates entre personajes. Los combates funcionan de la siguiente manera: <br>
+* Es un combate por turnos, en los que las estadísticas del personaje determinan la efectividad de un ataque.<br>
+* Se puede seleccionar un ataque de tres disponibles. Los ataques varían unos de otros, yendo del más rápido y menos dañino, al más lento pero más fuerte.<br>
+* Se pueden visualizar las barras de vida de cada personaje para hacerse una idea de cómo está siendo llevado a cabo.<br>
+* Hemos decidido que los combates contra jugadores serán parecidos a los de contra bestias. La única diferencia es que se selecciona el personaje real de otro jugador, con sus estadísticas.<br>
+* Esta vista también sirve para ver los combates contra bestias.</li>
+<li><a href="http://localhost:8080/arcade">Arcade</a> - La vista de Arcade contiene el modo individual. En él podemos elegir una de las bestias disponibles para luchar contra ella. Se encuentran ordenadas por dificultad, de menor a mayor, y cada una tiene unas estadísticas diferentes. Cada bestia da unas cantidades de puntos de experiencia y de oro por vencerla. 
+<h3> Falta aún (para el día 2): </h3>
+<li> En la vista nuevoObjeto, el panel de ataques sólo se mostrará si el objeto a crear es una espada.
+<li> En la vista de combate, se podrá elegir el ataque (actualmente tiene uno por defecto) a usar y se tendrán en cuenta los objetos equipados.
+<li> Combate aleatorio dará dinero y experiencia. Combate por búsqueda no dará.
 </ul>
-
 <h2>Recursos externos utilizados</h2>
 <ul>
 <li><a href="http://www.dafont.com/">DaFont</a>  - Fuente gratuita Barbarian para crear el Logo.
-<li><a href = "http://www.deviantart.com/">Devianart</a> - Página de donde hemos sacado imágenes como la de fondo.
+<li><a href = "http://es.freeimages.com/">Free Images</a> - Página de donde hemos sacado imágenes como la de fondo. <br>
+<a href="http://es.freeimages.com/photo/longsword-1422533"> - Espada larga</a><br>
+<a href="http://es.freeimages.com/photo/knife-picture-1316060"> - Daga</a><br>
+<a href="http://es.freeimages.com/photo/sword-1316430"> - Espada matadragones</a><br>
+<a href="http://es.freeimages.com/photo/dragon-1444710"> - Escudo del dragón</a><br>
+<a href="http://es.freeimages.com/photo/riding-boots-1422373"> - Botas de montar</a><br>
+<a href="http://es.freeimages.com/photo/the-coppergate-helm-1547191"> - Casco de cuero</a><br></li>
+<li> <a href="https://www.wesnoth.org/"> Battle for Wesnoth </a><br>
+* De este juego de software libre hemos sacado todas las imágenes de bestias y personajes. </li>
+<li>Nota: las imágenes del tmp no cabían en el campus y te las hemos mandado por correo</li>
+
 </ul>
 </body>
 </html>

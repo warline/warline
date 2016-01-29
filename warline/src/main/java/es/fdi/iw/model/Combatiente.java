@@ -2,7 +2,6 @@ package es.fdi.iw.model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,12 +22,16 @@ public class Combatiente {
 	Ataque ataque;
 	long id;
 	
-	public Combatiente(Heroe h, double d, long ultimo, Ataque ataque) {
+	public Combatiente(Heroe h, long ultimo, Ataque ataque) {
 		super();
 		this.h = h;
-		this.vida = d;
+		this.h.sumarObjetos();
+		this.vida = h.getVida();
 		this.ultimo = ultimo;
-		this.ataque = ataque;
+		if(h.getEspada() != null)
+			this.ataque = h.getEspada().getAt1();
+		else
+			this.ataque = ataque;
 		id=h.getId();
 	}
 	
@@ -36,7 +39,6 @@ public class Combatiente {
 	public long getId() {
 		return id;
 	}
-
 
 	public void setId(long id) {
 		this.id = id;
@@ -68,6 +70,25 @@ public class Combatiente {
 	}
 	public void setAtaque(Ataque ataque) {
 		this.ataque = ataque;
+	}
+
+	public void ataqueAleatorio() {
+		int aleaJactaEst = (int) Math.floor(Math.random() * 3);
+		
+		if(this.h.getEspada() != null){
+			
+			switch(aleaJactaEst){
+			case 0:
+				setAtaque(this.h.getEspada().getAt1());
+				break;
+			case 1:
+				setAtaque(this.h.getEspada().getAt2());
+				break;
+			case 2:
+				setAtaque(this.h.getEspada().getAt3());
+				break;
+			}
+		}
 	}
 
 	

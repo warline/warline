@@ -2,18 +2,10 @@ package es.fdi.iw.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @Entity
 public class Ataque {
-	
-		
 		private String nombre;
 		private double porcDano;
 		private double porcPrecision;
@@ -60,16 +52,7 @@ public class Ataque {
 			this.tiempo = tiempo;
 		}
 		
-		public void setTurnos(long tiempo) {
-			this.tiempo = tiempo;
-		}
 		public Ataque() {
 			// TODO Auto-generated constructor stub
-		}
-		
-		
-			
-		
-
-
+		}	
 }

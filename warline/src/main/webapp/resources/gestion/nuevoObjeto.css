@@ -14,12 +14,17 @@
 	background: transparent;
 }
 
-#capaMadre .bicho{
-	width: 200px;
-	height: 200px;
+.bicho{
+	width: 100%;
+	height: 100%;
 }
 
- #panelBotonSubirImagen{
+#ataques{
+	float:right;
+	margin-right:10px;
+}
+
+#panelImagen{
 	width: 230px;
     height: 230px;
 	background-color: #0a2735;
@@ -29,9 +34,14 @@
 	border: #474747 solid 3px;
 }
 
-#panelBotonSubirImagen button {
-	height: 100%;
+#list {
 	width: 100%;
+	heigth: 100%;
+}
+
+#divIzquierdo input[type="file"] {
+	margin-top: 20px;
+	margin-left: 35px;
 }
 
 #panelDisponibilidad {
@@ -154,4 +164,17 @@
 	font-size: 15px;
 	color: red;
 	text-align: center;
+}
+
+#tablaEstadAtq th{
+	color: white;
+	font-size: 14px;
+}
+
+#tablaEstadAtq td input[type= "text"]{
+	float: right;
+	font-size: 12px;
+	text-align: right;
+	width: 40px;
+	margin-right: 5px;
 }

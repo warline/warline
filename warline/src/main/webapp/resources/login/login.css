@@ -195,6 +195,7 @@ li {
 
 #registrar{
 	color:white;
+	font-size: 20px;
 }
 
 /* Content Body */
@@ -214,16 +215,17 @@ li {
 	position: relative;
 	top: 38px;
 	border: 5px solid black;
+	background-color: black;
 }
 
-#leon{
-	width: 455px;
+#foto1{
+	width: 338px;
 	height: 338px;
 	float:left;
 }
 
-#orco{
-	width: 455px;
+#foto2{
+	width: 338px;
 	height: 338px;
 	float:right;
 }
@@ -258,4 +260,10 @@ li {
 	font-weight: normal;
 }
 
-
+#excepciones{
+	margin: auto;
+	color: white;
+	height: 20px;
+	width: 90%;
+	font-size: 15px;
+}

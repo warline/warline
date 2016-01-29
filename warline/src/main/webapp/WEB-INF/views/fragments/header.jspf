@@ -1,11 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 
 <title>Warline</title>
+<link rel="stylesheet" type="text/css" href="resources/ui/jquery-ui.css"/>
 <link rel="stylesheet" type="text/css"
 	href="resources/fragments/plantilla.css" />
+<script src= "resources/ui/external/jquery/jquery.js"></script>
+<script src="resources/ui/jquery-ui.js"></script>
 </head>
 <body>
 
@@ -34,6 +39,10 @@
 			<p>
 				<a href="arcade">
 					<button class="botonesPrincipales" id="arcadeButton">Arcade</button>
+				</a>
+			<p>
+				<a href = "acercaDe">
+					<button class="botonesPrincipales" id="acercaDe">Acerca de</button>
 				</a>
 			<p>
 				<a href="logout">

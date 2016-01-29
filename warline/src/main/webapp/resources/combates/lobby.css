@@ -1,198 +1,245 @@
-#arcade h3{
-	top: 10px;
-	text-align: center;
-}
-
-/******************************************
-*******          HEADER           *********
-******************************************/
-
-/******************************************
-*******          SIDEBAR          *********
-******************************************/
-
 /******************************************
 *******          MAIN             *********
 ******************************************/
 
 #main {
-	height:100%;
+	height: 750px;
+	width: 800px;
 }
 
-
-#transparencia{
-	height: 100%;
-	position:absolute;
-	opacity:0.9;
-	background-color: #000000;
-	width: 100%;
-}
-/*
-#encabezado{
-	top: 5px;
-	background-color: #4b1a04;
-	color: yellow;
+#tituloDivs {
 	text-align: center;
-	vertical-align: middle;
-	margin: 0 auto;
-	position: relative;
-    height: 55px;
-	width:890px;
+	color: white;
+	font-size: 20px;
 }
-#encabezado hr{
-	position: relative;
-	bottom: 20px;
-	width: 850px;
-}*/
-#textcab{ 
-    text-align: center;
 
-    vertical-align: middle;
-    font-size: 40px;
-    height: 80px;
+#divIzquierdo {
+	height: 644px;
+	width: 500px;
+	float: left;
+}
+
+#divDerecho {
+	height: 626px;
+	width: 380px;
+	float: right;
+	margin: auto;
+	margin-top: 10px;
+	background-color: #0a2735;
+	border: #474747 solid 3px;
+	text-align: center;
+}
+
+#divIzqSup {
+	height: 240px;
 	width: 100%;
 }
 
-#arcade{
-	background-color: black;
+#divIzqSupDer {
+	height: 100%;
+	width: 40%;
+	float: right;
+}
+
+#divIzqSupIzq {
+	height: 100%;
+	width: 60%;
+	float: left;
+}
+
+#panelInfo{
+	position: absolute;
+	width: 350px;
+    height: 130px;
+    background-color: #0a2735;
+	border: 3px solid #474747;
+}
+.descripcion{
+	display:none;
+}
+
+.descripcion p{
+	color:white;
+	font-size: 12px;
+	line-height: 70%;
+}
+
+#divTabla{
+	height: 100%;
+	width: 60%;
+	float:right;
+}
+
+#statsEquipo{
 	color: white;
-	width: 870px;
-	position: relative;
-	margin: 0 auto;
-	border: 5px solid black;
+	float: right;
+	width: 100%;
 	height: 80%;
 }
 
-#arriba{
-	margin: 0 auto;
-	width: 95%;
-	height: 30%;
-	position: relative;
-	float: top;
+#statsEquipo caption{
+	font-weight: bold;
 }
 
-#combateRandom{
-	text-align: center;
-	border: 3px solid #474747;
-	width: 40%;
-	height: 100%;
-	background-color: #0a2735;
-	position: relative;
-	float: left;
-	left: 10px;
-	top: 10px;
-}
-
-#aleatorio{
-	margin: 8% auto;
-	border: 3px outset grey;
-}
-
-#combateAmigo{
-	text-align: center;
-	border: 3px solid #474747;
-	width: 55%;
-	height: 100%;
-	background-color: #0a2735;
-	position: relative;
-	float: right;
-	right: 10px;
-	top: 10px;
-}
-
-#usuario{ /*caja de texto*/
-	width: 200px;
-	background-color: white;
-	height: 20px;
-}
-
-#amigo{
-	border: 3px outset grey;
-}
-
-#abajo{
-	margin: 0 auto;
-	width: 95%;
-	height: 65%;
-	position: relative;
-	float: bottom;
-}
-
-#perfil2{
-	border: 3px solid #474747;
-	top: 2px;
+#statsEquipo td{
+	width: 50%;
+	height: 50%;
 	text-align: left;
-	position: relative;
-	float: bottom;
-	width: 95%;
-	height: 55%;
-	margin: 0 auto;
-	background-color: #0a2735;
 }
 
-#topDiez{
-	border: 3px solid #474747;
-	text-align: center;
-	position: relative;
-	float: top;
-	width: 95%;
-	height: 35%;
-	margin: 0 auto;
-	border-collapse: collapse;
-	border-spacing: 0;
-	background-color: #0a2735;
+#foto img{
+	float:left;
+	width: 130px;
+	height: 130px;
 }
-#toptitle{
+
+#combateAmigo, #combateRandom{
+	height: 90%;
+	width: 90%;
+	margin: auto;
+	margin-top: 10px;
+	background-color: #0a2735;
+	border: #474747 solid 3px;
+	text-align: center;
+}
+
+#divIzqInf {
+	height: 440px;
+	width: 100%;
+	margin-left: 2px;
+}
+
+#divPerfil{
+	height: 90%;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #0a2735;
+	border: #474747 solid 3px;
+	text-align: center;
+}
+
+#statsYimagen{
+	float: left;
+	height: 95%;
+	width: 50%;
+	margin-top: 10px;
+}
+
+#stats {
+	height: 50%;
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+
+#stats table {
+	width: 100%;
+	height: 80%;
+}
+
+#stats caption {
+	font-size: 20px;
 	font-weight: bold;
 	color: white;
-	text-align: left;
-	background-color: #474747;
+	text-decoration: underline;
 }
-#top{
+
+#stats table td {
+	color: white;
+}
+
+#imagen {
+	height: 50%;
+	width: 80%;
+	margin: auto;
+}
+
+#imagen img {
+	width: 100%;
+	height: 100%;
+}
+
+#equipoHeroe {
+	width: 40%;
+	height: 50%;
+	float: right;
+	margin-top: 10px;
+}
+
+#equipo {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#equipo table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+	font-size: 20px;
+    border-spacing: 5px;
+	height: 85%;
+	background-color: #0a2735;
+	empty-cells: hide;
+}
+
+#equipo caption {
+	font-size: 20px;
 	font-weight: bold;
-	border-right: 5px double white;
-}
-#puesto{
-	border-bottom: 5px double white;
-}
-#esquina{
-	border-right: 5px double white;
-	border-bottom: 5px double white;
-}
-#nombre{
-	width: 10%;
-	border-right: 3px dashed black;
-	border-bottom: 3px dashed black;
-}
-#nivel{
-	border-right: 3px dashed black;
+	color: white;
+	text-decoration: underline;
 }
 
-#luchar{ /*Boton de combate*/
-	width: 150px;
-	height: 45px;
-	margin-bottom: 2em;
-	position: absolute;
-	right: 330px;
-	top: 350px;
+#equipo td {
+    border: 5px grey inset;
+	background-color: #474747;
+	height: 36px;
+	width: 36px;
 }
 
-/******************************************
-*******          FOOTER           *********
-******************************************/
-/*
-#footer {
-clear: both;
-}
-*/
-
-#ocultar{
-	display: none;
-	background-color: black;
-	opacity: 0.99;
+#imagenObjeto {
+	height: 36px;
+	width: 36px;
 }
 
-#ocultar:hover{
-	opacity: 0;
+#imagenObjeto img {
+	height: 100%;
+	width: 100%;
 }
 
+#nombreHeroe{
+	color: white;
+	font-size: 40px;
+	margin-right: 20px;
+	margin-left: -70px;
+	margin-top: 70px;
+}
+
+#divDerecho table {
+	width: 85%;
+	margin: auto;
+	margin-top: 15px;
+	color: white;
+}
+
+#divDerecho th {
+	font-size: 25px;
+	color: white;
+	text-decoration: underline;
+}
+
+#divDerecho caption {
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+	text-decoration: underline;
+}
+
+#divDerecho button {
+	margin-top: 20px;
+}
+
+#excepciones{
+	color: white;
+}

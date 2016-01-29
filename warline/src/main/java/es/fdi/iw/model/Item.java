@@ -2,10 +2,12 @@ package es.fdi.iw.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
@@ -13,6 +15,8 @@ import javax.persistence.NamedQuery;
             query="select i from Item i"),
     @NamedQuery(name="itemsPorPrecio",
     		query="select i from Item i Order By(i.precio)"),
+    @NamedQuery(name="itemsPorNivel",
+	query="select i from Item i Order By(i.nivel)"),
     @NamedQuery(name="itemByName",
         query="select i from Item i where i.nombre = :nombreParam"),
     @NamedQuery(name="delItem",
@@ -33,10 +37,14 @@ public class Item {
 	private int precision;
 	private TipoItem tipo;
 	private int precio;
+	private Ataque at1;
+	private Ataque at2;
+	private Ataque at3;
 	//private boolean disponibilidad
 	public Item() {}
 	
-	public Item(String nombre, double vida, int fu, int def, int vel, int pre, TipoItem t , int precio, int nivel){
+	public Item(String nombre, double vida, int fu, int def, int vel,
+				int pre, TipoItem t , int precio, int nivel,Ataque a1,Ataque a2, Ataque a3){
 		this.nombre = nombre;
 		this.vida = vida;
  		this.fuerza = fu;
@@ -46,6 +54,9 @@ public class Item {
 		this.tipo = t;
 		this.precio = precio;
 		this.nivel=nivel;
+		setAt1(a1);
+		setAt2(a2);
+		setAt3(a3);
 	}
 	
 	public int getNivel() {
@@ -131,9 +142,77 @@ public class Item {
 		return tipo;
 	}	
 	
-    @Override
-	public boolean equals(Object o) {
-		return o instanceof Item && ((Item)o).getId() == id;
+    /* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
 	}
 	
+    public void modificar(Item copia){
+    	nombre = copia.nombre;
+    	vida = copia.vida;
+    	fuerza = copia.fuerza;
+    	defensa = copia.defensa;
+    	velocidad = copia.velocidad;
+    	precision = copia.precision;
+    	tipo = copia.tipo;
+    	precio = copia.precio;
+    	nivel = copia.nivel;
+    	at1 = copia.at1;
+    	at2 = copia.at2;
+    	at3 = copia.at3;
+    }
+
+    
+    @OneToOne (targetEntity = Ataque.class, fetch= FetchType.EAGER)
+	public Ataque getAt3() {
+		return at3;
+	}
+
+	public void setAt3(Ataque at3) {
+		this.at3 = at3;
+	}
+	
+	@OneToOne (targetEntity = Ataque.class, fetch= FetchType.EAGER)
+	public Ataque getAt2() {
+		return at2;
+	}
+
+	public void setAt2(Ataque at2) {
+		this.at2 = at2;
+	}
+	
+	@OneToOne (targetEntity = Ataque.class, fetch= FetchType.EAGER)
+	public Ataque getAt1() {
+		return at1;
+	}
+
+	public void setAt1(Ataque at1) {
+		this.at1 = at1;
+	}
 }

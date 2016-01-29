@@ -1,15 +1,23 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="fragments/headerGestion.jspf"%>
+<%@ page import="es.fdi.iw.model.TipoItem"%>
 
-<script src="./ui/external/jquery/jquery.js"></script>
-<script src="./ui/jquery-ui.js"></script>
-
-<link rel="stylesheet" type="text/css" href="./ui/jquery-ui.css" />
-<link rel="stylesheet" type="text/css"
-	href="resources/fragments/plantilla.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/gestion/nuevoObjeto.css">
 <script src="resources/gestion/nuevo.js"></script>
+
+<script>
+	$(function() {
+		var valor = document.getElementById("tipoObj").value;
+		mostrarOcultarAtaques(valor);	
+	});
+	
+	function cambio(){
+		var valor = document.getElementById("tipoObj").value;
+		console.log(valor);
+		mostrarOcultarAtaques(valor);
+	}
+	
+</script>
 
 <div id="container">
 	<div id="main">
@@ -19,17 +27,21 @@
 					Nuevo objeto
 					<hr>
 				</div>
-				<form action="registrarItem" enctype="multipart/form-data" method="POST">
+			<form action="registrarItem" enctype="multipart/form-data" method="POST">
+				<input type="hidden" name="nombreViejo" value = "${objeto.nombre}"/>
 				<input type="hidden" name="idObj" value = "${objeto.id}"/>
 				<div id="divIzquierdo">
-					<div id="panelBotonSubirImagen">
-						<input type="file" id="files" name="photo" />
-						<output id="list"></output>
-						<script> document.getElementById('files').addEventListener('change', archivo, false);</script>
-
+					<div id="panelImagen">
+						<output id="list">
+							<c:if test="${not empty objeto}">
+								<img  class="bicho" src = "objeto/photo?id=${objeto.id}"/>
+							</c:if>
+						</output>
 					</div>
-
-
+					<input type="file" id="files" name="photo" />
+					<script> 
+						document.getElementById('files').addEventListener('change', archivo, false);
+					</script>
 					<!--  <div id="panelDisponibilidad">
 						<p>
 							<input type="checkbox" id="disponible"> </input> Disponible en
@@ -47,14 +59,60 @@
 					</p>
 
 					<p>
-						Tipo de objeto: <select name="tipoObj">
-							<option value="ESPADA">Espada</option>
-							<option value="CASCO">Casco</option>
-							<option value="BOTAS">Botas</option>
-							<option value="ARMADURA">Armadura</option>
+						Tipo de objeto: 
+						<select id="tipoObj" name="tipoObj" onchange="cambio()">
+							<c:choose>
+								<c:when test = "${not empty objeto}">
+									<option value = "${objeto.tipo}"> ${objeto.tipo.nombreTipo} </option>
+									<c:forEach items = "<%=TipoItem.values()%>" var = "t">
+										<c:if test = "${t != objeto.tipo}">
+											<option value="${t}">${t.nombreTipo}</option>
+										</c:if>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items = "<%=TipoItem.values()%>" var = "t">
+										<option value="${t}">${t.nombreTipo}</option>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</select>
 					</p>
-
+					<div id="ataques">
+						<p> Ataques: </p>
+						<div id="tablaEstadAtq">
+							<table>
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Daño</th>
+									<th>Precisión</th>
+									<th>Velocidad</th>
+								</tr>
+							</thead>
+							<tbody>
+									<tr>
+										<td><input type="text" name="nombreAtq1" value="${objeto.at1.nombre}" /></td>
+										<td><input type="text" name="danoAtq1" value="${objeto.at1.porcDano}" /></td>
+										<td><input type="text" name="precisionAtq1" value="${objeto.at1.porcPrecision}" /></td>
+										<td><input type="text" name="velocidadAtq1" value="${objeto.at1.tiempo}" /></td>
+									</tr>
+									<tr>
+										<td><input type="text" name="nombreAtq2" value="${objeto.at2.nombre}" /></td>
+										<td><input type="text" name="danoAtq2" value="${objeto.at2.porcDano}" /></td>
+										<td><input type="text" name="precisionAtq2" value="${objeto.at2.porcPrecision}" /></td>
+										<td><input type="text" name="velocidadAtq2" value="${objeto.at2.tiempo}" /></td>										
+									</tr>
+									<tr>
+										<td><input type="text" name="nombreAtq3" value="${objeto.at3.nombre}" /></td>
+										<td><input type="text" name="danoAtq3" value="${objeto.at3.porcDano}" /></td>
+										<td><input type="text" name="precisionAtq3" value="${objeto.at3.porcPrecision}" /></td>
+										<td><input type="text" name="velocidadAtq3" value="${objeto.at3.tiempo}" /></td>
+									</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
 					<div id="panelStatsObj">
 						<p>Estadisticas:</p>
 						<div id="tablaEstadObj">
@@ -73,7 +131,7 @@
 										<td><input type="text" name="fuerzaObj" value="${objeto.fuerza}" /></td>
 									</tr>
 									<tr>
-										<td>Precision</td>
+										<td>porcPrecision</td>
 										<td><input type="text" name="precisionObj" value="${objeto.precision}" />
 										</td>
 									</tr>
@@ -113,9 +171,10 @@
 						<p>
 					</c:if>
 				 </div>		
+			</div>
 		</div>
-	</div>
 
+	</div>
 </div>
 <!-- container -->
 </body>
