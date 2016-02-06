@@ -47,6 +47,10 @@ td{
 	height: 36px;
 	width: 36px;
 }
+#imagenObjeto{
+	height: 36px;
+	width: 36px;
+}
 #imagenObjeto img{
 	height: 36px;
 	width: 36px;
@@ -155,7 +159,7 @@ div#capaMadre{
 }
 
 #excepciones{
-	color: white;
+	color: red;
 	height: 30px;
 	width: 80%;
 	text-align: center;

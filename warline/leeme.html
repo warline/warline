@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf8"><title>Leeme</title></head>
 <body>
-<h1>Entrega 3: </h1>
+<h1>Entrega Final: </h1>
 <p>Componentes del grupo "Warline"
 <ul>
 <li>Javier López de Lerma
@@ -10,8 +10,8 @@
 <li>Jose Manuel Pérez Zamorano
 <li>Enrique Ituarte Martínez-Millán
 </ul>
-+<h2>Esquema de la base de datos</h2>
-+<img src="../diagramaBD.png">
+<h2>Esquema de la base de datos</h2>
+<img src="../diagramaBD.png">
 <h2>Vistas que componen esta entrega</h2>
 <ul>
 
@@ -23,24 +23,27 @@
 <li><a href="http://localhost:8080/gestionBestias"> Gestion de bestias</a> - El adminsitrador puede en esta vista, crear, modificar, eliminar y filtrar bestias. Útil por si se quieren añadir nuevos enemigos al juego.
 <li><a href="http://localhost:8080/gestionObjetos"> Gestion de objetos</a> - Igual que con los usuarios, el administrador tiene esas funciones además de crear un nuevo objeto. Bastante útil para administrar los objetos del juego.
 <li><a href="http://localhost:8080/nuevoObjeto"> Nuevo objeto</a> - Vista donde el administrador mete los datos para crear el nuevo objeto. Útil por ser la funcionalidad principal de la gestión de objetos.
-<li><a href="http://localhost:8080/nuevaBestia"> Nueva bestia</a> - Vista donde el administrador mete los datos para crear la nueva bestia.
+El panel de ataques sólo se mostrará si el objeto a crear es una espada.</li>
+<li><a href="http://localhost:8080/nuevaBestia"> Nueva bestia</a> - Vista donde el administrador mete los datos para crear la nueva bestia, con sus estadísticas y la recompensa.
 <h3> Vistas de usuario: </h3>
 <li><a href="http://localhost:8080/perfil">Perfil</a> - En ella se muestran las estadísticas, inventario, equipación, imagen del personaje... El jugador debe poder comprobar en todo momento el estado del personaje.
 <li><a href="http://localhost:8080/armeria">Armería</a> - Presenta tanto el inventario como los objetos que se pueden comprar en la armería y un visualizador para ellos. Lo más interesante de esta es que se puede ver claramente la descripción de los objetos (estadísticas, imágenes), así como proporcionar una visión clara del inventario y las mejoras sobre el personaje.
 <li><a href="http://localhost:8080/lobby">Lobby</a> - La vista del Lobby es la precuela del combate. En ella podemos encontrar información interesante como es la lista de los 10 mejores luchadores registrados, con su ranking y su nivel. También podemos ver nuestras estadísticas y nuestro equipo antes de hacer frente a otro héroe. Tenemos disponibles dos formas de luchar contra otros héroes: <br>
 * Mediante la búsqueda. Introducimos el nombre de otro héroe y pasamos al combate contra él si existe. Si no, la página nos avisa de ello.<br>
 * Mediante el combate aleatorio. Si pulsamos el botón '¡Luchar ahora!' de combate aleatorio, pasamos directamente al combate contra otro héroe cualquiera existente. En el hipotético y triste caso de que no exista ningún otro héroe, la página avisará de ello.<br>
+* Combate aleatorio dará dinero y experiencia. Combate por búsqueda no dará nada a no ser que el rival sea de un nivel igual o superior al de tu héroe.</li>
 <li><a href="http://localhost:8080/arena">Arena</a> - En esta vista se podrán ver los combates entre personajes. Los combates funcionan de la siguiente manera: <br>
 * Es un combate por turnos, en los que las estadísticas del personaje determinan la efectividad de un ataque.<br>
 * Se puede seleccionar un ataque de tres disponibles. Los ataques varían unos de otros, yendo del más rápido y menos dañino, al más lento pero más fuerte.<br>
+* Se procede automáticamente a usar ese ataque hasta que se decida cambiar.<br>
+* Se tienen en cuenta las estadísticas de los objetos equipados.<br>
 * Se pueden visualizar las barras de vida de cada personaje para hacerse una idea de cómo está siendo llevado a cabo.<br>
-* Hemos decidido que los combates contra jugadores serán parecidos a los de contra bestias. La única diferencia es que se selecciona el personaje real de otro jugador, con sus estadísticas.<br>
-* Esta vista también sirve para ver los combates contra bestias.</li>
+* Hemos decidido que los combates contra jugadores serán parecidos a los de contra bestias. La única diferencia es que se selecciona el personaje real de otro jugador (sin necesidad de que éste esté conectado), con sus estadísticas.<br>
+* Esta vista también sirve para ver los combates contra bestias.<br>
+* Al final del combate se puede visualizar la recompensa en caso de victoria y de que haya recompensa.<br>
+</li>
 <li><a href="http://localhost:8080/arcade">Arcade</a> - La vista de Arcade contiene el modo individual. En él podemos elegir una de las bestias disponibles para luchar contra ella. Se encuentran ordenadas por dificultad, de menor a mayor, y cada una tiene unas estadísticas diferentes. Cada bestia da unas cantidades de puntos de experiencia y de oro por vencerla. 
-<h3> Falta aún (para el día 2): </h3>
-<li> En la vista nuevoObjeto, el panel de ataques sólo se mostrará si el objeto a crear es una espada.
-<li> En la vista de combate, se podrá elegir el ataque (actualmente tiene uno por defecto) a usar y se tendrán en cuenta los objetos equipados.
-<li> Combate aleatorio dará dinero y experiencia. Combate por búsqueda no dará.
+
 </ul>
 <h2>Recursos externos utilizados</h2>
 <ul>

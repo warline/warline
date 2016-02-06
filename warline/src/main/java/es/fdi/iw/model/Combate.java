@@ -11,13 +11,14 @@ public class Combate {
 	private int i;
 	private boolean gan;
 	private Zascadas resumen;
+	private int recompensa;
 	
 
 
 
 public Combate(Heroe h, Heroe b){
-	this.a=new Combatiente(h,0, new Ataque("Puñetazo", 80, 100 ,1001));
-	this.b=new Combatiente(b, 0, new Ataque("Puñetazo", 80, 100, 1001));
+	this.a=new Combatiente(h, 0, new Ataque("Puñetazo", 80, 100, 400));
+	this.b=new Combatiente(b, 0, new Ataque("Puñetazo", 80, 100, 400));
 	this.t=600;
 	ganador="no";
 	setGan(false);
@@ -90,8 +91,8 @@ public void actualizaCombate(){
 
 public Golpe golpe(){	
 	Golpe golpe = new Golpe("Fallo",0);
-	int alea = (int) Math.floor(Math.random()*100);
-		if(alea<= (50+(a.getHeroe().getPrecision()/2)*(a.getAtaque().getPorcPrecision()/100))){//vemos si le acierta (con la precision)
+	int alea = (int) Math.floor(Math.random()*100) + (b.getHeroe().getVelocidad()/a.getHeroe().getVelocidad())*5;
+	if(alea<= (50+(a.getHeroe().getPrecision()/2)*(a.getAtaque().getPorcPrecision()/100))){//vemos si le acierta (con la precision)
 		int dano= (int) (a.getHeroe().getFuerza()*a.getAtaque().getPorcDano()/100); //calcula el daño del ataque
 		if(b.getHeroe().getDefensa() / Heroe.MAX_DEFENSA > 0.75)
 			dano -= dano*0.75;
@@ -111,7 +112,7 @@ public Golpe golpe(){
 public Golpe zasca(){
 	Golpe golpe = new Golpe("Fallo",0);
 	
-	int alea = (int) Math.floor(Math.random()*100);
+	int alea = (int) Math.floor(Math.random()*100) +(a.getHeroe().getVelocidad()/b.getHeroe().getVelocidad())*5;
 	if(alea<= (50+b.getHeroe().getPrecision()/2)){//vemos si le acierta (con la precision)
 		int dano= (int) (b.getHeroe().getFuerza()*(b.getAtaque().getPorcDano()/100)); //calcula el daño del ataque
 		if(a.getHeroe().getDefensa() / Heroe.MAX_DEFENSA > 0.75)
@@ -124,7 +125,6 @@ public Golpe zasca(){
 			golpe.dano=dano;	
 			//actualizamos el combate
 			hayGanador();
-			System.err.println(a.getHeroe().getNombre()+"= "+a.getVida());
 		}
 	}
 	return golpe;
@@ -172,6 +172,13 @@ public Zascadas getResumen() {
 
 public void setResumen(Zascadas resumen) {
 	this.resumen = resumen;
+}
+
+public int getRecompensa() {
+	return this.recompensa;
+}
+public void setRecompensa(int r){
+	this.recompensa=r;
 }
 
 }

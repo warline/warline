@@ -27,7 +27,6 @@
 			type: "POST",
 			data: data,
 			success: function(d) {
-				console.log("Esto funciona", d);
 				actualizarStats(d);
 			}
 		});	
@@ -187,11 +186,11 @@
 				<c:forEach var="i" items="${user.heroe.inventario}">
 					<c:set var = "k" value = "0" scope = "session"/>
 					<c:if test="${k%5 == 0}"> <tr> </c:if>
-							<td>
-								<div id = "imagenObjeto" 
+							<td id = "imagenObjeto">
+								<div id = "imagenObjeto"
 										onmouseout = "desaparecePerfil()" 
 										onmouseover = "aparecePerfil(event, '${i.id}', '${i.fuerza}', '${i.defensa}', '${i.velocidad}', '${i.precision}', '${i.nivel}', '${i.vida}', '${i.precio}', '${i.tipo.nombreTipo}', '${i.nombre}')" >
-									<form action="equiparObjeto" method="POST">
+									<form  action="equiparObjeto" method="POST">
 										<button name="idObjeto" type = "submit" value = "${i.id}"><img src = "objeto/photo?id=${i.id}" align="middle"/></button> 
 									</form>
 									

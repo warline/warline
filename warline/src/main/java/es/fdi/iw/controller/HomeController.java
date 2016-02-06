@@ -100,7 +100,7 @@ public class HomeController {
 						logger.info("pass was valid");				
 						session.setAttribute("user", u);
 						if(u.getRole().equals("user"))
-							formSource = "perfil";
+							formSource = "redirect:perfil";
 						else if(u.getRole().equals("admin")){
 							return "redirect:" + gestionUsuarios(model, session);
 						}
@@ -145,7 +145,7 @@ public class HomeController {
 			Model model, HttpSession session) {
 
 		logger.info("Login attempt from '{}' while visiting '{}'", formLogin);
-		
+
 		//Comprobamos los datos introducidos
 		if (formLogin == null || formLogin.length() < 4 ||
 				formNombre == null || formNombre.length() < 4 ||
@@ -154,7 +154,7 @@ public class HomeController {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return "registrar";
 		}
-		
+
 		//Comprobamos que su correo este disponible
 		User u = null;
 		try{
@@ -165,7 +165,7 @@ public class HomeController {
 				return "registrar";
 			}
 		}catch (NoResultException nre) {}
-		
+
 		//Comprobamos que el nombre de heroe no este usado
 		Heroe h = null;
 		try {
@@ -176,10 +176,10 @@ public class HomeController {
 				return "registrar";
 			}
 		} catch (NoResultException nre) {}
-		
-		
+
+
 		User user = User.createUser(formLogin, formPass, "user", formNombre);
-			
+
 		if(formPass.equals(formRePass)){
 			user.getHeroe().setImagen(formImagen);
 			entityManager.persist(user.getHeroe());
@@ -187,7 +187,7 @@ public class HomeController {
 			session.setAttribute("user", user);
 			return "redirect:perfil";
 		}
-		
+
 		model.addAttribute("registrerError", "¡La contraseña no es la misma en los dos campos!");
 		return "registrar";
 	}
@@ -203,8 +203,8 @@ public class HomeController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	
-	
+
+
 
 	/****************************************************************************/
 
@@ -223,15 +223,14 @@ public class HomeController {
 	@RequestMapping(value = "/perfil", method = RequestMethod.GET)
 	public String perfil(Model model , HttpSession session) {
 		User u = (User)session.getAttribute("user");
-		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
 		if(u == null) return "login";
 		else {
 			model.addAttribute("constantesHeroe", Heroe.getJsonConstants());
 			return "perfil";
 		}
 	}
-	
-	
+
+
 
 	@Transactional
 	@RequestMapping(value = "/equiparObjeto", method = RequestMethod.POST)
@@ -239,7 +238,6 @@ public class HomeController {
 			@RequestParam("idObjeto") long id,
 			Model model, HttpSession session) {
 
-		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
 		try{
 			Item i = (Item)entityManager.find(Item.class, id);
 			User u = (User)session.getAttribute("user");
@@ -250,14 +248,13 @@ public class HomeController {
 		//DUDA: ES NECESARIO LLAMAR A PERFIL () O  VALDRIA PERFIL
 		return "redirect:perfil";
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/desequiparObjeto", method = RequestMethod.POST)
 	public String desequiparObjeto(
 			@RequestParam("idObjeto") long id,
 			Model model, HttpSession session) {
-		
-		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
+
 		try{
 			Item i = (Item)entityManager.find(Item.class, id);
 			User u = (User)session.getAttribute("user");
@@ -276,8 +273,6 @@ public class HomeController {
 			@RequestParam("subir") String stat,
 			HttpSession session,
 			Model model) {
-
-		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
 
 		boolean modificado = false;
 
@@ -316,15 +311,15 @@ public class HomeController {
 		}
 		StringBuilder sb = new StringBuilder("");
 		sb.append("{"
-					+ "\"vida\": \"" + h.getVida() + "\", "
-					+ "\"fuerza\": \"" + h.getFuerza() + "\", "
-					+ "\"precision\": \"" + h.getPrecision() + "\", "
-					+ "\"defensa\": \"" + h.getDefensa() + "\", "
-					+ "\"velocidad\": \"" + h.getVelocidad() + "\", "
-					+ "\"puntosHab\": \"" + h.getPuntosHab() + "\"}");
-		
+				+ "\"vida\": \"" + h.getVida() + "\", "
+				+ "\"fuerza\": \"" + h.getFuerza() + "\", "
+				+ "\"precision\": \"" + h.getPrecision() + "\", "
+				+ "\"defensa\": \"" + h.getDefensa() + "\", "
+				+ "\"velocidad\": \"" + h.getVelocidad() + "\", "
+				+ "\"puntosHab\": \"" + h.getPuntosHab() + "\"}");
+
 		model.addAttribute("constantesHeroe", Heroe.getJsonConstants());
-		
+
 		return new ResponseEntity<String>(sb + "", HttpStatus.OK);
 	}
 
@@ -353,6 +348,7 @@ public class HomeController {
 			@RequestParam("idObjeto") String _id,
 			@RequestParam("idUser") String _idUs,Model model,HttpSession session) {
 		StringBuilder sb = new StringBuilder("[");
+		StringBuilder error = new StringBuilder("");
 		long id = Long.parseLong(_id);
 		long idUs = Long.parseLong(_idUs);
 		try{
@@ -363,7 +359,6 @@ public class HomeController {
 				for(Item a: us.getHeroe().getInventario()){
 					if (sb.length()>1) sb.append(",");
 					sb.append("{"
-							//apareceArmeria('${i.id}', '${i.fuerza}', '${i.defensa}', '${i.velocidad}', '${i.precision}', '${i.nivel}', '${i.vida}', '${i.precio}', '${i.tipo.nombreTipo}', '${i.nombre}')
 							+ "\"fuerza\": \"" + a.getFuerza() + "\", "
 							+ "\"defensa\": \"" + a.getDefensa() + "\", "
 							+ "\"velocidad\": \"" + a.getVelocidad() + "\", "
@@ -378,14 +373,15 @@ public class HomeController {
 				sb.append("]");
 				session.setAttribute("user", us);
 			} catch(Exception e) {
-				logger.info("error en comprar", e);
-				return new ResponseEntity<String>(sb + "", HttpStatus.OK);
+				logger.info("error en comprar", e.getMessage());
+				error.append("{"
+						+ "\"message\": \"" + e.getMessage() + "\"}");
+				return new ResponseEntity<String>(error + "", HttpStatus.BAD_REQUEST);
 			}
 			logger.info("Devolviendo " + sb);
 			System.err.println(sb);
 			return new ResponseEntity<String>(sb + "", HttpStatus.OK);
 		} catch(NoResultException nre){
-
 			logger.info("error en comprar", nre);
 			return new ResponseEntity<String>(nre.getMessage(), HttpStatus.BAD_REQUEST);
 		}	
@@ -442,19 +438,8 @@ public class HomeController {
 		return new ResponseEntity<String>(sb + "", HttpStatus.OK);
 	}
 
+	/********************** FUNCIONES DE COMBATES ************************************/
 
-
-	/*
-	@ResponseBody
-	@RequestMapping(value = "/objetosUsuario", method = RequestMethod.GET)
-	public String venderObjeto(HttpSession session) {
-		User u = (User)session.getAttribute("user");
-		User us = (User)entityManager.find(User.class, u.getId());
-		return us.getHeroe().itemListAsJson();
-	}
-*/
-	/**
-	 * @param c *************************************************************************/
 	@RequestMapping(value = "/combate", method = RequestMethod.GET)
 	public String combate(Heroe rival, Model model , HttpSession session, Combate c) {
 		String formSource = "combate";
@@ -474,9 +459,6 @@ public class HomeController {
 
 	/****************************** ARENA **************************************/
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "/arena", method = RequestMethod.GET)
 	public String arena(Bestia b, Model model, HttpSession session, CombateBestia c) {
 		String formSource = "combateBestia";
@@ -498,7 +480,6 @@ public class HomeController {
 	@RequestMapping(value = "/lobby", method = RequestMethod.GET)
 	public String lobby(Model model , HttpSession session) {
 		String formSource = "lobby";
-		//DUDA:SI ES ADMIN SACARLE A GESTION_USUARIOS???????????????
 		List<Heroe> t = null;		
 		User u = (User)session.getAttribute("user");
 		if(u == null) formSource = "login";
@@ -514,12 +495,12 @@ public class HomeController {
 	public String buscarAmigo(
 			@RequestParam("busqueda") String amigo,
 			Model model, HttpSession session) {
-		
+
 		String formSource = "";
 		Heroe rival = null;
 		boolean fallo = true;
 		Exception e;
-		
+
 		try{
 			User yo = (User)session.getAttribute("user");
 			if(!amigo.equals(yo.getHeroe().getNombre())){
@@ -541,22 +522,22 @@ public class HomeController {
 		}
 		return formSource;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	@RequestMapping(value = "/combateAleatorio", method = RequestMethod.POST)
 	public String combateAleatorio (Model model, HttpSession session) {
-		
+
 		String formSource = "";
 		List<Heroe> a = null;
 		Heroe rival = null;
-//sacamos una lista de los heroes en la BD. Quitamos el nuestro de la lista.
+		//sacamos una lista de los heroes en la BD. Quitamos el nuestro de la lista.
 
 		try{//Sacamos un id aleatorio de esa lista. Sacamos el heroe con ese id. Lo sacamos con el modelo.
 			User yo = (User)session.getAttribute("user");
 			a = (List<Heroe>)entityManager.createNamedQuery("todosMenosYo").setParameter("yo", yo.getHeroe().getId()).getResultList();
 			long alea;
-			
+
 			if(!a.isEmpty()){	
 				alea = (long) Math.floor(Math.random()*(a.size())) + 1;
 				rival = (Heroe)entityManager.createNamedQuery("miHeroe").setParameter("idParam", alea).getSingleResult();
@@ -564,16 +545,16 @@ public class HomeController {
 				Combate c= new Combate(yo.getHeroe(), rival);
 				formSource=combate(rival, model, session, c);
 			}else throw new NoResultException();
-			
+
 		} catch(NoResultException nre){ //hipotetico caso de que solo haya un heroe en la base de datos	
 			Exception e = new Exception("No se ha podido encontrar otro héroe :'(");
 			model.addAttribute("falloAleatorio", e);
 			formSource=lobby(model, session);			
 		}
-		
+
 		return formSource;
 	}
-	
+
 	@RequestMapping(value = "/cambioAtaqueB", method = RequestMethod.POST)
 	public String cambioAtaqueB(@RequestParam("id") long atq, Model model, HttpSession session){
 		Ataque a= (Ataque) entityManager.find(Ataque.class, atq);
@@ -582,7 +563,7 @@ public class HomeController {
 		session.setAttribute("combate", c);
 		return arena(c.getB(),model,session,c);
 	}
-	
+
 	@RequestMapping(value = "/cambioAtaqueH", method = RequestMethod.POST)
 	public String cambioAtaqueH(@RequestParam("id") long atq, Model model, HttpSession session){
 		Ataque a= (Ataque) entityManager.find(Ataque.class, atq);
@@ -591,12 +572,12 @@ public class HomeController {
 		session.setAttribute("combate", c);
 		return combate(c.getB().getHeroe(), model, session, c);
 	}
-	
+
 	@ResponseBody
 	@Transactional
 	@RequestMapping(value = "/luchaHeroe", method = RequestMethod.POST)
 	public ResponseEntity<String> luchaHeroe(@RequestParam ("at") int at,
-						Model model,HttpSession session){
+			Model model,HttpSession session){
 
 		User u = (User)session.getAttribute("user");
 		User us = (User)entityManager.find(User.class, u.getId());
@@ -609,29 +590,66 @@ public class HomeController {
 			default: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt1());break;
 			}
 		}
-		
+
 		c.getB().ataqueAleatorio();
-		
+
 		c.actualizaCombate();
+		int rec=0;
+		if (c.isGan()) {
+			model.addAttribute("ganador", c.getGanador());
+			if (c.getGanador().equals("heroe")){
+				rec = us.getHeroe().recompensaHeroes(c.getB().getHeroe());
+				c.setRecompensa(rec);
+				session.setAttribute("user", us);
+			}
+		}
 		session.setAttribute("combate", c);
-		
+		Gson g= new Gson();
+
+		return new ResponseEntity<String>(g.toJson(c), HttpStatus.OK);
+	}
+
+	@Transactional
+	@RequestMapping(value = "/arena", method = RequestMethod.POST)
+	public String combateBestia(
+			@RequestParam("id") long id,Model model,HttpSession session){
+		User u =(User)session.getAttribute("user");
+		Heroe h = new Heroe(u.getHeroe());
+		Bestia b = (Bestia)entityManager.find(Bestia.class, id);
+		CombateBestia c= new CombateBestia(h, b);
+		return arena(b,model,session,c);
+	}
+
+	@ResponseBody
+	@Transactional
+	@RequestMapping(value = "/luchar", method = RequestMethod.POST)
+	public ResponseEntity<String> luchar(@RequestParam ("at") int at, 
+			Model model, HttpSession session){
+		User u = (User)session.getAttribute("user");
+		User us = (User)entityManager.find(User.class, u.getId());
+		CombateBestia c = (CombateBestia)session.getAttribute("combate");
+		if(c.getA().getHeroe().getEspada()!=null){
+			switch(at){
+			case 2: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt2());break;
+			case 3: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt3());break;
+			default: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt1());break;
+			}
+		}
+
+		c.actualizaCombate();
+
+		session.setAttribute("combate", c);
 		if (c.isGan()) {
 			model.addAttribute("ganador",c.getGanador());
 			if (c.getGanador().equals("heroe")){
-				us.getHeroe().recompensaHeroes(c.getB().getHeroe());
+				c.setRecompensa(us.getHeroe().recompensa(c.getB()));
 				session.setAttribute("user", us);
 			}
 		}
 		Gson g= new Gson();
-		
+
 		return new ResponseEntity<String>(g.toJson(c), HttpStatus.OK);
 	}
-	
-
-	/***************************************************************************/
-
-
-	/****************************** ARCADE *************************************/
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/arcade", method = RequestMethod.GET)
@@ -646,7 +664,6 @@ public class HomeController {
 		} catch(NoResultException nre){}
 		return formSource;
 	}
-
 
 	/***************************************************************************/
 
@@ -683,7 +700,7 @@ public class HomeController {
 			HttpSession session) {
 
 		if(!isAdmin(session)) return new ResponseEntity<String>("No eres admin!", HttpStatus.BAD_REQUEST);
-			
+
 		try{
 			User i = (User)entityManager.find(User.class, id);
 			if (!i.getRole().equals("admin")) entityManager.remove(i.getHeroe());
@@ -693,10 +710,10 @@ public class HomeController {
 			nre.printStackTrace();
 			return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
 		}
-		
+
 		StringBuilder sb = new StringBuilder("");
 		sb.append("{" + "\"Mensaje\": \"" + "Eliminado correctamente." + "\"}");
-		
+
 		return new ResponseEntity<String>(sb + "", HttpStatus.OK);
 	}
 
@@ -706,17 +723,17 @@ public class HomeController {
 	public ResponseEntity<String> banearUsuario(
 			@RequestParam("idUsuario") long id,
 			Model model, HttpSession session) {
-		
+
 		if(!isAdmin(session)) return new ResponseEntity<String>("No eres admin!", HttpStatus.BAD_REQUEST);
 		try{
 			User i = (User)entityManager.find(User.class, id);
 			if(i.isBanned()) i.setBanned(false);
 			else i.setBanned(true);
-			
+
 			StringBuilder sb = new StringBuilder("");
 			sb.append("{" + "\"baneado\": \"" + i.isBanned() + "\"}");
 			return new ResponseEntity<String>(sb + "", HttpStatus.OK);
-			
+
 		} catch(NoResultException nre){
 			nre.printStackTrace();
 			return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
@@ -848,13 +865,13 @@ public class HomeController {
 			Model model, HttpSession session, HttpServletRequest request) {
 
 		String formSource = "nuevoObjeto";
-
+		if(!isAdmin(session)) return formSource;
 		//HABRIA QUE COMPROBAR SI EL DE LA SESION ES ADMIN?????????????
 		boolean modificando = !idObj.equals("");
 
 		double formVida=0,dano1=0,dano2=0,dano3=0,precision1=0,precision2=0,precision3=0;
 		int formNivel, formFuerza=0, formPrecision=0, formDefensa=0, 
-		formVelocidad=0, formPrecio=0;
+				formVelocidad=0, formPrecio=0;
 
 		long velocidad1=0,velocidad2=0,velocidad3=0;
 
@@ -921,7 +938,7 @@ public class HomeController {
 				entityManager.persist(a2);
 				entityManager.persist(a3);
 			} catch(Exception e){}
-		
+
 		Item item = new Item(formNombre, formVida, formFuerza, formDefensa,
 				formVelocidad, formPrecision, formTipo, formPrecio, formNivel,a1,a2,a3);
 
@@ -948,9 +965,9 @@ public class HomeController {
 			@RequestParam("idObjeto") long id,
 			Model model, HttpSession session) {
 
-		
+
 		if(!isAdmin(session)) return new ResponseEntity<String>("No eres admin!", HttpStatus.BAD_REQUEST);
-		
+
 		try{
 			Item i = (Item)entityManager.find(Item.class, id);
 			entityManager.remove(i);
@@ -959,12 +976,12 @@ public class HomeController {
 			nre.printStackTrace();
 			return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
 		}
-		
+
 		StringBuilder sb = new StringBuilder("");
 		sb.append("{" + "\"Mensaje\": \"" + "Eliminado correctamente." + "\"}");
-		
+
 		return new ResponseEntity<String>(sb + "", HttpStatus.OK);
-		
+
 	}
 
 	@ResponseBody
@@ -1035,18 +1052,20 @@ public class HomeController {
 			@RequestParam("nombreViejo") String nombreViejo,
 			@RequestParam("nombreBestia") String formNombre,
 			@RequestParam("photo") MultipartFile photo,
+			@RequestParam("recompensa") String recNombre,
 			Model model, HttpSession session, HttpServletRequest request) {
 
 		String formSource = "nuevaBestia";
-		//HABRIA QUE COMPROBAR SI EL DE LA SESION ES ADMIN??????????????	
+		
+		User u = (User)session.getAttribute("user");
+		if(!isAdmin(session)) return formSource;
 		boolean modificando;
-
-		double formVida;
+		Item i = null;
+		double formVida,porcRecom = 0;
 		int formNivel, formFuerza, formPrecision, formDefensa,
 		formVelocidad, formExp, formOro;
 
 		modificando = !idObj.equals("");
-
 		//Comprobamos que los datos son correctos
 		if (formNombre == null || formNombre.length() < 4) {
 			model.addAttribute("bestiaError", 
@@ -1057,6 +1076,7 @@ public class HomeController {
 		try {
 			formNivel = Integer.parseInt(request.getParameter("nivel"));
 			formVida = Double.parseDouble(request.getParameter("vida"));
+			porcRecom = Double.parseDouble(request.getParameter("porcRecompensa"));
 			formFuerza = Integer.parseInt(request.getParameter("fuerza"));
 			formPrecision = Integer.parseInt(request.getParameter("precision"));
 			formDefensa = Integer.parseInt(request.getParameter("defensa"));
@@ -1067,26 +1087,36 @@ public class HomeController {
 			model.addAttribute("bestiaError", "Error al introducir datos");
 			return formSource;
 		}		
-
+		if(porcRecom > 100 || porcRecom < 0){
+			model.addAttribute("bestiaError", "porcentaje de recompensa invalido");
+			return formSource;
+		}
 		/* Comprobamos que si estamos modificando y nos han cambiado
 		 * el nombre o estamos creando uno nuevo (nombreViejo = null)
 		 * no este en uso*/
+		
 		if (!nombreViejo.equals(formNombre)) {
 			try {
-				Bestia b = (Bestia)entityManager.createNamedQuery("itemByName")
+				Bestia b = (Bestia)entityManager.createNamedQuery("bestiaByName")
 						.setParameter("nombreParam", formNombre).getSingleResult();
 				if (b != null) {
 					model.addAttribute("bestiaError", "El nombre ya esta en uso");
 					return formSource;
-				}
+				}		
 			} catch (NoResultException nre) {}
 		}
-
+		try{
+			i = (Item)entityManager.createNamedQuery("itemByName")
+					.setParameter("nombreParam", recNombre).getSingleResult();
+		}catch(NoResultException nre){
+			model.addAttribute("bestiaError", "el item introducido no existe");
+			return formSource;
+		}
 		//No hay errores por tanto volveremos a gestion cuando lo creemos
 		formSource = gestionBestias(model,session);
 
 		Bestia bestia = new Bestia(formFuerza, formDefensa, formVida, formPrecision,
-				formVelocidad, formNivel, formNombre, formExp, formOro);
+				formVelocidad, formNivel, formNombre, formExp, formOro,i,porcRecom);
 
 		if (modificando) {
 			//parseamos el string ya que sabemos que es distinto de null
@@ -1114,7 +1144,7 @@ public class HomeController {
 			Model model,HttpSession session) {
 
 		if(!isAdmin(session)) return new ResponseEntity<String>("No eres admin!", HttpStatus.BAD_REQUEST);
-		
+
 		try{
 			Bestia i = (Bestia)entityManager.find(Bestia.class, id);
 			entityManager.remove(i);
@@ -1123,10 +1153,10 @@ public class HomeController {
 			nre.printStackTrace();
 			return new ResponseEntity<String>("Error", HttpStatus.BAD_REQUEST);
 		}
-		
+
 		StringBuilder sb = new StringBuilder("");
 		sb.append("{" + "\"Mensaje\": \"" + "Eliminado correctamente." + "\"}");
-		
+
 		return new ResponseEntity<String>(sb + "", HttpStatus.OK);
 	}
 
@@ -1147,50 +1177,6 @@ public class HomeController {
 
 	/*************************************************************/
 
-	/******************************************************************************/
-//De arcade a combateBestia
-	@Transactional
-	@RequestMapping(value = "/arena", method = RequestMethod.POST)
-	public String combateBestia(
-			@RequestParam("id") long id,Model model,HttpSession session){
-		User u =(User)session.getAttribute("user");
-		Bestia b = (Bestia)entityManager.find(Bestia.class, id);
-		CombateBestia c= new CombateBestia(u.getHeroe(),b);
-		return arena(b,model,session,c);
-	}
-
-	@ResponseBody
-	@Transactional
-	@RequestMapping(value = "/luchar", method = RequestMethod.POST)
-	public ResponseEntity<String> luchar(@RequestParam ("at") int at, 
-							Model model, HttpSession session){
-		User u = (User)session.getAttribute("user");
-		User us = (User)entityManager.find(User.class, u.getId());
-		CombateBestia c = (CombateBestia)session.getAttribute("combate");
-		if(c.getA().getHeroe().getEspada()!=null){
-			switch(at){
-			case 2: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt2());break;
-			case 3: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt3());break;
-			default: c.getA().setAtaque(c.getA().getHeroe().getEspada().getAt1());break;
-			}
-		}
-	
-		c.actualizaCombate();
-		
-		session.setAttribute("combate", c);
-		
-		if (c.isGan()) {
-			model.addAttribute("ganador",c.getGanador());
-			if (c.getGanador().equals("heroe")){
-				us.getHeroe().recompensa(c.getB());
-				session.setAttribute("user", us);
-			}
-		}
-		Gson g= new Gson();
-		
-		return new ResponseEntity<String>(g.toJson(c), HttpStatus.OK);
-	}
-	
 
 	/**************************************************************************************************/
 

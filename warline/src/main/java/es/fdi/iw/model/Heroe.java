@@ -50,6 +50,7 @@ public class Heroe {
 	public static int XP_POR_NIVEL = 100;
 	private int expSiguienteNivel;
 
+	
 	public int getExpSiguienteNivel() {
 		return expSiguienteNivel;
 	}
@@ -104,6 +105,27 @@ public class Heroe {
 		this.escudo = null;
 		this.botas = null;
 		
+	}
+	
+	public Heroe(Heroe h){
+		this.nombre = h.getNombre();
+		this.vida = h.getVida();
+		this.defensa = h.getDefensa();
+		this.fuerza = h.getFuerza();
+		this.velocidad = h.getVelocidad();
+		this.precision = h.getPrecision();
+		this.inventario = new ArrayList<Item>(TAM_INVENT);
+		this.nivel = h.getNivel();
+		this.oro = 200;
+		this.xp = 0;
+		this.puntosHab = 10;
+		this.expSiguienteNivel=XP_POR_NIVEL;
+		
+		this.casco = h.getCasco();
+		this.espada = h.getEspada();
+		this.armadura = h.getArmadura();
+		this.escudo = h.getEscudo();
+		this.botas = h.getBotas();
 	}
 	
 	public void sumarObjetos(){
@@ -217,57 +239,6 @@ public class Heroe {
 		if(viejo != null)
 			inventario.add(viejo);
 	}
-	/*
-	public String getJsonStatistics(){
-		double vida = 0;
-		int defensa = 0, fuerza = 0, velocidad = 0, precision = 0;
-		
-		if (this.casco != null) {
-			vida += this.casco.getVida();
-			defensa += this.casco.getDefensa();
-			fuerza += this.casco.getFuerza();
-			velocidad += this.casco.getVelocidad();
-			precision += this.casco.getPrecision();
-		}
-		
-		if (this.espada != null) {
-			vida += this.espada.getVida();
-			defensa += this.espada.getDefensa();
-			fuerza += this.espada.getFuerza();
-			velocidad += this.espada.getVelocidad();
-			precision += this.espada.getPrecision();
-		}
-		
-		if (this.armadura != null) {
-			vida += this.armadura.getVida();
-			defensa += this.armadura.getDefensa();
-			fuerza += this.armadura.getFuerza();
-			velocidad += this.armadura.getVelocidad();
-			precision += this.armadura.getPrecision();
-		}
-		
-		if (this.escudo != null) {
-			vida += this.escudo.getVida();
-			defensa += this.escudo.getDefensa();
-			fuerza += this.escudo.getFuerza();
-			velocidad += this.escudo.getVelocidad();
-			precision += this.escudo.getPrecision();
-		}
-		
-		if (this.botas != null) {
-			vida += this.botas.getVida();
-			defensa += this.botas.getDefensa();
-			fuerza += this.botas.getFuerza();
-			velocidad += this.botas.getVelocidad();
-			precision += this.botas.getPrecision();
-		}
-
-		return  "{\"vida\" : " + vida + ","
-				+"\"defensa\" : " +  defensa + ","
-				+"\"fuerza\" : " + fuerza + ","
-				+"\"velocidad\" : " + velocidad + ","
-				+"\"velocidad\" : " + precision + "}";
-	}*/
 
 	public static String getJsonConstants() {
 		return  "{\"MAX_VIDA\" : " + MAX_VIDA + ","
@@ -343,14 +314,7 @@ public class Heroe {
 	public void setPrecision(int precision) {
 		this.precision = precision;
 	}
-	/*
-	public String itemListAsJson() {
-		Gson g1 = new Gson();
-		Gson g2 = new Gson();
-		return "{ \"equipo\": " + g1.toJson(getEquipo()) 
-			+ ", \"inventario\": " + g2.toJson(getInventario()) + "}";
-	}
-*/
+
 	@ManyToMany(targetEntity = Item.class, fetch= FetchType.EAGER)
 	public List<Item> getInventario() {
 		return inventario;
@@ -410,9 +374,20 @@ public class Heroe {
 		this.puntosHab = puntosHab;
 	}
 	
-	public void recompensa(Bestia b){
+	public boolean recompensa(Bestia b){
+		boolean recompensa=false;
 		oro+=b.getOro();
-		xp+=b.getExp();
+		double alea = Math.floor(Math.random() * 100);
+		if(alea<=b.getPorcRecompensa() && this.inventario.size() <= TAM_INVENT){
+			inventario.add(b.getRecompensa()); 
+			recompensa=true;
+		} 
+		subirExp(b.getExp());
+		return recompensa;
+	}
+
+	private void subirExp(int exp){
+		xp+=exp;
 		if(xp>=expSiguienteNivel){
 			xp-=expSiguienteNivel;
 			nivel++;
@@ -420,17 +395,13 @@ public class Heroe {
 			puntosHab+=10;
 		}
 	}
-	
-	public void recompensaHeroes(Heroe r){
+
+	public int recompensaHeroes(Heroe r){
 		if(this.nivel <= r.getNivel()){
-			xp += (r.getNivel())*40;
-			if(xp>=expSiguienteNivel){
-				xp-=expSiguienteNivel;
-				nivel++;
-				expSiguienteNivel=XP_POR_NIVEL*nivel;
-				puntosHab+=10;
-			}
+			subirExp((r.getNivel())*40);
+			return r.getNivel()*40;
 		}
+		return 0;		
 	}
 	
 	

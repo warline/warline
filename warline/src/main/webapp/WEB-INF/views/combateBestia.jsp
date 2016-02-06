@@ -3,13 +3,14 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/combates/combates.css" />
 <script src="resources/combates/combateBestia.js"></script>
-
+<script src="resources/perfil/perfil.js"></script>
 <script>
 
 $(function() {
 	mostrarVidas(${combate});
 	$("#lucha").click(function(e) {
 		e.preventDefault();	
+		$("#lucha").css("visibility", "hidden");
 		combatir(${combate}); 
 	});
 });
@@ -30,7 +31,6 @@ function combatir(d) {
 				type : "POST",
 				data:"at="+at,
 				success : function(d) {
-					console.log(d);
 					if (d.gan) {
 						window.clearInterval(t);
 					}
@@ -128,18 +128,53 @@ function combatir(d) {
 						<tr><td id="velocidadm"></td><td id="precisionm"></td></tr>
 					</table>
 				</div>
+					
+				<div class = "apanel" id = "recompensa">
+					<p> Recompensas: </p>
+					<p> Recibiste <c:out value = "${rival.oro}"></c:out> monedas de oro. </p>
+					<p> Ganaste <c:out value = "${rival.exp}"></c:out> puntos de exp. </p>
+					<div id = "filarecompensa">
+						<img src = "objeto/photo?id=${rival.recompensa.id}" 
+						onmouseout = "desaparecePerfil()"
+						onmouseover = "aparecePerfil(event, '${rival.recompensa.id}', '${rival.recompensa.fuerza}', '${rival.recompensa.defensa}', '${rival.recompensa.velocidad}', '${rival.recompensa.precision}', '${rival.recompensa.nivel}', '${rival.recompensa.vida}', '${rival.recompensa.precio}', '${rival.recompensa.tipo.nombreTipo}', '${rival.recompensa.nombre}')"/>
+					</div>
+					<form id="volver" action="arcade" method="GET">
+						<div id = "panelBoton">
+							<button id="volverArcade">Volver atras</button>
+						</div>
+					</form>
+					
+				</div>
 				
-
 			</div>
 			<form id="luchaMatic" action="luchar" method="POST">
 				<button id="lucha">¡A LUCHAR!</button>
 			</form>
-			<br />
-
+			<br>
+			
 		</div>
+			<div class = "descripcion" id = "panelInfo">
+				<div id = "divTabla">
+				<table id = "stats">
+					<caption id = "idNombre"></caption>
+					<tr>
+					<td>
+						<p id = "idFuerza"> 
+						<p id = "idDefensa"> 
+						<p id = "idVelocidad"> 
+						<p id = "idPrecision">
+					</td>
+					<td> 
+						<p id = "idNivel">
+						<p id = "idVida">
+						<p id = "idTipo">
+						<p id = "idPrecio">
+					</td>
+					</tr>
+				</table>	
+				</div>	
+			</div>
 	</div>
-	<div id="footer"></div>
-
 </div>
 
 </body>

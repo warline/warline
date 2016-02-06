@@ -3,11 +3,27 @@
 	href="resources/gestion/gestion.css">
 
 <script>
+
+	function cambioFiltro() {
+		var valor = $("#opcionBusqueda").val();
+		if (valor == 1) {
+		 	$("#busqueda").attr("placeholder", "Busqueda por nombre de heroe...");
+		} else if (valor == 2) {
+			$("#busqueda").attr("placeholder", "Busqueda por correo...");
+		} else if (valor == 3) {
+			$("#busqueda").attr("placeholder", "Busqueda por estado...");
+		} else {
+			$("#busqueda").attr("placeholder", "Busqueda por rol...");
+		}
+		aplicarFiltro();
+	}
+	
 	function aplicarFiltro() {
+		var filtro = $("#opcionBusqueda").val();
 		var value = $("#busqueda").val();
 		$("table tbody tr").each(function(index) {
 			$row = $(this);
-			var id = $row.find("td:first").text();
+			var id = $row.find("td:nth-child(" + filtro + ")").text();
 			if (id.indexOf(value) != 0) {
 				$row.hide();
 			}
@@ -15,7 +31,8 @@
 				$row.show();
 			}
 		});
-	};
+	}
+	
 	function eliminarUsuario(id) {
 		var data = {idUsuario: id}
 		$.ajax({
@@ -67,12 +84,19 @@
 
 			<div id="acuerpo">
 				<div id="find">
-					<input placeholder = "Busqueda por usuario..." id="busqueda" type="text" onkeyup="aplicarFiltro()" />
+					<input placeholder = "Busqueda por nombre de heroe..." id="busqueda" type="text" onkeyup="aplicarFiltro()" />
+					
+					<select id="opcionBusqueda" onchange="cambioFiltro()">
+						<option value = "1"> Usuario </option>
+						<option value = "2"> Correo </option>
+						<option value = "3"> Baneado </option>
+						<option value = "4"> Rol </option>
+					</select>
+					
+					<a href="nuevoAdmin">
+						<button class="botonesGUsu" id="admin"></button>
+					</a>
 				</div>
-
-				<a href="nuevoAdmin">
-					<button class="botonesGUsu" id="admin"></button>
-				</a>
 
 				<div class="apanel" id="panelScroll">
 					<table id="usuarios">

@@ -15,18 +15,12 @@ function venderAjax(id){
 		data: data,
 		success: function(d) {
 			refreshArmeria(d);
-		},
-		fail: function(d) {
-			console.log("Qué injusta es la vida!", d);
 		}
 	})		
 	
 }
 
 function comprarAjax(id,idUser) {
-	// en un manejador de eventos jquery, el "this" inicial es el elemento DOM sobre el que se lanza el evento
-	// por tanto, $(this) es el elemento JQuery que lo envuelve 
-	// el id del libro cuyos autores buscamos
 	var data = { idObjeto: id, idUser: idUser }; 
 	$.ajax({
 		dataType: "json",
@@ -36,11 +30,14 @@ function comprarAjax(id,idUser) {
 		success: function(d) {
 			refreshArmeria(d);
 		},
-		fail: function(d) {
-			console.log("Qué injusta es la vida!", d);
+		error: function(d){
+			muestraError(d);
 		}
 	})	
-	
+}
+
+function muestraError(d){
+	$("#excepciones").html("No tienes dinero suficiente");
 }
 
 function actualizaDinero(){
@@ -50,14 +47,12 @@ function actualizaDinero(){
 		type: "POST",
 		success: function(d) {
 			refrescaDinero(d);
-		},
-		fail: function(d) {
-			console.log("Qué injusta es la vida!", d);
 		}
 	})	
 }
 function refrescaDinero(d){
 	$(".adineroAjax").html("Monedas: " + d.dinero);
+	$("#excepciones").html("");
 }
 
 function refreshArmeria(items){

@@ -15,8 +15,8 @@ h3{
 }
 
 .apanel {
-	margin-top: 30px;
-    height: 300px;
+	margin-top: 50px;
+    height: 360px;
     width: 800px;
 	background-color: #0a2735; /* azul turquesa oscuro*/
 	border:3px solid #474747; /*gris oscuro*/
@@ -24,6 +24,7 @@ h3{
 
 #find {
 	margin-top: 20px;
+	height: 50px;
 }
 
 #find input[type= "text"]{
@@ -45,7 +46,7 @@ h3{
 
 .apanel table {
 	width: 800px;
-	height: 300px;
+	height: 360px;
 	position: absolute;
 	margin-top: 0px;
     margin-left: 0px;
@@ -106,7 +107,7 @@ table tbody {
 	top: 40px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	height: 250px;
+	height: 310px;
 	width: 800px;
 }
 
@@ -139,10 +140,16 @@ div #capaMadre{
 
 #anadir{
 	background-image:url("fotos/anadir.png");
+	margin-right: 50px;
+	float: right;
+	margin-top: 0px;
 }
 
 #admin{
 	background-image:url("fotos/admin.png");
+	margin-right: 50px;
+	float: right;
+	margin-top: 0px;
 }
 
 #filtrar{
@@ -164,3 +171,6 @@ div #capaMadre{
 	height: 120px;
 }
 
+#opcionBusqueda {
+	height: 25px;
+}

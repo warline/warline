@@ -4,22 +4,12 @@
 <script src="resources/combates/combateHeroe.js"></script>
 
 <script>
-/* 	$(function() {
-		mostrarVidas('${combate}');
-		if ('${resumen}')
-			textoFlota('${resumen}');
-		var comb= JSON.parse('${combate}');
-		if(!comb.gan){
-			window.setTimeout(function() {
-				$("#luchaMatic").submit();
-			}, 600);
-		}
-	});
-	 */
+
 	 $(function() {
 			mostrarVidas(${combate});
 			$("#lucha").click(function(e) {
-				e.preventDefault();	
+				e.preventDefault();
+				$("#lucha").css("visibility", "hidden");
 				combatir(${combate}); 
 			});
 		});
@@ -40,7 +30,6 @@
 						type : "POST",
 						data:"at="+at,
 						success : function(d) {
-							console.log(d);
 							if (d.gan) {
 								window.clearInterval(t);
 							}
@@ -105,11 +94,9 @@
 						<div class="imgm" id="dmalo" >
 							<img class= "foto" id="imalo" src="${rival.imagen}"></img>
 						</div>
-						<c:if test= "${ganador=='heroe'}">
 							<div class="sangre" id="dsangrem">
 								<img class= "foto" id="isangrem" src ="resources/combates/fotos/sangre2.png"></img>
 							</div>
-						</c:if>
 						<div class=vidam id="vidamalomax" ></div>					
 						<div class=vidam id="vidamalo"></div>						
 						<div class="textoFlotante" id="textoMalo"></div>
@@ -124,9 +111,17 @@
 						<tr> <td id ="velocidadm"></td> <td id ="precisionm"></td></tr>
 					
 					</table>
+				</div>
+				<div class = "apanel" id = "recompensa">
+					<p> Recompensas: </p>
+					<p id="RecompensaHeroe"></p>
+					<form id="volver" action="lobby" method="GET">
+						<div id = "panelBoton">
+							<button id="volverArcade">Volver atras</button>
+						</div>
+					</form>
 					
 				</div>
-				
 			</div>
 			<form id="luchaMatic" action="luchaHeroe" method="POST">
 				<button id="lucha">¡A LUCHAR!</button>				

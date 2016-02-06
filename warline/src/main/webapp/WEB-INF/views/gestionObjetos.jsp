@@ -3,11 +3,24 @@
 	href="resources/gestion/gestion.css">
 
 <script>
+	function cambioFiltro() {
+		var valor = $("#opcionBusqueda").val();
+		if (valor == 2) {
+		 	$("#busqueda").attr("placeholder", "Busqueda por nombre de objeto...");
+		} else if (valor == 3) {
+			$("#busqueda").attr("placeholder", "Busqueda por tipo de objeto...");
+		} else {
+			$("#busqueda").attr("placeholder", "Busqueda por nivel...");
+		}
+		aplicarFiltro();
+	}
+	
 	function aplicarFiltro() {
+		var filtro = $("#opcionBusqueda").val();
 		var value = $("#busqueda").val();
 		$("table tbody tr").each(function(index) {
 			$row = $(this);
-			var id = $row.find("td:nth-child(2)").text();
+			var id = $row.find("td:nth-child(" + filtro + ")").text();
 			if (id.indexOf(value) != 0) {
 				$row.hide();
 			}
@@ -15,7 +28,8 @@
 				$row.show();
 			}
 		});
-	};
+	}
+
 	function eliminarObjeto(id) {
 		var data = {idObjeto: id}
 		$.ajax({
@@ -48,11 +62,19 @@
 
 			<div id="acuerpo">
 				<div id="find">
-					<input placeholder = "Busqueda por nombre..." id="busqueda" type="text" onkeyup = "aplicarFiltro()"/>
+					<input placeholder = "Busqueda por nombre de objeto..." 
+						id="busqueda" type="text" onkeyup = "aplicarFiltro()"/>
+					
+					<select id="opcionBusqueda" onchange="cambioFiltro()">
+						<option value = "2"> Nombre </option>
+						<option value = "3"> Tipo </option>
+						<option value = "4"> Nivel </option>
+					</select>
+					
+					<a href="nuevoObjeto">
+						<button class="botonesGUsu" id="anadir"></button>
+					</a>
 				</div>
-				<a href="nuevoObjeto">
-					<button class="botonesGUsu" id="anadir"></button>
-				</a>
 
 				<div class="apanel">
 					<table>

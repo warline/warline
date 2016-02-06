@@ -1,4 +1,4 @@
-function mostrarVidas(combate, resumen){
+function mostrarVidas(combate){
 	vidaHeroe(combate);
 	vidaMalo(combate);
 	coloresInfo(combate);
@@ -28,7 +28,20 @@ function vidaMalo(comb){
 	var vidam= comb.vidaBestia/(comb.b.vida/70);
 	vidam+="%";
 	caja1.animate({width:vidam},"normal");
-	if(comb.vidaBestia<=0) $("#dsangrem").css("display","inline");
+	if(comb.vidaBestia<=0){
+		setTimeout(function(){
+			if(comb.recompensa){
+				$("#filarecompensa").show();
+				$("#recompensa").css("height","300px");
+			}
+			else{
+				$("#filarecompensa").hide();
+				$("#recompensa").css("height","200px");
+			}
+			$("#recompensa").show();
+		},600);
+		$("#dsangrem").css("display","inline");
+	}
 }
 
 function ataques(heroe){
@@ -58,31 +71,29 @@ function vidaHeroe(comb){
 
 	var caja2=$("#vidaheroemax");
 	caja2.css("backgroundColor","red");
-	if(comb.a.vida<=0) $("#dsangreh").css("display","inline");
+	if(comb.a.vida<=0)$("#dsangreh").css("display","inline");
 }
 
 function textoFlota(res){
 
-	if(res.a.length != 0){
-		$(".imgh").animate({left: "300px"},300);
-		$(".imgh").animate({left: "100px"},300);
+	for(var i=0; i<res.a.length; i++){
+		$(".imgh").animate({left: "300px"}, 300/res.a.length);
+		$(".imgh").animate({left: "100px"}, 300/res.a.length);
 		var textoF = $("#textoMalo");
-		textoF.animate({top: "300px", opacity: 1}, 3);
-		textoF.text(res.a[0].texto + " (-" + res.a[0].dano + ")");
-		textoF.animate({top: "150px", opacity: 0.5}, 600);
-		textoF.animate({ opacity: 0}, 100);
-		
+		textoF.animate({top: "300px", opacity: 1}, 3/res.a.length);
+		textoF.text(res.a[i].texto + " (-" + res.a[i].dano + ")");
+		textoF.animate({top: "150px", opacity: 0.5}, 600/res.a.length);
+		textoF.animate({ opacity: 0}, 100/res.a.length);
 	}
-	if(res.b.length != 0){
-		$(".imgm").animate({left: "-100px"},300);
-		$(".imgm").animate({left: "100px"},300);
+	for(var j=0; j<res.b.length; j++){
+		$(".imgm").animate({left: "-100px"}, 300/res.b.length);
+		$(".imgm").animate({left: "100px"}, 300/res.b.length);
 		var textoF = $("#textoBueno");
-		textoF.animate({top: "300px", opacity: 1}, 3);
-		textoF.text(res.b[0].texto + " (-" + res.b[0].dano + ")");
-		textoF.animate({top: "150px", opacity: 0.5}, 600);
-		textoF.animate({ opacity: 0}, 100);
+		textoF.animate({top: "300px", opacity: 1}, 3/res.b.length);
+		textoF.text(res.b[j].texto + " (-" + res.b[j].dano + ")");
+		textoF.animate({top: "150px", opacity: 0.5}, 600/res.b.length);
+		textoF.animate({ opacity: 0}, 100/res.b.length);
 	}
-	
 }
 
 function coloresInfo(comb){

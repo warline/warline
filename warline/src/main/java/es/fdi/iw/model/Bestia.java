@@ -17,7 +17,9 @@ import javax.persistence.NamedQuery;
     @NamedQuery(name="bestiaByName",
             query="select b from Bestia b where b.nombre= :nombreParam"),
     @NamedQuery(name="delBestia",
-    		query="delete from Bestia b where b.nombre= :nombreParam")
+    		query="delete from Bestia b where b.nombre= :nombreParam"),
+    @NamedQuery(name="findBestia",
+		query="select b from Bestia b where b.nombre LIKE :busqueda")
 })
 public class Bestia {
 	private long id;
@@ -34,10 +36,12 @@ public class Bestia {
 
 	private int exp;
 	private int oro;
-	
+	private double porcRecompensa;
+	private Item recompensa;
 	public Bestia() {}
 	
-	public Bestia(int f, int d, double hp, int p, int vel, int n, String name, int x, int o){
+	public Bestia(int f, int d, double hp, int p, int vel, int n, String name, int x, int o,
+			Item recompensa, double porcRecompensa){
 		this.fuerza = f;
 		this.defensa = d;
 		this.vida = hp;
@@ -47,7 +51,9 @@ public class Bestia {
 		this.nombre = name;
 		this.exp = x;
 		this.oro = o;
-		ataque=new Ataque("Mordisco",1,1,1);
+		this.ataque = new Ataque("Mordisco",100,100,600); //100 porcDano 100 porcAcierto 600 milisegundos
+		this.porcRecompensa = porcRecompensa;
+		this.recompensa = recompensa;
 	}
 	
 	@Id
@@ -154,5 +160,24 @@ public class Bestia {
 		exp = copia.exp;
 		oro = copia.oro;
 	}
+	@ManyToOne(targetEntity = Item.class, fetch= FetchType.EAGER)
+	 public Item getRecompensa() {
+	  return recompensa;
+	 }
+	
+	 public void setRecompensa(Item recompensa) {
+	  this.recompensa = recompensa;
+	 }
+	 
+	 
+	 public double getPorcRecompensa() {
+	  return porcRecompensa;
+	 }
 
+	 public void setPorcRecompensa(double porcRecompensa) {
+	  this.porcRecompensa = porcRecompensa;
+	 }
+	 
+
+	
 }

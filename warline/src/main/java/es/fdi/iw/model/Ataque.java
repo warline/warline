@@ -12,6 +12,18 @@ public class Ataque {
 		private long tiempo;
 		private long id;
 		
+		
+		public Ataque(String nombre, double dano, double precision, long tiempo){
+			this.nombre = nombre;
+			this.porcDano = dano;
+			this.porcPrecision = precision;
+			this.tiempo = tiempo;
+		}
+		
+		public Ataque() {
+			// TODO Auto-generated constructor stub
+		}	
+		
 		@Id
 		@GeneratedValue
 		public long getId() {
@@ -44,15 +56,4 @@ public class Ataque {
 		public long getTiempo() {
 			return tiempo;
 		}
-		
-		public Ataque(String nombre, double dano, double precision, long tiempo){
-			this.nombre = nombre;
-			this.porcDano = dano;
-			this.porcPrecision = precision;
-			this.tiempo = tiempo;
-		}
-		
-		public Ataque() {
-			// TODO Auto-generated constructor stub
-		}	
 }

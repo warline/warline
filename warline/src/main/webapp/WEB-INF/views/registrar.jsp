@@ -52,12 +52,16 @@ $(function() {
 					<div id = "imagenesHeroe">
 						<div class="imgizq" onClick="rotarizd()">
 							<img class= "foto" id="fizd" ></img> 
+							<div class="flecha" id=flechaizd><</div>
 						</div>
+			
 						<div class="imgcent"> 
 							<img class= "foto" id="fcen" ></img>
 						</div>
+						
 						<div class="imgder" onClick="rotarder()">
 							<img class= "foto" id="fder" ></img> 
+							<div class="flecha" id=flechader>></div>
 						</div>
 					</div>
 					<c:if test="${not empty registrerError}">

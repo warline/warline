@@ -202,6 +202,8 @@
 					</table>
 					<br>
 					<hr>
+					<p id = "textoLobby" align = "justify" color = "white"> Recuerda que en el combate por búsqueda, no tienes la posibilidad de obtener recompensa si el héroe al que retas tiene un nivel inferior al tuyo.
+					¡Innumerables recompensas esperan a los jugadores más atrevidos!</p> <br> <p id = "textoLobby"> ¡Demuestra tu valor y reta a un héroe con nivel superior! </p>
 			</div>
 			
 		</div>

@@ -78,16 +78,6 @@
 	border: 3px solid #474747;
 }
 
-/* #equipo table{
-	background-image: url("fotos/fondoEquipo.png");
-	background-size:100%;
-	opacity: 0.8;
-
-}
-#equipo table td{
-	opacity: 0.9;
-}
- */
 #panelInfo{
 	position: absolute;
 	width: 350px;
@@ -119,6 +109,7 @@
 #stats caption{
 	font-weight: bold;
 }
+
 #stats td{
 	width: 50%;
 	height: 50%;
@@ -130,6 +121,7 @@
 	width: 130px;
 	height: 130px;
 }
+
 #equipo {
 	width: 40%;
     height: 30%;
@@ -138,13 +130,11 @@
 
 #inventario {
 	width: 60%;
-    height: 46%;
+    height: 43%;
 	margin-top: 40px;
 }
 
 #inventario table, #equipo table {
-	height: 90%;
-    width: 90%;
     background-color: grey;
     margin-left: auto;
     margin-right: auto;
@@ -159,14 +149,15 @@
 #inventario td, #equipo td {
     border: 5px grey inset;
 	background-color: #474747;
+	width: 36px;
+	height: 36px;
+}
+
+#imagenObjeto{
 	height: 36px;
 	width: 36px;
 }
 
-#imagenObjeto {
-	height: 36px;
-	width: 36px;
-}
 #imagenObjeto button{
 	padding: 0px;
 	border: 0px;
@@ -192,8 +183,5 @@
 
 caption {
 	color: white;
-}
-
-#subirVida, #subirFuerza, #subirPrecision, #subirDefensa, #subirVelocidad{
 }
 

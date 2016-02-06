@@ -11,6 +11,7 @@ public class CombateBestia {
 	private int t;
 	private String ganador;
 	private boolean gan;
+	private boolean recompensa;
 	private int i;
 	private Zascadas resumen;
 
@@ -102,7 +103,7 @@ public class CombateBestia {
 
 	public Golpe golpe() {
 		Golpe golpe = new Golpe("Fallo", 0);
-		int alea = (int) Math.floor(Math.random() * 100);
+		int alea = (int) Math.floor(Math.random() * 100) +(b.getVelocidad()/a.getHeroe().getVelocidad())*5;
 		if (alea <= (50 + (a.getHeroe().getPrecision() / 2) * (a.getAtaque().getPorcPrecision() / 100))) {
 			// vemos si le acierta (con la precision)
 			int dano = (int) (a.getHeroe().getFuerza() * a.getAtaque().getPorcDano() / 100); // calcula el daño del ataque
@@ -125,9 +126,8 @@ public class CombateBestia {
 	public Golpe zasca() {
 		Golpe golpe = new Golpe("Fallo", 0);
 
-		int alea = (int) Math.floor(Math.random() * 100);
-		if (alea <= (50 + b.getPrecision() / 2)) {// vemos si le acierta (con la
-													// precision)
+		int alea = (int) Math.floor(Math.random() * 100) +(a.getHeroe().getVelocidad()/b.getVelocidad())*5;
+		if (alea <= (50 + b.getPrecision() / 2)) {// vemos si le acierta (con la precision)
 			int dano = (int) (b.getFuerza() * b.getAtaque().getPorcDano()); 
 			// calcula el daño del ataque
 			if(a.getHeroe().getDefensa() / Heroe.MAX_DEFENSA > 0.75)
@@ -141,7 +141,6 @@ public class CombateBestia {
 				golpe.dano = dano;
 				// actualizamos el combate
 				hayGanador();
-				System.err.println(a.getHeroe().getNombre() + "= " + a.getVida());
 			}
 		}
 		return golpe;
@@ -190,6 +189,14 @@ public class CombateBestia {
 
 	public void setResumen(Zascadas resumen) {
 		this.resumen = resumen;
+	}
+
+	public boolean isRecompensa() {
+		return recompensa;
+	}
+
+	public void setRecompensa(boolean recompensa) {
+		this.recompensa = recompensa;
 	}
 
 }

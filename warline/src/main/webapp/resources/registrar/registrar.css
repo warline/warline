@@ -106,6 +106,11 @@ body {
 	width: 100%;
 }
 
+.flecha{
+	font-size:50px;
+	
+}
+
 #reg_button {
 	margin-top: 30px;
 }
@@ -117,7 +122,7 @@ body {
 
 #excepciones{
 	margin: auto;
-	color: white;
+	color: red;
 	height: 20px;
 	width: 90%;
 	font-size: 20px;

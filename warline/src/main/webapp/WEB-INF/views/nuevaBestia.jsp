@@ -62,7 +62,20 @@
 							</table>
 						</div>
 					</div>
-
+					<div id="recompensa">
+					<div id="panelRecompensa">
+							<table>
+								<tr>
+									<td id="recompensatd">Objeto de recompensa:</td>
+									<td><input type="text" name = "recompensa" value = "${bestia.recompensa.nombre}"/></td>
+								</tr>
+								<tr>
+									<td id="recompensatd">% de obtenerlo: </td>
+									<td><input type="text" name = "porcRecompensa" value = "${bestia.porcRecompensa}"/></td>
+								</tr>
+							</table>
+					</div>
+					</div>
 					<div id="panelRecompensas">
 						<div id="panelExpYOro">
 							<table>
